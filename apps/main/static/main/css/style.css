@@ -1,0 +1,8 @@
+* {
+	/*outline: 1px dotted purple;*/
+}
+
+#info {
+	border: 10px solid red;
+	min-height: 200px;
+}
