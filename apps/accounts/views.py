@@ -25,7 +25,7 @@ class RegisterUser(CreateView):
 	success_url = '/main'
 
 	def post(self, request):
-		
+		#testing git
 		form = UserCreateForm(request.POST)
 		print "post ran"
 		if form.is_valid():
@@ -40,9 +40,9 @@ class RegisterUser(CreateView):
 
 			# return to home
 			return redirect(reverse('main:index'))
-		
+
 		else:
-		
+
 			return render(request, 'accounts/register.html', {'form': form})
 
 class LoginView(FormView):
