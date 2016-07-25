@@ -11,6 +11,6 @@ def index(request):
 def dashboard(request):
 
 	if request.user.is_authenticated():
-		return render(request, "main/index.html")
+		return render(request, "main/dashboard.html")
 	else:
 		return redirect(reverse('accounts:login'))
