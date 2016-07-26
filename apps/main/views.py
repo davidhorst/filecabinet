@@ -11,7 +11,7 @@ def index(request):
 def dashboard(request):
 
 	if request.user.is_authenticated():
-		return render(request, "main/note.html")
+		return render(request, "main/event.html")
 	else:
 		return redirect(reverse('accounts:login'))
 
@@ -19,22 +19,31 @@ def properties(request):
 
 	return render (request, "main/properties.html")
 
-def events(request):
-	#ajax api for events?
-	# returns a list of all of the events?
-	pass
-
 def event(request,id):
-	# db call to get out specific event to display rendered html to user
-	#server side rendering
-	pass
+	event = Events.objects.get(pk=id)
+	context={
+	'event':event
+	}
+	return render(request, 'main/event.html',context)
+
+def events(request):
+	events = Events.objects.all()
+	context={
+	'events':events
+	}
+	return render(request, 'main/dashboard.html',context)
 
 def add_event(request):
 	#creates a new event. will need to return a server rendered html
 	pass
 
+def note(request,id):
+	pass
 
-def add_note(request):
+def notes(request):
+	return render(request, 'main/note.html')
+
+def add_note(request,id):
     # example from fileupload project
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)

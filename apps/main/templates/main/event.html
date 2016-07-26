@@ -54,6 +54,14 @@
 var tempNotes= ['Note1','Note Content']
 $(document).ready(function() {
 
+    $.ajax({
+        url: "/properties/event/4/notes",
+        method: "get",
+        success: function(serverResponse){
+        $('#body').html(serverResponse)
+        }
+    })
+
     $('#search').keyup(function(){
       var searchTerm = $('#search').val();
       $(`.property-name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
