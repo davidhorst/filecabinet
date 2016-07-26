@@ -24,15 +24,15 @@
     <!-- <script scr="{% static 'main/js/index.js' %}"></script> -->
     <script type="text/javascript">
 
-      $(document).ready(function(){
-                $.ajax({
-          url: "/dashboard",
-          method: "get",
-          success: function(serverResponse){
-            $('#body').html(serverResponse)
-          }
-        })
-      });
+      // $(document).ready(function(){
+      //     $.ajax({
+      //       url: "/dashboard",
+      //       method: "get",
+      //       success: function(serverResponse){
+      //       $('#body').html(serverResponse)
+      //     }
+      //   })
+      // });
 
     </script>
   </head>
@@ -46,7 +46,10 @@
     <div class="container" id="body">
 
         <!-- ajax return -->
+
+        {% include 'main/dashboard.html' %}
         <p> you've done it wrong </p>
+        
 
     </div>
 

@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+
+@login_required(login_url='/accounts/login/')
 def index(request):
 
 	#redirect to login if user isn't authenticated
@@ -10,14 +14,16 @@ def index(request):
 
 def dashboard(request):
 
-	if request.user.is_authenticated():
-		return render(request, "main/note.html")
-	else:
-		return redirect(reverse('accounts:login'))
+		return render(request, "main/base.html")
 
 def properties(request):
 
 	return render (request, "main/properties.html")
+
+def add_properties(request):
+
+	return render (request, "main/properties.html")
+
 
 def events(request):
 	#ajax api for events?

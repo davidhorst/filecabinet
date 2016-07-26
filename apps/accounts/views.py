@@ -60,4 +60,4 @@ def logoutView(request):
 
 	logout(request)
 
-	return redirect(reverse('main:index'))
+	return redirect(reverse('accounts:login'))
