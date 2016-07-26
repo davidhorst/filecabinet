@@ -1,0 +1,83 @@
+<div class='container'>
+    <div id='header'>
+        <h4>New Note</h4>
+        <label for='title_id'>Title:</label>
+        <input type='text' id='title_id' name='title'>
+    </div>
+
+    <div id='mid_content'>
+        <textarea name='description'></textarea>
+    </div>
+
+    <div>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>{{ form.non_field_errors }}</p>
+
+        <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+
+        <p>
+            {{ form.docfile.errors }}
+            {{ form.docfile }}
+        </p>
+
+        <p><input type="submit" value="Upload"/></p>
+    </form>
+
+    {% if documents %}
+        <ul>
+            {% for document in documents %}
+                <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
+    <div>
+</div>
+
+<style>
+
+    #header, #mid_content{
+        margin-bottom: 40px;
+    }
+
+    .inline{
+        display: inline-block;
+    }
+
+    #search{
+        margin-bottom: 20px;
+    }
+</style>
+
+<script type="text/javascript">
+var tempNotes= ['Note1','Note Content']
+$(document).ready(function() {
+
+    $('#search').keyup(function(){
+      var searchTerm = $('#search').val();
+      $(`.property-name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
+      $(`.property-name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
+  });
+
+
+    $('#event_table tbody tr').click(function() {
+        $(this).addClass('active').siblings().removeClass('active');
+        $(note_table).append(`<tr><td>${tempNotes[0]}</td><td>${tempNotes[1]}</td></tr>`)
+
+    });
+    // when add event is clicked have a server call to retun partial event template form.
+    $('#add_event').click(function(){
+        alert('insert event partial here')
+    });
+});
+
+$.expr[':'].Contains = function(a,i,m){
+    	return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
+ 	};
+
+
+
+</script>
