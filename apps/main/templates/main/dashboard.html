@@ -27,10 +27,13 @@
               </ul>
             </li>
           </ul>
-          <form action="accounts/logout" class="navbar-form navbar-right">
+          <a href="accounts/logout" class="btn btn-primary navbar-btn navbar-right">Logout</a>
+          <p class="navbar-text navbar-right"></p>
+          <p class="navbar-text navbar-right">Welcome back, {{ request.user.first_name }}</p>
+          <!-- <form action="accounts/logout" class="navbar-form navbar-right">
             <label class="form-label">Welcome back, {{ request.user.first_name }}</label>
             <button type="submit" class="btn btn-success">Logout</button>
-          </form>
+          </form> -->
         </div><!--/.nav-collapse -->
       </div>
     </nav>

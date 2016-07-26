@@ -10,14 +10,14 @@
 					{% csrf_token %}
 						{{ form.as_p }}
 						<button type="submit" class="btn btn-primary">Login</button>
-					
+						<a id="register" class="btn btn-primary">Create New Account</a>
 					</form>
-					<a id="register" class="btn btn-primary">Create New Account</a>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 <script>
 	$(document).ready(function(){
 		$('#register').click(function(){
