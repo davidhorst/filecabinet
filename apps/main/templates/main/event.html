@@ -1,0 +1,81 @@
+<div class='container'>
+    <div class='col-xs-offset-4' id='header'>
+        <h3>{{event.name}}</h3>
+        <h4>EVENT NAME</h4>
+        <p>{{event.created_at}}</p>
+        <p>created at date</p>
+    </div>
+
+    <div id='mid_content'>
+        <div class='inline col-xs-6'>
+            <p>This is an example text. it should be limited to only a certian size.This is an example text.</p>
+        </div>
+
+
+        <a class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event" href="#" role="button"> Add </a>
+    </div>
+
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+        <input type="text" id="search" class="form-control" placeholder="Search">
+    </div>
+
+    <table class="table table-hover" id="event_table">
+        <tr>
+            <td> <div class='property-name'>A Event </div></td>
+        </tr>
+        <tr>
+            <td> <div class='property-name'>B Event</div></td>
+        </tr>
+        <tr>
+            <td><div class='property-name'>C Event</div></td>
+        </tr>
+        <tr>
+            <td><div class='property-name'>D Event</div></td>
+        </tr>
+    </table>
+</div>
+
+<style>
+
+    #header, #mid_content{
+        margin-bottom: 40px;
+    }
+
+    .inline{
+        display: inline-block;
+    }
+
+    #search{
+        margin-bottom: 20px;
+    }
+</style>
+
+<script type="text/javascript">
+var tempNotes= ['Note1','Note Content']
+$(document).ready(function() {
+
+    $('#search').keyup(function(){
+      var searchTerm = $('#search').val();
+      $(`.property-name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
+      $(`.property-name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
+  });
+
+
+    $('#event_table tbody tr').click(function() {
+        $(this).addClass('active').siblings().removeClass('active');
+        $(note_table).append(`<tr><td>${tempNotes[0]}</td><td>${tempNotes[1]}</td></tr>`)
+
+    });
+    // when add event is clicked have a server call to retun partial event template form.
+    $('#add_event').click(function(){
+        alert('insert event partial here')
+    });
+});
+
+$.expr[':'].Contains = function(a,i,m){
+    	return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
+ 	};
+
+
+
+</script>

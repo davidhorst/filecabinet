@@ -38,19 +38,8 @@
       </div>
     </nav>
 
-  <div id="main-dashboard">
-    
-
-
-  <div class="container">
-    <div class="row" id="properties">
-    </div>
-    <div class="row" id="events">
-    </div>
-    <div class="row" id="alerts">
-    </div>
-  </div>    
-</div>
+  <div id="main-dashboard" class="container"> 
+  </div>
 
 <script>
   $(document).ready(function(){
@@ -58,7 +47,7 @@
       url: "/properties",
       method: "get",
       success: function(serverResponse) {
-        $('#properties').html(serverResponse);
+        $('#main-dashboard').html(serverResponse);
       }
     });
   });
