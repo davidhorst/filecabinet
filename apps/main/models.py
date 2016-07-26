@@ -15,7 +15,7 @@ class Color(models.Model):
 
 class Property(models.Model):
     name = models.CharField(max_length=25)
-    description = models.CharField(max_length=50)
+    description = models.TextField(max_length=255)
     icon_type = models.ForeignKey(Icon)
     icon_color = models.ForeignKey(Color)
     address = models.CharField(max_length=100, null=True)

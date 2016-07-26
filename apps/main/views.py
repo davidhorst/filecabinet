@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
-from .forms import EventCreateForm
+from .forms import EventCreateForm, PropertyCreateForm
 from models import Event
 from django.http import HttpResponse
 
@@ -16,12 +16,33 @@ def index(request):
 	return render(request, "main/base.html")
 
 def dashboard(request):
-
 		return render(request, "main/base.html")
 
 def properties(request):
 
 	return render (request, "main/properties.html")
+
+def add_property(request):
+	# if request.POST:
+	# 	# template_name = 'main/add_event.html'
+	# 	# event_form = EventCreateForm(request.POST)
+	# 	# #bug create db entry for event here
+	# 	# if event_form.is_valid:
+	# 	# 	event = event_form.save()
+	# 	# 	print event
+	# 	# 	return redirect('event_id', kwargs={'id':event.id})
+	# 	# else:
+	# 	# 	print 'didnt work'
+	# 	# 	return HttpResponse('didnt create event')
+	# 	context={
+	# 		'form':PropertyCreateForm()
+	# 	}
+	# 	return render(request,'main/add_property.html',context)
+	# else:
+	context={
+		'form':PropertyCreateForm()
+	}
+	return render(request,'main/add_property.html',context)
 
 
 def event(request,event_id, prop_id):
