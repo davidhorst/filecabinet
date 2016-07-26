@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-{% load staticfiles %}  
+{% load staticfiles %}
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,16 +16,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- <script scr="{% static 'main/js/jquery-3.1.0.min.js' %}"></script> -->
     <script scr="{% static 'main/js/handlebars-v4.0.5.js' %}"></script>
-    
+
     <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet">
-    
+    <link href="{% static 'main/css/style.css' %}" rel="stylesheet">
+
     <!-- <script scr="{% static 'main/js/bootstrap.min.js' %}"></script> -->
     <script scr="{% static 'main/js/index.js' %}"></script>
     <script type="text/javascript">
-      
+
       $(document).ready(function(){
-        
-        $.ajax({
+                $.ajax({
           url: "/dashboard",
           method: "get",
           success: function(serverResponse){
@@ -42,12 +42,12 @@
     }
   </style>
   <body>
- 
+
     <div class="container" id="body">
-        
+
         <!-- ajax return -->
         <p> you've done it wrong </p>
-    
+
     </div>
 
     <hr>
@@ -62,7 +62,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-    
+
 
   </body>
 </html>
