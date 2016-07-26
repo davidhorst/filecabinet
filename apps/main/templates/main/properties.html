@@ -2,21 +2,34 @@
 <link rel="stylesheet" href="{% static 'main/css/font-awesome.min.css' %}">
 
 <style>
+.property-wrapper {
+	border: 1px solid silver;
+	border-radius: 2em;
+	padding: 0;
+	margin: 1em 0em;
+	text-align: center;
+}
 .btn-circle {
-  width: 150px;
-  height: 150px;
+  width: 8em;
+  height: 8em;
   margin: 20px auto;
   text-align: center;
   padding: 6px 0;
   font-size: 1em;
   line-height: 1.42;
-  border-radius: 75px;
+  border-radius: 4em;
 }
-#properties-interface {
-	height: 190px;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	border: 1px solid silver;
+.property-name, .add-property{
+	border-top: 1px solid silver;
+}
+#search{
+	margin-bottom: 1em;
+}
+h2 {
+	text-align: center;
+}
+h4 {
+	color: #305D72;
 }
 </style>
 <script>
@@ -33,34 +46,59 @@
  	};
 </script>
 
-<div id="properties-header" class="row">
-	<h2 class="col-xs-12 col-sm-4">Properties</h2>
-	<div class="col-xs-12 col-sm-4 col-sm-offset-4"><input type="text" id="search" class="form-control" placeholder="Search properties by name..."></div>
-	
+<h2 class="row">Properties</h2>
+<div class="row">
+	<div class="col-xs-4 col-xs-offset-4">
+		<input type="text" id="search" class="form-control " placeholder="Search properties by name...">
+	</div>
 </div>
-<div id="properties-interface" class="col-12">
-	<div class="col-xs-6 col-sm-3 col-md-2">
-		<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-home fa-5x" style="color: blue"></i><div class="property-name">HOME</div></button>
+<div id="properties-interface" class="row">
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-home fa-5x" style="color: blue"></i></button>
+			<div class="property-name"><h4>HOME</h4></div>
+		</div>
 	</div>
-	<div class="col-xs-6 col-sm-3 col-md-2">
-		<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-building fa-5x"></i><div class="property-name">Building</div></button>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-building fa-5x"></i></button>
+			<div class="property-name"><h4>Building</h4></div>
+		</div>
 	</div>
-	<div class="col-xs-6 col-sm-3 col-md-2">
-		<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-building-o fa-5x" style="color: red"></i><div class="property-name">Building 2</div></button>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-building-o fa-5x" style="color: red"></i></button>
+			<div class="property-name"><h4>Building 2</h4></div>
+		</div>
 	</div>
-	<div class="col-xs-6 col-sm-3 col-md-2">
-		<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-hospital-o fa-5x"></i><div class="property-name">HOSPITAL</div></button>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-hospital-o fa-5x"></i></button>
+			<div class="property-name"><h4>HOSPITAL</h4></div>
+		</div>
 	</div>
-	<div class="col-xs-6 col-sm-3 col-md-2">
-		<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-car fa-5x" style="color: rgb(169,217,219)"></i><div class="property-name">My Hyundai</div></button>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-car fa-5x" style="color: rgb(169,217,219)"></i></button>
+			<div class="property-name"><h4>My Hyundai</h4></div>
+		</div>
 	</div>
-	<div class="col-xs-6 col-sm-3 col-md-2">
-		<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-car fa-5x" style="color: rgb(169,217,219)"></i><div class="property-name">My Hyundai</div></button>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-car fa-5x" style="color: rgb(169,217,219)"></i></button>
+			<div class="property-name"><h4>My Hyundai</h4></div>
+		</div>
 	</div>
-	<div class="col-xs-6 col-sm-3 col-md-2">
-		<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-car fa-5x" style="color: rgb(169,217,219)"></i><div class="property-name">My Hyundai</div></button>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-car fa-5x" style="color: rgb(169,217,219)"></i></button>
+			<div class="property-name"><h4>My Hyundai</h4></div>
+		</div>
 	</div>
-	<div class="col-xs-6 col-sm-3 col-md-2">
-		<button class="btn btn-lg btn-info btn-circle"><i class="fa fa-plus fa-5x" style="color: grey"></i><div>Add Property</div></button>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-info btn-circle"><i class="fa fa-plus fa-5x" style="color: grey"></i></button>
+			<div class="add-property"><h4>Add Property</h4></div>
+		</div>
 	</div>
 </div>

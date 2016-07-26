@@ -27,28 +27,19 @@
               </ul>
             </li>
           </ul>
-          <form action="accounts/logout" class="navbar-form navbar-right">
+          <a href="accounts/logout" class="btn btn-primary navbar-btn navbar-right">Logout</a>
+          <p class="navbar-text navbar-right"></p>
+          <p class="navbar-text navbar-right">Welcome back, {{ request.user.first_name }}</p>
+          <!-- <form action="accounts/logout" class="navbar-form navbar-right">
             <label class="form-label">Welcome back, {{ request.user.first_name }}</label>
             <button type="submit" class="btn btn-success">Logout</button>
-          </form>
+          </form> -->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-  <div id="main-dashboard">
-
-
-
-  <div class="container">
-
-    <div class="row" id="properties">
-    </div>
-    <div class="row" id="events">
-    </div>
-    <div class="row" id="alerts">
-    </div>
+  <div id="main-dashboard" class="container"> 
   </div>
-</div>
 
 <script>
   $(document).ready(function(){
@@ -56,7 +47,7 @@
       url: "/properties",
       method: "get",
       success: function(serverResponse) {
-        $('#properties').html(serverResponse);
+        $('#main-dashboard').html(serverResponse);
       }
     });
   });
