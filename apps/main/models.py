@@ -2,9 +2,23 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+class Icon(models.Model):
+    name = models.CharField(max_length=25)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+class Color(models.Model):
+    name = models.CharField(max_length=25)
+    color = models.CharField(max_length=25)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
 class Property(models.Model):
     name = models.CharField(max_length=25)
     description = models.CharField(max_length=50)
+    icon_type = models.ForeignKey(Icon)
+    icon_color = models.ForeignKey(Color)
+    address = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     user = models.ForeignKey(User)
