@@ -1,19 +1,29 @@
 
 
-
-<div class="container">
+<style>
+	body{
+		background-color: #C0B08C;
+	}
+	.col-centered{
+        float: none;
+        margin: 0 auto;
+    }
+</style>
+{% load staticfiles %}
+<div class="container col-centered">
+	<div class="row">
+		<div col="col-sm-12">
+			<img src="{% static 'main/img/templogo.png' %}" alt="HOW DID YOU FIND ME">
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="panel panel-default">
-				<div id="reg-panel" class="panel-body">
-					<form method="post" action="/accounts/login/" class="col-sm-12">
-					{% csrf_token %}
-						{{ form.as_p }}
-						<button type="submit" class="btn btn-primary">Login</button>
-						<a id="register" class="btn btn-primary">Create New Account</a>
-					</form>
-				</div>
-			</div>
+			<form method="post" action="/accounts/login/" class="col-sm-12">
+			{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit" class="btn btn-primary">Login</button>
+				<a id="register" class="btn btn-primary">Create New Account</a>
+			</form>
 		</div>
 	</div>
 </div>
