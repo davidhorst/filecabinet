@@ -1,12 +1,15 @@
 <div class='container'>
     <div id='header'>
         <h4>New Note</h4>
-        <label for='title_id'>Title:</label>
-        <input type='text' id='title_id' name='title'>
     </div>
 
-    <div id='mid_content'>
-        <textarea name='description'></textarea>
+    <div id='mid_content form-control'>
+        <label>Title:</label>
+        <input type='text' id='title_id' name='title'>
+        <br>
+        <br>
+        <label>Description:</label>
+        <textarea class="form-control" id='textarea_id' name='description'></textarea>
     </div>
 
     <div>
@@ -22,14 +25,25 @@
             {{ form.docfile }}
         </p>
 
-        <p><input type="submit" value="Upload"/></p>
+        <p><input type="submit" value="Attach File(s)"/></p>
+        <p><input type="submit" value="Create Note"/></p>
     </form>
-
+    <div>
+        <ul>
+            <li><p>test</p></li>
+            <li><p>test</p></li>
+            <li><p>test</p></li>
+            <li><p>test</p></li>
+            <li><p>test</p></li>
+            <li><p>test</p></li>
+        </ul>
+    </div>
     {% if documents %}
         <ul>
             {% for document in documents %}
                 <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
             {% endfor %}
+
         </ul>
 
     {% endif %}
@@ -39,6 +53,10 @@
 
 <style>
 
+    ul{
+        columns: 2;
+        list-style: none;
+    }
     #header, #mid_content{
         margin-bottom: 40px;
     }
