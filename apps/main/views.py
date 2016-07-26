@@ -4,7 +4,11 @@ from .forms import EventCreateForm
 from models import Event
 from django.http import HttpResponse
 
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+
+@login_required(login_url='/accounts/login/')
 def index(request):
 
 	#redirect to login if user isn't authenticated
@@ -13,14 +17,12 @@ def index(request):
 
 def dashboard(request):
 
-	if request.user.is_authenticated():
-		return render(request, "main/dashboard.html")
-	else:
-		return redirect(reverse('accounts:login'))
+		return render(request, "main/base.html")
 
 def properties(request):
 
 	return render (request, "main/properties.html")
+
 
 def event(request,event_id, prop_id):
 	event = Event.objects.get(pk=event_id)
