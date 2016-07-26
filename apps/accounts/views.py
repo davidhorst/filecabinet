@@ -52,12 +52,8 @@ class LoginView(FormView):
 	form_class = AuthenticationForm
 
 	def form_valid(self, form):
-		print self.request.POST['username']
-		user = authenticate(username=self.request.POST['username'], password=self.request.POST['password'])
-		print "user :", user
-		if user is not None:
-			login(self.request, user)
-			print "logged in"
+		print "hello"
+		login(self.request, form.get_user())
 		return super(LoginView, self).form_valid(form)
 
 def logoutView(request):

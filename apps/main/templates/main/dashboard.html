@@ -41,29 +41,23 @@
 
   <div class="container">
 
-    <div class="row">
-      <div id="properties" class="col-sm-12">
-
-        <h2>User List</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-      </div>
+    <div class="row" id="properties">
     </div>
-    <div class="row">
-
+    <div class="row" id="events">
     </div>
-    <div class="row">
-      <div id="alerts" class="col-sm-12">
-          <h3>Alerts/Notes</h3>
-          <table id="note_table" class="table table-hover">
-              <tr>
-                  <td>Name</td>
-
-                  <td>content</td>
-              </tr>
-          </table>
-      <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-      </div>
+    <div class="row" id="alerts">
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function(){
+    $.ajax({
+      url: "/properties",
+      method: "get",
+      success: function(serverResponse) {
+        $('#properties').html(serverResponse);
+      }
+    });
+  });
+</script>
