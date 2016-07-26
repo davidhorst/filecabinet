@@ -14,3 +14,7 @@ def dashboard(request):
 		return render(request, "main/dashboard.html")
 	else:
 		return redirect(reverse('accounts:login'))
+
+def properties(request):
+
+	return render (request, "main/properties.html")
