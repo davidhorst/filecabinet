@@ -9,7 +9,7 @@ urlpatterns = [
 
     url(r'^properties/events$', views.events, name="events"),
     url(r'^properties/event/(?P<id>\d+)$', views.event, name="event_id"),
-    url(r'^properties/event/(?P<id>\d+)/add_event$', views.add_event, name="add_events"),
+    url(r'^properties/add_event$', views.add_event, name="add_events"),
 
     url(r'^properties/event/\d+/note/(?P<id>\d+)$', views.note, name="note"),
     url(r'^properties/event/\d+/notes$', views.notes, name="notes"),

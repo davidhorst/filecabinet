@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
+from .forms import EventCreateForm
+from models import Event
+from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
@@ -20,22 +23,36 @@ def properties(request):
 	return render (request, "main/properties.html")
 
 def event(request,id):
-	event = Events.objects.get(pk=id)
+	event = Event.objects.get(pk=id)
 	context={
 	'event':event
 	}
 	return render(request, 'main/event.html',context)
 
 def events(request):
-	events = Events.objects.all()
+	events = Event.objects.all()
 	context={
 	'events':events
 	}
 	return render(request, 'main/dashboard.html',context)
 
+
 def add_event(request):
-	#creates a new event. will need to return a server rendered html
-	pass
+	if request.POST:
+		template_name = 'main/add_event.html'
+		event_form = EventCreateForm(request.POST)
+		#bug create db entry for event here
+		if event_form.is_valid:
+			return redirect('event_id')
+		else:
+			print 'didnt work'
+			return HttpResponse('didnt create event')
+	else:
+		template_name = 'main/add_event.html'
+		context={
+			'form':EventCreateForm()
+		}
+		return render(request,'main/add_event.html',context)
 
 def note(request,id):
 	pass
