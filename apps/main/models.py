@@ -3,18 +3,21 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Property(models.Model):
+    name = models.CharField(max_length=25)
     description = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     user = models.ForeignKey(User)
 
 class Event(models.Model):
+    name = models.CharField(max_length=25)
     comment = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     property = models.ForeignKey(Property)
 
 class Note(models.Model):
+    name = models.CharField(max_length=25)
     comment = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
