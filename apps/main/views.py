@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from .forms import EventCreateForm, PropertyCreateForm
-from models import Event
+from models import Event, Property
+
 from django.http import HttpResponse
 
 from django.contrib.auth.decorators import login_required
@@ -15,12 +16,15 @@ def index(request):
 
 	return render(request, "main/base.html")
 
+@login_required(login_url='/accounts/login/')
 def dashboard(request):
 		return render(request, "main/base.html")
 
 def properties(request):
-
-	return render (request, "main/properties.html")
+	context = {
+			"properties" : Property.objects.filter(user = request.user)
+		}
+	return render (request, "main/properties.html", context)
 
 def add_property(request):
 	# if request.POST:
