@@ -105,8 +105,7 @@ def note(request,event_id,prop_id,note_id):
 	'prop_id':prop_id,
 	"note":note
 	}
-	return HttpResponse('note view')
-	# return render(request, 'main/note.html', context)
+	return render(request, 'main/note.html', context)
 
 def notes(requst,event_id,prop_id):
 		event = Event.objets.get(pk=event_id)
@@ -116,9 +115,8 @@ def notes(requst,event_id,prop_id):
 		'event_id':event_id,
 		'prop_id':prop_id,
 		}
-		return HttpResponse('ntoes view')
 
-		# return render(request, 'main/notes.html', context)
+		return render(request, 'main/note.html', context)
 
 def add_note(request,prop_id, event_id):
 	if request.POST:
@@ -129,6 +127,9 @@ def add_note(request,prop_id, event_id):
 			note.save()
 			return redirect("/property/{}/event/{}".format(prop_id, event_id))
 		else:
+			context={
+				'form':note_form
+			}
 			return HttpResponseBadRequest(render (request,'main/add_note.html',context))
 	else:
 		context={

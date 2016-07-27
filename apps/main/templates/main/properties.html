@@ -48,6 +48,7 @@ h4 {
 		});
 
 		$(".property-name").parent().click(function(){
+			
 			window.location.hash = `/property/${$(this).attr("data-id")}/events`;
 			// $.ajax({
 			// 	url: `/property/${$(this).attr("data-id")}/events`,

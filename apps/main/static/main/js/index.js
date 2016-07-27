@@ -88,6 +88,16 @@ function addProperty() {
     });
 }
 
+function loadNote(args){
+$.ajax({
+  url: `/property/${args[0]}/event/${args[1]}/note/${args[2]}`,
+  method: "get",
+  success: function(serverResponse) {
+    $('#main-dashboard').html(serverResponse);
+  }
+});
+}
+
 function renderTemplate(partialUrl,jsonUrl) {
     return Promise.all([
         fetch(partialUrl).then(resp => resp.text()),
@@ -104,6 +114,7 @@ var routes = [
     ['/properties', loadProperties],
     ['/property/(\\d+)/event/(\\d+)/addNote', addNote],
     ['/property/(\\d+)/event/(\\d+)/notes', loadNotes],
+    ['/property/(\\d+)/event/(\\d+)/note/(\\d+)', loadNote],
     ['/property/(\\d+)/addEvent', addEvent],
     ['/property/(\\d+)/events', loadProperty],
     ['/add_property', addProperty]
