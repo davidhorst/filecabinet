@@ -7,21 +7,27 @@ class Icon(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
+    def __str__(self):
+        return self.name
+
 class Color(models.Model):
     name = models.CharField(max_length=25)
     color = models.CharField(max_length=25)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
 
+    def __str__(self):
+        return self.name
+
 class Property(models.Model):
     name = models.CharField(max_length=25)
-    description = models.TextField(max_length=255)
-    icon_type = models.ForeignKey(Icon)
-    icon_color = models.ForeignKey(Color)
+    description = models.TextField(max_length=255, null=True)
+    icon_type = models.ForeignKey(Icon, null=True)
+    icon_color = models.ForeignKey(Color, null=True)
     address = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, null=True)
 
 class Event(models.Model):
     name = models.CharField(max_length=25)

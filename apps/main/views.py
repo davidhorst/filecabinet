@@ -27,26 +27,30 @@ def properties(request):
 	return render (request, "main/properties.html", context)
 
 def add_property(request):
-	# if request.POST:
-	# 	# template_name = 'main/add_event.html'
-	# 	# event_form = EventCreateForm(request.POST)
-	# 	# #bug create db entry for event here
-	# 	# if event_form.is_valid:
-	# 	# 	event = event_form.save()
-	# 	# 	print event
-	# 	# 	return redirect('event_id', kwargs={'id':event.id})
-	# 	# else:
-	# 	# 	print 'didnt work'
-	# 	# 	return HttpResponse('didnt create event')
-	# 	context={
-	# 		'form':PropertyCreateForm()
-	# 	}
-	# 	return render(request,'main/add_property.html',context)
-	# else:
-	context={
-		'form':PropertyCreateForm()
-	}
-	return render(request,'main/add_property.html',context)
+	if request.method == "POST":
+		prop_form = PropertyCreateForm(request.POST)
+		print request.POST
+		if prop_form.is_valid():
+			prop = prop_form.save(commit=False)
+			prop.user = request.user
+			prop.save()
+			context = {
+				"properties" : Property.objects.filter(user = request.user)
+			}
+			print "valid form"
+			return render (request, "main/properties.html", context)
+		else:
+			context={
+				'form':prop_form
+			}
+			print "invalid form"
+			return render(request,'main/add_property.html',context)
+	else:
+		context={
+			'form':PropertyCreateForm()
+		}
+		print "GET"
+		return render(request,'main/add_property.html',context)
 
 
 def event(request,event_id, prop_id):

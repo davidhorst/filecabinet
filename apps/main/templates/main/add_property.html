@@ -1,20 +1,65 @@
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'main/css/font-awesome.min.css' %}">
 
-<form class="form-horizontal" method="post" enctype="multipart/form-data" action="/accounts/register/">
-					{% csrf_token %}
-					{% for field in form %}
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<span class="text-danger small">{{ field.errors }}</span>
-						</div>
-						<label class="control-label col-sm-2">{{ field.label }}</label>
-						<div class="col-sm-10">{{ field }}</div>
-					</div>
-					{% endfor %}
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-success">Submit</button>
-						</div>
-					</div>
-				</form>
+<script>
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+  $(document).ready(function(){
+    $('#theForm').submit(function(e){
+    	console.log("submit accepted")
+    	e.preventDefault();
+
+    	var csrftoken = getCookie('csrftoken');
+
+    	$.ajax({
+	    	beforeSend: function(xhr, settings) {
+	    	    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+	        	    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	        	}
+	   		}, 
+	      url: "/add_property",
+	      method: "post",
+	      data: $(this).serialize(),
+	      success: function(serverResponse) {
+	        $('#main-dashboard').html(serverResponse);
+	      }
+	    });
+    });
+   });
+</script>
+
+<form class="form-horizontal" method="post" enctype="multipart/form-data" action="/" id="theForm">
+	{% csrf_token %}
+	{% for field in form %}
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<span class="text-danger small">{{ field.errors }}</span>
+		</div>
+		<label class="control-label col-sm-2">{{ field.label }}</label>
+		<div class="col-sm-10">{{ field }}</div>
+	</div>
+	{% endfor %}
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success">Submit</button>
+		</div>
+	</div>
+</form>
