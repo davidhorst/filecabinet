@@ -1,5 +1,5 @@
 from django import forms
-from .models import Event, Property, Icon, Color
+from .models import Event, Property, Icon, Color, Note
 
 class PropertyCreateForm(forms.ModelForm):
 
@@ -24,7 +24,7 @@ class EventCreateForm(forms.ModelForm):
 
     class Meta:
         model = Event
-        fields = ("name", "comment", 'id')
+        fields = ("name", "comment")
 
     name = forms.CharField(
         max_length=30,
@@ -33,6 +33,15 @@ class EventCreateForm(forms.ModelForm):
     comment = forms.CharField(
         max_length=30)
 
-    id = forms.CharField(
-        widget=forms.HiddenInput()
-    )
+class NoteCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Note
+        fields = ("name", "comment")
+
+    name = forms.CharField(
+        max_length=30,
+        required=True)
+
+    comment = forms.CharField(
+        max_length=30)

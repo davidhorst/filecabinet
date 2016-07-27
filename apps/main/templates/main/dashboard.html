@@ -27,8 +27,16 @@
               </ul>
             </li>
           </ul>
-          <a href="accounts/logout" class="btn btn-primary navbar-btn navbar-right">Logout</a>
-          <p class="navbar-text navbar-right"></p>
+          <div class="btn-group navbar-right navbar-btn">
+            <button type="button" class="btn btn-circle-nav dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-2x"></i>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Edit Profile</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/accounts/logout">Logout</a></li>
+              </ul>
+          </div>
+          <p class="navbar-right">te</p>
           <p class="navbar-text navbar-right">Welcome back, {{ request.user.first_name }}</p>
           <!-- <form action="accounts/logout" class="navbar-form navbar-right">
             <label class="form-label">Welcome back, {{ request.user.first_name }}</label>

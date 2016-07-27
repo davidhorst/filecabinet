@@ -4,51 +4,15 @@
     </div>
 
     <div id='mid_content form-control'>
-        <label>Title:</label>
-        <input type='text' id='title_id' name='title'>
+        <p>Title:</p>
+        <p>{{ note.name }}</p>
         <br>
         <br>
-        <label>Description:</label>
-        <textarea class="form-control" id='textarea_id' name='description'></textarea>
+        <p>Description:</p>
+        <p>{{ note.comment }}
     </div>
 
-    <div>
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <p>{{ form.non_field_errors }}</p>
-
-        <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-
-        <p>
-            {{ form.docfile.errors }}
-            {{ form.docfile }}
-        </p>
-
-        <p><input type="submit" value="Attach File(s)"/></p>
-        <p><input type="submit" value="Create Note"/></p>
-    </form>
-    <div>
-        <ul>
-            <li><p>test</p></li>
-            <li><p>test</p></li>
-            <li><p>test</p></li>
-            <li><p>test</p></li>
-            <li><p>test</p></li>
-            <li><p>test</p></li>
-        </ul>
-    </div>
-    {% if documents %}
-        <ul>
-            {% for document in documents %}
-                <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
-            {% endfor %}
-
-        </ul>
-
-    {% endif %}
-
-    <div>
+    <p>DISPLAY ATTACHED FILES HERE </p>
 </div>
 
 <style>
