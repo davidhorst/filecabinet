@@ -48,24 +48,25 @@ h4 {
 		});
 
 		$(".property-name").parent().click(function(){
-			$.ajax({
-				url: `/property/${$(this).attr("data-id")}/events`,
-				method: "get",
-				success: function(serverResponse) {
-					$('#main-dashboard').html(serverResponse);
-				}
-			});
+			window.location.hash = `/property/${$(this).attr("data-id")}/events`;
+			// $.ajax({
+			// 	url: `/property/${$(this).attr("data-id")}/events`,
+			// 	method: "get",
+			// 	success: function(serverResponse) {
+			// 		$('#main-dashboard').html(serverResponse);
+			// 	}
+			// });
 		});
 
 		$(".add-property").parent().click(function(){
-			window.location.hash = 'something';
-			$.ajax({
-				url: "/add_property",
-				method: "get",
-				success: function(serverResponse) {
-					$('#main-dashboard').html(serverResponse);
-				}
-			});
+			window.location.hash = '/add_property';
+			// $.ajax({
+			// 	url: "/add_property",
+			// 	method: "get",
+			// 	success: function(serverResponse) {
+			// 		$('#main-dashboard').html(serverResponse);
+			// 	}
+			// });
 		});
 	});
 
