@@ -15,8 +15,8 @@ class PropertyCreateForm(forms.ModelForm):
     address = forms.CharField(
         max_length=100,required=False)
 
-    icon_type = forms.ModelChoiceField(queryset=Icon.objects.all(),required=False)
-    icon_color = forms.ModelChoiceField(queryset=Color.objects.all(),required=False)
+    icon_type = forms.ModelChoiceField(queryset=Icon.objects.all())#, widget=forms.Select(attrs={'style': "font-family: 'FontAwesome', Helvetica"}))
+    icon_color = forms.ModelChoiceField(queryset=Color.objects.all())
 
 
 

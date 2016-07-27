@@ -1,13 +1,13 @@
 function loadProperties(){
-    // $.ajax({
-    //   url: "/properties",
-    //   method: "get",
-    //   success: function(serverResponse) {
-    //     $('#body').html(serverResponse);
-    //   }
-    // });
+    $.ajax({
+      url: "/properties",
+      method: "get",
+      success: function(serverResponse) {
+        $('#body').html(serverResponse);
+      }
+    });
 
-    fetch('/properties', { credentials: 'same-origin' }).then(resp => resp.text()).then(html =>$('#body').html(html));
+    // fetch('/properties', { credentials: 'same-origin' }).then(resp => resp.text()).then(html =>$('#body').html(html));
 }
 
 function loadProperty(args) {
