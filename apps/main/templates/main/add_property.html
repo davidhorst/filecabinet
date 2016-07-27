@@ -20,6 +20,13 @@
 // }
 
   $(document).ready(function(){
+  	$('#id_icon_color option').each( function(){
+  		$(this).css("background-color", $(this).attr("color"));
+  		// $(this).html("");
+  	});
+
+  	
+
     $('#theForm').submit(function(e){
     	e.preventDefault();
     	var csrftoken = getCookie('csrftoken');
@@ -52,8 +59,8 @@
     	$('#preview i').addClass(`fa fa-${$('#id_icon_type option:selected').text()} fa-5x`);
     });
 
-    $('#id_icon_typecolor').change(function(){
-    	$('#preview i').css('color', `blue`);
+    $('#id_icon_color').change(function(){
+    	$('#preview i').css('color', `${$('#id_icon_color option:selected').text()}`);
     });
 
    });
@@ -69,10 +76,14 @@
   height: 8em;
   margin: 20px auto;
   text-align: center;
-  padding: 6px 0;
+  padding: 1.3em 0;
   font-size: 1em;
   line-height: 1.42;
   border-radius: 4em;
+}
+
+#preview, #submit-button {
+	text-align: center;
 }
 </style>
 
@@ -92,11 +103,13 @@
 			<div class="btn btn-lg btn-default btn-circle">
 				<i></i>
 			</div>
+			<p>icon preview</p>
 		</div>
 	</div>
 	<div class="row form-group">
-		<div class=" col-sm-2 col-xs-6">
+		<div id="submit-button" class="col-sm-12 col-xs-12">
 			<button type="submit" class="btn btn-success">Submit</button>
 		</div>
 	</div>
 </form>
+

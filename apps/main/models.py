@@ -17,7 +17,7 @@ class Color(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
 
     def __str__(self):
-        return self.name
+        return "{}-{}".format(self.name, self.color)
 
 class Property(models.Model):
     name = models.CharField(max_length=25)
