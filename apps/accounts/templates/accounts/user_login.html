@@ -6,11 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>File Cabinet</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- <script scr="{% static 'main/js/jquery-3.1.0.min.js' %}"></script> -->
@@ -23,34 +21,39 @@
     <!-- <script scr="{% static 'main/js/index.js' %}"></script> -->
 
   </head>
-  <style>
-    body{
-      padding-top: 60px;
-    }
-  </style>
-  <body>
 
-    <div class="container" id="body">
 <style>
 	body{
+    padding-top: 60px;
 		background-color: #C0B08C;
 	}
 	.col-centered{
-        float: none;
-        margin: 0 auto;
+        
     }
-</style>
-{% load staticfiles %}
+
+  .row{
+    margin: auto;
+    width: 100%;
+  }
+  button, a{
+    margin: auto;
+  }
+  p,form, #img-div{
+    text-align: center;
+  }
+
+</style> 
+<body>
 <div class="container col-centered">
 	<div class="row">
-		<div col="col-sm-12">
+		<div id="img-div" class="col-sm-12">
 			<img src="{% static 'main/img/templogo.png' %}" alt="HOW DID YOU FIND ME">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12" id="reg-panel">
 			<form method="post" action="/accounts/login/" class="col-sm-12">
-			{% csrf_token %}
+			 {% csrf_token %}
 				{{ form.as_p }}
 				<button type="submit" class="btn btn-primary">Login</button>
 				<a id="register" class="btn btn-primary">Create New Account</a>
@@ -75,14 +78,12 @@
 		
 </script>
 
-    </div>
-
-    <hr>
-    <div class="container">
-      <footer>
-        <p>&copy; 2016 company, Inc.</p>
-      </footer>
-    </div> <!-- /container -->
+  <hr>
+  <div class="container">
+    <footer>
+      <p>&copy; 2016 company, Inc.</p>
+    </footer>
+  </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript
@@ -91,5 +92,5 @@
 
 
 
-  </body>
+</body>
 </html>
