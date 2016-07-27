@@ -17,7 +17,7 @@ class Color(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
 
     def __str__(self):
-        return self.name
+        return "{}-{}".format(self.name, self.color)
 
 class Property(models.Model):
     name = models.CharField(max_length=25)
@@ -51,6 +51,7 @@ class File(models.Model):
 
 class Alert(models.Model):
     when = models.DateTimeField()
+    comment = models.CharField(max_length=50)
     event = models.ForeignKey(Event)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)

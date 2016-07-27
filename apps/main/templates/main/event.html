@@ -5,13 +5,13 @@
         <p>{{event.created_at}}</p>
     </div>
 
-    <div id='mid_content'>
+    <div id='mid_content' class='col-xs-offset-4'>
         <div class='inline col-xs-6'>
-            <p>This is an example text. it should be limited to only a certian size.This is an example text.</p>
+            <p>{{event.comment }}</p>
         </div>
 
 
-        <a class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event" href="#" role="button"> Add </a>
+        <button class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event" role="button"> Add </button>
     </div>
 
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
@@ -20,13 +20,14 @@
 
     <table class="table table-hover" id="note_table">
         {% for note in notes %}
-        <tr>
-            <td> <a class='note_name'>{{ note.name }}</a></td>
+        <tr data-id='{{note.id}}'>
+            <td><p class='note_name'>{{ note.name }}</p></td>
         </tr>
         {% endfor %}
 
     </table>
 </div>
+<!-- window.location.hash = `/property/1/event/${$(this).attr("data-id")}/add_note`; -->
 
 <style>
 
@@ -47,13 +48,6 @@
 var tempNotes= ['Note1','Note Content']
 $(document).ready(function() {
 
-    $.ajax({
-        url: "/properties/event/4/notes",
-        method: "get",
-        success: function(serverResponse){
-        $('#body').html(serverResponse)
-        }
-    })
 
     $('#search').keyup(function(){
       var searchTerm = $('#search').val();
@@ -62,14 +56,16 @@ $(document).ready(function() {
   });
 
 
+$('#note_table tbody tr').click(function() {
+    window.location.hash = `/property/{{prop_id}}/event/{{event.id}}/note/${$(this).attr("data-id")}`;
+});
+
     $('#event_table tbody tr').click(function() {
         $(this).addClass('active').siblings().removeClass('active');
-        $(note_table).append(`<tr><td>${tempNotes[0]}</td><td>${tempNotes[1]}</td></tr>`)
 
     });
-    // when add event is clicked have a server call to retun partial event template form.
     $('#add_event').click(function(){
-        alert('insert event partial here')
+        window.location.hash = "/property/{{prop_id}}/event/{{event.id}}/addNote";
     });
 });
 

@@ -1,10 +1,6 @@
 <div class='container'>
-    <div id='header'>
-        <h4>New Note</h4>
-    </div>
-
-    <div id='mid_content form-control'>
-        <p>Title:</p>
+    <div id='header form-control'>
+        <p>Name:</p>
         <p>{{ note.name }}</p>
         <br>
         <br>
@@ -21,7 +17,7 @@
         columns: 2;
         list-style: none;
     }
-    #header, #mid_content{
+    #header{
         margin-bottom: 40px;
     }
 
@@ -47,12 +43,11 @@ $(document).ready(function() {
 
     $('#event_table tbody tr').click(function() {
         $(this).addClass('active').siblings().removeClass('active');
-        $(note_table).append(`<tr><td>${tempNotes[0]}</td><td>${tempNotes[1]}</td></tr>`)
 
     });
     // when add event is clicked have a server call to retun partial event template form.
     $('#add_event').click(function(){
-        alert('insert event partial here')
+        alert('insert note partial here')
     });
 });
 

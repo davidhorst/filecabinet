@@ -1,25 +1,32 @@
 <script>
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
+// function getCookie(name) {
+//     var cookieValue = null;
+//     if (document.cookie && document.cookie !== '') {
+//         var cookies = document.cookie.split(';');
+//         for (var i = 0; i < cookies.length; i++) {
+//             var cookie = jQuery.trim(cookies[i]);
+//             // Does this cookie string begin with the name we want?
+//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                 break;
+//             }
+//         }
+//     }
+//     return cookieValue;
+// }
+// function csrfSafeMethod(method) {
+//     // these HTTP methods do not require CSRF protection
+//     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+// }
 
   $(document).ready(function(){
+  	$('#id_icon_color option').each( function(){
+  		$(this).css("background-color", $(this).attr("color"));
+  		// $(this).html("");
+  	});
+
+  	
+
     $('#theForm').submit(function(e){
     	e.preventDefault();
     	var csrftoken = getCookie('csrftoken');
@@ -33,7 +40,11 @@ function csrfSafeMethod(method) {
 	      method: "post",
 	      data: $(this).serialize(),
 	      success: function(serverResponse) {
-	        $('#main-dashboard').html(serverResponse);
+	        window.location.hash = '/properties';
+	      },
+	      error: function(serverResponse) {
+	      	console.log(serverResponse);
+	        $('#main-dashboard').html(serverResponse.responseText);
 	      }
 	    });
     });
@@ -48,8 +59,8 @@ function csrfSafeMethod(method) {
     	$('#preview i').addClass(`fa fa-${$('#id_icon_type option:selected').text()} fa-5x`);
     });
 
-    $('#id_icon_typecolor').change(function(){
-    	$('#preview i').css('color', `blue`);
+    $('#id_icon_color').change(function(){
+    	$('#preview i').css('color', `${$('#id_icon_color option:selected').text()}`);
     });
 
    });
@@ -65,10 +76,14 @@ function csrfSafeMethod(method) {
   height: 8em;
   margin: 20px auto;
   text-align: center;
-  padding: 6px 0;
+  padding: 1.3em 0;
   font-size: 1em;
   line-height: 1.42;
   border-radius: 4em;
+}
+
+#preview, #submit-button {
+	text-align: center;
 }
 </style>
 
@@ -83,17 +98,18 @@ function csrfSafeMethod(method) {
 		<small class="text-muted text-danger small">{{ field.errors }}</small>
 	</fieldset>
 	{% endfor %}
-	<div class="row form-group">
-		<div id="preview" class="col-sm-4 col-xs-12">
+	<div class="row">
+		<div id="preview" class="col-sm-4 col-sm-offset-4 col-xs-12">
 			<div class="btn btn-lg btn-default btn-circle">
 				<i></i>
 			</div>
+			<p>icon preview</p>
 		</div>
-		<div class=" col-sm-2 col-sm-offset-4 col-xs-6">
-			<a href="#" class="btn btn-success">Cancel</a>
-		</div>
-		<div class=" col-sm-2 col-xs-6">
+	</div>
+	<div class="row form-group">
+		<div id="submit-button" class="col-sm-12 col-xs-12">
 			<button type="submit" class="btn btn-success">Submit</button>
 		</div>
 	</div>
 </form>
+
