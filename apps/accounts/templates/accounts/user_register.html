@@ -1,6 +1,6 @@
+{% extends 'accounts/accounts_base.html' %}
 
-
-
+{% block body %}
 	
 <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/accounts/register/">
 	{% csrf_token %}
@@ -20,4 +20,5 @@
 	</div>
 </form>
 
+{% endblock %}
 
