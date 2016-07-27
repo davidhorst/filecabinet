@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
-from .forms import EventCreateForm, NoteCreateForm
+from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm
 from models import Event, Property, Note
+from .forms import EventCreateForm,
+
 from django.http import HttpResponse
 
 from django.contrib.auth.decorators import login_required
@@ -15,13 +17,37 @@ def index(request):
 
 	return render(request, "main/base.html")
 
+@login_required(login_url='/accounts/login/')
 def dashboard(request):
-
 		return render(request, "main/base.html")
 
 def properties(request):
+	context = {
+			"properties" : Property.objects.filter(user = request.user)
+		}
+	return render (request, "main/properties.html", context)
 
-	return render (request, "main/properties.html")
+def add_property(request):
+	# if request.POST:
+	# 	# template_name = 'main/add_event.html'
+	# 	# event_form = EventCreateForm(request.POST)
+	# 	# #bug create db entry for event here
+	# 	# if event_form.is_valid:
+	# 	# 	event = event_form.save()
+	# 	# 	print event
+	# 	# 	return redirect('event_id', kwargs={'id':event.id})
+	# 	# else:
+	# 	# 	print 'didnt work'
+	# 	# 	return HttpResponse('didnt create event')
+	# 	context={
+	# 		'form':PropertyCreateForm()
+	# 	}
+	# 	return render(request,'main/add_property.html',context)
+	# else:
+	context={
+		'form':PropertyCreateForm()
+	}
+	return render(request,'main/add_property.html',context)
 
 
 def event(request,event_id, prop_id):
