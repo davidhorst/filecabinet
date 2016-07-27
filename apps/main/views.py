@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm
 from models import Event, Property, Note
-from .forms import EventCreateForm,
+from .forms import EventCreateForm
 
 from django.http import HttpResponse
 
