@@ -12,29 +12,12 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>{% block title %}{% endblock %}</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- <script scr="{% static 'main/js/jquery-3.1.0.min.js' %}"></script> -->
-    <script scr="{% static 'main/js/handlebars-v4.0.5.js' %}"></script>
-
+    <script src="{% static 'main/js/jquery-2.2.4.min.js' %}"></script>
+    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
     <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'main/css/style.css' %}" rel="stylesheet">
+    <script src="{% static 'main/js/index.js' %}"></script>
 
-    <!-- <script scr="{% static 'main/js/bootstrap.min.js' %}"></script> -->
-    <!-- <script scr="{% static 'main/js/index.js' %}"></script> -->
-    <script type="text/javascript">
-
-      // $(document).ready(function(){
-      //     $.ajax({
-      //       url: "/dashboard",
-      //       method: "get",
-      //       success: function(serverResponse){
-      //       $('#body').html(serverResponse)
-      //     }
-      //   })
-      // });
-
-    </script>
   </head>
   <style>
     body{
@@ -43,13 +26,13 @@
   </style>
   <body>
 
+    {% include 'main/dashboard.html' %}
     <div class="container" id="body">
 
         <!-- ajax return -->
 
-        {% include 'main/dashboard.html' %}
-        <p> you've done it wrong </p>
-        
+        <!-- <p> you've done it wrong </p> -->
+
 
     </div>
 

@@ -1,8 +1,21 @@
-function loadHome() {
-    renderTemplate('/static/main/user-login.html','/static/home_app/json/event14.json').then(html => {
-        $('#template_content').html(html);
+function loadProperties(){
+    // $.ajax({
+    //   url: "/properties",
+    //   method: "get",
+    //   success: function(serverResponse) {
+    //     $('#body').html(serverResponse);
+    //   }
+    // });
+
+    fetch('/properties', { credentials: 'same-origin' }).then(resp => resp.text()).then(html =>$('#body').html(html));
+}
+
+function loadProperty(args) {
+    renderTemplate('/static/home_app/html/property.html').then(html =>{
+        $('#container').html(html);
     });
 }
+
 
 function renderTemplate(partialUrl,jsonUrl) {
     return Promise.all([
@@ -15,15 +28,9 @@ function renderTemplate(partialUrl,jsonUrl) {
     });
 }
 
-function loadProperty(args) {
-    renderTemplate('/static/home_app/html/property.html','/api/property/' + args[0]).then(html =>{
-        $('#template_content').html(html);
-    });
-}
-
 
 var routes = [
-    ['/', loadHome],
+    ['/', loadProperties],
     ['/property/(\\d+)', loadProperty]
 ];
 
@@ -42,9 +49,5 @@ function loadRoute() {
     originalHash = newHash;
 }
 
-
-
 $(window).bind('hashchange', loadRoute);
-
-
-loadRoute()
+loadRoute();
