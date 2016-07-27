@@ -46,17 +46,17 @@
       </div>
     </nav>
 
-  <div id="main-dashboard" class="container"> 
+  <div id="main-dashboard" class="container">
   </div>
 
 <script>
   $(document).ready(function(){
-    $.ajax({
-      url: "/properties",
-      method: "get",
-      success: function(serverResponse) {
-        $('#main-dashboard').html(serverResponse);
-      }
-    });
+    // $.ajax({
+    //   url: "/properties",
+    //   method: "get",
+    //   success: function(serverResponse) {
+    //     $('#main-dashboard').html(serverResponse);
+    //   }
+    // });
   });
 </script>
