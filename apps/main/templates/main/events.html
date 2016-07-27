@@ -1,8 +1,6 @@
 <div class='container'>
     <div class='col-xs-offset-4' id='header'>
-        <h3>{{event.name}}</h3>
-
-        <p>{{event.created_at}}</p>
+        <h3>{{property.name}}</h3>
     </div>
 
     <div id='mid_content'>
@@ -19,12 +17,18 @@
     </div>
 
     <table class="table table-hover" id="note_table">
-        {% for note in notes %}
         <tr>
-            <td> <a class='note_name'>{{ note.name }}</a></td>
+            <td> <div class='property-name'>A Event </div></td>
         </tr>
-        {% endfor %}
-
+        <tr>
+            <td> <div class='property-name'>B Event</div></td>
+        </tr>
+        <tr>
+            <td><div class='property-name'>C Event</div></td>
+        </tr>
+        <tr>
+            <td><div class='property-name'>D Event</div></td>
+        </tr>
     </table>
 </div>
 
