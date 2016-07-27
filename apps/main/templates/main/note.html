@@ -4,7 +4,7 @@
     </div>
 
     <div id='mid_content form-control'>
-        <p>Title:</p>
+        <p>asdfjzasfjzasdjdasfj:</p>
         <p>{{ note.name }}</p>
         <br>
         <br>
@@ -47,12 +47,11 @@ $(document).ready(function() {
 
     $('#event_table tbody tr').click(function() {
         $(this).addClass('active').siblings().removeClass('active');
-        $(note_table).append(`<tr><td>${tempNotes[0]}</td><td>${tempNotes[1]}</td></tr>`)
 
     });
     // when add event is clicked have a server call to retun partial event template form.
     $('#add_event').click(function(){
-        alert('insert event partial here')
+        alert('insert note partial here')
     });
 });
 

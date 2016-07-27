@@ -1,4 +1,4 @@
-<form method='POST'>
+<form id='theForm' method='POST' enctype="multipart/form-data">
 {% csrf_token %}
 {% for field in form %}
 	<div class="form-group">
@@ -11,4 +11,31 @@
 {% endfor %}
     <input type='submit' value="submit">
 </form>
-<p>test</p>
+
+<script>
+$(document).ready(function(){
+
+  $('#theForm').submit(function(e){
+	  e.preventDefault();
+	  var csrftoken = getCookie('csrftoken');
+	  $.ajax({
+		  beforeSend: function(xhr, settings) {
+			  if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+				  xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			  }
+		  },
+		url: "/property/"+{{prop_id}}+"/add_event",
+		method: "post",
+		data: $(this).serialize(),
+		success: function(serverResponse) {
+			// alert("/property/"+{{prop_id}}+"/events/")
+		  window.location.hash = "/property/{{prop_id}}/events";
+		},
+		error: function(serverResponse) {
+			console.log(serverResponse)
+		  $('#main-dashboard').html(serverResponse.responseText);
+		}
+	  });
+    });
+});
+</script>
