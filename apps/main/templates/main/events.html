@@ -9,17 +9,17 @@
         </div>
 
 
-        <button class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event" role="button"> Add </button>
+        <button class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event"> add_event </button>
     </div>
 
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
         <input type="text" id="search" class="form-control" placeholder="Search">
     </div>
 
-    <table class="table table-hover" id="note_table">
+    <table class="table table-hover" id="event_table">
         {% for event in events %}
-        <tr>
-            <td> <div class='property-name'>{{event.name}} </div></td>
+        <tr data_id='{{event.id}}'>
+            <td> <div class='event-name'>{{event.name}} </div></td>
         </tr>
         {% endfor %}
     </table>
@@ -46,19 +46,21 @@ var tempNotes= ['Note1','Note Content']
 $(document).ready(function() {
 
     $('#add_event').click(function(){
-        window.location.hash = 'addnote/'
+        // alert(`/property/` + {{property.id}} + `/add_event`)
+        window.location.hash = `/property/` + {{property.id}} + `/addEvent`;
+
     })
 
     $('#search').keyup(function(){
       var searchTerm = $('#search').val();
-      $(`.property-name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
-      $(`.property-name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
+      $(`.event-name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
+      $(`.event-name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
   });
 
 
     $('#event_table tbody tr').click(function() {
         $(this).addClass('active').siblings().removeClass('active');
-        $(note_table).append(`<tr><td>${tempNotes[0]}</td><td>${tempNotes[1]}</td></tr>`)
+        window.location.hash = '/property/{{property.id}}/event/' + $(this).attr('data_id')+ '/notes';
 
     });
 

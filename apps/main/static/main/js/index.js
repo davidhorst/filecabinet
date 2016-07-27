@@ -47,6 +47,26 @@ function loadProperty(prop_id) {
     });
 }
 
+function addNote(args) {
+    $.ajax({
+        url:  `/property/${args[0]}/event/${args[1]}/add_note`,
+        method: "get",
+        success: function(serverResponse) {
+            $('#main-dashboard').html(serverResponse);
+        }
+    });
+}
+
+function addEvent(args) {
+    $.ajax({
+        url:  `/property/${args[0]}/add_event`,
+        method: "get",
+        success: function(serverResponse) {
+            $('#main-dashboard').html(serverResponse);
+        }
+    });
+}
+
 function addProperty() {
     $.ajax({
         url: "/add_property",
@@ -58,9 +78,9 @@ function addProperty() {
 }
 
 
-function loadNotes(){
+    function loadNotes(args){
     $.ajax({
-      url: "/properties",
+      url: `/property/${args[0]}/event/${args[1]}`,
       method: "get",
       success: function(serverResponse) {
         $('#main-dashboard').html(serverResponse);
@@ -82,7 +102,9 @@ function renderTemplate(partialUrl,jsonUrl) {
 
 var routes = [
     ['/properties', loadProperties],
+    ['/property/(\\d+)/event/(\\d+)/addNote', addNote],
     ['/property/(\\d+)/event/(\\d+)/notes', loadNotes],
+    ['/property/(\\d+)/addEvent', addEvent],
     ['/property/(\\d+)/events', loadProperty],
     ['/add_property', addProperty]
 ];

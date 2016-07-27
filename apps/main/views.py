@@ -30,7 +30,6 @@ def properties(request):
 def add_property(request):
 	if request.method == "POST":
 		prop_form = PropertyCreateForm(request.POST)
-		print request.POST
 		if prop_form.is_valid():
 			prop = prop_form.save(commit=False)
 			prop.user = request.user
@@ -56,19 +55,22 @@ def add_property(request):
 
 def event(request,event_id, prop_id):
 	event = Event.objects.get(pk=event_id)
-	notes = Note.objects.all()
+	notes = event.note_set.all()
 
 	context={
+	'prop_id':prop_id,
 	'event':event,
 	"notes":notes
 	}
 	return render(request, 'main/event.html',context)
 
 def events(request, prop_id):
-	events = Property.objects.get(pk=prop_id).event_set.all()
+	property = Property.objects.get(pk=prop_id)
+	events = property.event_set.all()
 	print events
 
 	context={
+	'property' : property,
 	'events':events
 	}
 	return render(request, 'main/events.html',context)
@@ -77,18 +79,21 @@ def events(request, prop_id):
 def add_event(request, prop_id):
 	if request.POST:
 		event_form = EventCreateForm(request.POST)
-		if event_form.is_valid:
+		if event_form.is_valid():
 			event = event_form.save(commit=False)
 			event.property = Property.objects.get(pk=prop_id)
 			event.save()
 			return redirect("/property/{}/event/{}".format(prop_id, event.id))
 		else:
-			print 'didnt work'
-			return HttpResponse('didnt create event')
+			context={
+				'form':event_form
+			}
+			return HttpResponseBadRequest(render (request,'main/add_event.html',context))
 	else:
-		template_name = 'main/add_event.html'
 		context={
-			'form':EventCreateForm()
+			'form':EventCreateForm(),
+			'prop_id':prop_id,
+
 		}
 		return render(request,'main/add_event.html',context)
 
@@ -96,27 +101,40 @@ def add_event(request, prop_id):
 def note(request,event_id,prop_id,note_id):
 	note = Note.objects.get(pk=note_id)
 	context={
+	'event_id':event_id,
+	'prop_id':prop_id,
 	"note":note
 	}
-	return render(request, 'main/note.html', context)
+	return HttpResponse('note view')
+	# return render(request, 'main/note.html', context)
 
 def notes(requst,event_id,prop_id):
-	return render(request, 'main/notes.html')
+		event = Event.objets.get(pk=event_id)
+		notes = event.note_set.all()
+
+		context={
+		'event_id':event_id,
+		'prop_id':prop_id,
+		}
+		return HttpResponse('ntoes view')
+
+		# return render(request, 'main/notes.html', context)
 
 def add_note(request,prop_id, event_id):
 	if request.POST:
 		note_form = NoteCreateForm(request.POST)
-		if note_form.is_valid:
+		if note_form.is_valid():
 			note = note_form.save(commit=False)
 			note.event = Event.objects.get(pk=event_id)
 			note.save()
 			return redirect("/property/{}/event/{}".format(prop_id, event_id))
 		else:
-			print 'didnt work'
-			return HttpResponse('didnt create event')
+			return HttpResponseBadRequest(render (request,'main/add_note.html',context))
 	else:
 		context={
-			'form':NoteCreateForm()
+			'form':NoteCreateForm(),
+			'prop_id':prop_id,
+			'event_id':event_id
 		}
 		return render(request,'main/add_note.html',context)
 

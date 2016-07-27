@@ -11,7 +11,7 @@
         </div>
 
 
-        <a class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event" href="#" role="button"> Add </a>
+        <button class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event" role="button"> Add </button>
     </div>
 
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
@@ -27,6 +27,7 @@
 
     </table>
 </div>
+<!-- window.location.hash = `/property/1/event/${$(this).attr("data-id")}/add_note`; -->
 
 <style>
 
@@ -69,7 +70,7 @@ $(document).ready(function() {
     });
     // when add event is clicked have a server call to retun partial event template form.
     $('#add_event').click(function(){
-        alert('insert event partial here')
+        window.location.hash = "/property/{{prop_id}}/event/{{event.id}}/addNote";
     });
 });
 
