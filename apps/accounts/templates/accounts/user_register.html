@@ -1,5 +1,10 @@
+{% extends 'accounts/accounts_base.html' %}
 
-{% for field in form %}
+{% block body %}
+	
+<form class="form-horizontal" method="post" enctype="multipart/form-data" action="/accounts/register/">
+	{% csrf_token %}
+	{% for field in form %}
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
 			<span class="text-danger small">{{ field.errors }}</span>
@@ -7,16 +12,13 @@
 		<label class="control-label col-sm-2">{{ field.label }}</label>
 		<div class="col-sm-10">{{ field }}</div>
 	</div>
-{% endfor %}
-<!-- {% for field in form2 %}
+	{% endfor %}
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<span class="text-danger small">{{ field.errors }}</span>
+			<button type="submit" class="btn btn-primary">Create Account</button>
 		</div>
-		<label class="control-label col-sm-2">{{ field.label }}</label>
-		<div class="col-sm-10">{{ field }}</div>
 	</div>
-{% endfor %} -->
+</form>
 
-
+{% endblock %}
 

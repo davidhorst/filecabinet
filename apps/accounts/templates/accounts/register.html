@@ -1,27 +1,23 @@
 
-<style>
-	body{
-		padding-top: 60px;
-	}
-</style>
+
 
 	
-				<form class="form-horizontal" method="post" enctype="multipart/form-data" action="/accounts/register/">
-					{% csrf_token %}
-					{% for field in form %}
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<span class="text-danger small">{{ field.errors }}</span>
-						</div>
-						<label class="control-label col-sm-2">{{ field.label }}</label>
-						<div class="col-sm-10">{{ field }}</div>
-					</div>
-					{% endfor %}
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-success">Submit</button>
-						</div>
-					</div>
-				</form>
-			
+<form class="form-horizontal" method="post" enctype="multipart/form-data" action="/accounts/register/">
+	{% csrf_token %}
+	{% for field in form %}
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<span class="text-danger small">{{ field.errors }}</span>
+		</div>
+		<label class="control-label col-sm-2">{{ field.label }}</label>
+		<div class="col-sm-10">{{ field }}</div>
+	</div>
+	{% endfor %}
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary">Create Account</button>
+		</div>
+	</div>
+</form>
+
 

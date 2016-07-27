@@ -43,7 +43,7 @@ class RegisterUser(CreateView):
 
 		else:
 
-			return render(request, 'accounts/register.html', {'form': form})
+			return render(request, 'accounts/user_register.html', {'form': form})
 
 class LoginView(FormView):
 
