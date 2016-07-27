@@ -18,16 +18,21 @@
         <input type="text" id="search" class="form-control" placeholder="Search">
     </div>
 
+
     <table class="table table-hover" id="note_table">
+        <thead>
+            <tr>
+                <td><h3>Notes:</h3></td>
+            </tr>
+        </thead>
         {% for note in notes %}
-        <tr data-id='{{note.id}}'>
+        <tr data_id='{{note.id}}'>
             <td><p class='note_name'>{{ note.name }}</p></td>
         </tr>
         {% endfor %}
 
     </table>
 </div>
-<!-- window.location.hash = `/property/1/event/${$(this).attr("data-id")}/add_note`; -->
 
 <style>
 
@@ -56,9 +61,11 @@ $(document).ready(function() {
   });
 
 
-$('#note_table tbody tr').click(function() {
-    window.location.hash = `/property/{{prop_id}}/event/{{event.id}}/note/${$(this).attr("data-id")}`;
+$('#note_table tr').click(function() {
+    window.location.hash = '/property/{{prop_id}}/event/{{event.id}}/note/'+$(this).attr("data_id")
+
 });
+
 
     $('#event_table tbody tr').click(function() {
         $(this).addClass('active').siblings().removeClass('active');

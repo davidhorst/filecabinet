@@ -53,6 +53,10 @@ class PropertyCreateForm(forms.ModelForm):
     print icon_type
     icon_color = forms.ModelChoiceField(queryset=Color.objects.all(), widget=mySelect())
 
+class FileUploadForm(forms.Form):
+    docfile = forms.FileField(
+        label='Select a file'
+    )
 
 
 class EventCreateForm(forms.ModelForm):

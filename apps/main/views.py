@@ -125,7 +125,9 @@ def add_note(request,prop_id, event_id):
 			note = note_form.save(commit=False)
 			note.event = Event.objects.get(pk=event_id)
 			note.save()
-			return redirect("/property/{}/event/{}".format(prop_id, event_id))
+
+			
+			return HttpResponse(note.id)
 		else:
 			context={
 				'form':note_form
@@ -139,7 +141,7 @@ def add_note(request,prop_id, event_id):
 		}
 		return render(request,'main/add_note.html',context)
 
-def add_file(request,prop_id, event_id):
+def add_file(request,prop_id, event_id, note_id):
     # example from fileupload project
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
@@ -150,14 +152,15 @@ def add_file(request,prop_id, event_id):
             # Redirect to the document list after POST
             return HttpResponseRedirect(reverse('list'))
     else:
-        form = DocumentForm()  # A empty, unbound form
+		form = DocumentForm()
+		context={
+			'form':form
+		}
+		return HttpResponseBadRequest(render (request,'main/add_file.html',context))
+          # A empty, unbound form
 
     # Load documents for the list page
     documents = Document.objects.all()
 
     # Render list page with the documents and the form
-    return render(
-        request,
-        'list.html',
-        {'documents': documents, 'form': form}
-    )
+    return render(request, 'main/note.html',{'documents': documents, 'form': form} )
