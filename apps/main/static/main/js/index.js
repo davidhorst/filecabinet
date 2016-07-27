@@ -3,19 +3,23 @@ function loadProperties(){
       url: "/properties",
       method: "get",
       success: function(serverResponse) {
-        $('#body').html(serverResponse);
+        $('#main-dashboard').html(serverResponse);
       }
     });
 
     // fetch('/properties', { credentials: 'same-origin' }).then(resp => resp.text()).then(html =>$('#body').html(html));
 }
 
-function loadProperty(args) {
-    renderTemplate('/static/home_app/html/property.html').then(html =>{
-        $('#container').html(html);
+
+function loadNotes(){
+    $.ajax({
+      url: "/properties",
+      method: "get",
+      success: function(serverResponse) {
+        $('#main-dashboard').html(serverResponse);
+      }
     });
 }
-
 
 function renderTemplate(partialUrl,jsonUrl) {
     return Promise.all([
@@ -30,8 +34,8 @@ function renderTemplate(partialUrl,jsonUrl) {
 
 
 var routes = [
-    ['/', loadProperties],
-    ['/property/(\\d+)', loadProperty]
+    ['/properties', loadProperties],
+    ['/property/(\\d+)/event/(\\d+)/notes', loadNotes],
 ];
 
 var originalHash = (window.location.hash || '#').substr(1);
@@ -43,7 +47,7 @@ function loadRoute() {
     if (route) {
         route[1](new RegExp(route[0]).exec(newHash).slice(1));
     } else {
-         window.location.hash = '/';
+         window.location.hash = '/properties';
     }
 
     originalHash = newHash;
