@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
-from .forms import EventCreateForm
-from models import Event, Property
+from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm
+from models import Event, Property, Note
+from .forms import EventCreateForm,
+
 from django.http import HttpResponse
 
 from django.contrib.auth.decorators import login_required
@@ -17,7 +19,6 @@ def index(request):
 
 @login_required(login_url='/accounts/login/')
 def dashboard(request):
-
 		return render(request, "main/base.html")
 
 def properties(request):
@@ -26,11 +27,36 @@ def properties(request):
 		}
 	return render (request, "main/properties.html", context)
 
+def add_property(request):
+	# if request.POST:
+	# 	# template_name = 'main/add_event.html'
+	# 	# event_form = EventCreateForm(request.POST)
+	# 	# #bug create db entry for event here
+	# 	# if event_form.is_valid:
+	# 	# 	event = event_form.save()
+	# 	# 	print event
+	# 	# 	return redirect('event_id', kwargs={'id':event.id})
+	# 	# else:
+	# 	# 	print 'didnt work'
+	# 	# 	return HttpResponse('didnt create event')
+	# 	context={
+	# 		'form':PropertyCreateForm()
+	# 	}
+	# 	return render(request,'main/add_property.html',context)
+	# else:
+	context={
+		'form':PropertyCreateForm()
+	}
+	return render(request,'main/add_property.html',context)
+
 
 def event(request,event_id, prop_id):
 	event = Event.objects.get(pk=event_id)
+	notes = Note.objects.all()
+
 	context={
-	'event':event
+	'event':event,
+	"notes":notes
 	}
 	return render(request, 'main/event.html',context)
 
@@ -39,18 +65,17 @@ def events(request, prop_id):
 	context={
 	'events':events
 	}
-	return render(request, 'main/dashboard.html',context)
+	return render(request, 'main/events.html',context)
 
 
 def add_event(request, prop_id):
 	if request.POST:
-		template_name = 'main/add_event.html'
 		event_form = EventCreateForm(request.POST)
-		#bug create db entry for event here
 		if event_form.is_valid:
-			event = event_form.save()
-			print event
-			return redirect('event_id', kwargs={'id':event.id})
+			event = event_form.save(commit=False)
+			event.property = Property.objects.get(pk=prop_id)
+			event.save()
+			return redirect("/property/{}/event/{}".format(prop_id, event.id))
 		else:
 			print 'didnt work'
 			return HttpResponse('didnt create event')
@@ -61,13 +86,35 @@ def add_event(request, prop_id):
 		}
 		return render(request,'main/add_event.html',context)
 
-def note(request,id):
-	pass
 
-def notes(request):
-	return render(request, 'main/note.html')
+def note(request,event_id,prop_id,note_id):
+	note = Note.objects.get(pk=note_id)
+	context={
+	"note":note
+	}
+	return render(request, 'main/note.html', context)
+
+def notes(requst,event_id,prop_id):
+	return render(request, 'main/notes.html')
 
 def add_note(request,prop_id, event_id):
+	if request.POST:
+		note_form = NoteCreateForm(request.POST)
+		if note_form.is_valid:
+			note = note_form.save(commit=False)
+			note.event = Event.objects.get(pk=event_id)
+			note.save()
+			return redirect("/property/{}/event/{}".format(prop_id, event_id))
+		else:
+			print 'didnt work'
+			return HttpResponse('didnt create event')
+	else:
+		context={
+			'form':NoteCreateForm()
+		}
+		return render(request,'main/add_note.html',context)
+
+def add_file(request,prop_id, event_id):
     # example from fileupload project
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)

@@ -49,6 +49,17 @@ h4 {
     	$(`.property-name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
     	$(`.property-name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
     });
+
+    $(".add-property").parent().click(function(){
+    $.ajax({
+      url: "/add_property",
+      method: "get",
+      success: function(serverResponse) {
+        $('#main-dashboard').html(serverResponse);
+      }
+    });
+  });
+
   });
 
   	$.expr[':'].Contains = function(a,i,m){
@@ -74,7 +85,52 @@ h4 {
 	{% endfor %}
 	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
 		<div class="property-wrapper">
+
 			<a href="/dashboard" class="btn btn-lg btn-info btn-circle"><i class="fa fa-plus fa-5x" style="color: grey"></i></a>
+
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-home fa-5x" style="color: blue"></i></button>
+			<div class="property-name"><h4>HOME</h4></div>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-building fa-5x"></i></button>
+			<div class="property-name"><h4>Building</h4></div>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-building-o fa-5x" style="color: red"></i></button>
+			<div class="property-name"><h4>Building 2</h4></div>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-hospital-o fa-5x"></i></button>
+			<div class="property-name"><h4>HOSPITAL</h4></div>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-car fa-5x" style="color: rgb(169,217,219)"></i></button>
+			<div class="property-name"><h4>My Hyundai</h4></div>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-car fa-5x" style="color: rgb(169,217,219)"></i></button>
+			<div class="property-name"><h4>My Hyundai</h4></div>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-car fa-5x" style="color: rgb(169,217,219)"></i></button>
+			<div class="property-name"><h4>My Hyundai</h4></div>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+		<div class="property-wrapper">
+			<button class="btn btn-lg btn-info btn-circle btn-add"><i class="fa fa-plus fa-5x" style="color: grey"></i></button>
 			<div class="add-property"><h4>Add Property</h4></div>
 		</div>
 	</div>
