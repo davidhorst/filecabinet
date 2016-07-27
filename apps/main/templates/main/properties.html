@@ -58,14 +58,9 @@ h4 {
 		});
 
 		$(".add-property").parent().click(function(){
-			window.location.hash = 'something';
-			$.ajax({
-				url: "/add_property",
-				method: "get",
-				success: function(serverResponse) {
-					$('#main-dashboard').html(serverResponse);
-				}
-			});
+			alert('iwasrun')
+			window.location.hash = '/properties/1/events';
+
 		});
 	});
 

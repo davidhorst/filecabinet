@@ -10,6 +10,16 @@ function loadProperties(){
     // fetch('/properties', { credentials: 'same-origin' }).then(resp => resp.text()).then(html =>$('#body').html(html));
 }
 
+function loadEvents(){
+    $.ajax({
+      url: "/property/1/events",
+      method: "get",
+      success: function(serverResponse) {
+        $('#main-dashboard').html(serverResponse);
+      }
+    });
+}
+
 
 function loadNotes(){
     $.ajax({
@@ -35,6 +45,7 @@ function renderTemplate(partialUrl,jsonUrl) {
 
 var routes = [
     ['/properties', loadProperties],
+    ['/property/(\\d+)/events', loadEvents],
     ['/property/(\\d+)/event/(\\d+)/notes', loadNotes],
 ];
 

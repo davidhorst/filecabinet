@@ -65,7 +65,9 @@ def event(request,event_id, prop_id):
 	return render(request, 'main/event.html',context)
 
 def events(request, prop_id):
-	events = Event.objects.all()
+	events = Property.objects.get(pk=prop_id).event_set.all()
+	print events
+
 	context={
 	'events':events
 	}

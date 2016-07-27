@@ -9,7 +9,7 @@
         </div>
 
 
-        <a class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event" href="#" role="button"> Add </a>
+        <button class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event" role="button"> Add </button>
     </div>
 
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
@@ -17,18 +17,11 @@
     </div>
 
     <table class="table table-hover" id="note_table">
+        {% for event in events %}
         <tr>
-            <td> <div class='property-name'>A Event </div></td>
+            <td> <div class='property-name'>{{event.name}} </div></td>
         </tr>
-        <tr>
-            <td> <div class='property-name'>B Event</div></td>
-        </tr>
-        <tr>
-            <td><div class='property-name'>C Event</div></td>
-        </tr>
-        <tr>
-            <td><div class='property-name'>D Event</div></td>
-        </tr>
+        {% endfor %}
     </table>
 </div>
 
@@ -49,14 +42,11 @@
 
 <script type="text/javascript">
 var tempNotes= ['Note1','Note Content']
+
 $(document).ready(function() {
 
-    $.ajax({
-        url: "/properties/event/4/notes",
-        method: "get",
-        success: function(serverResponse){
-        $('#body').html(serverResponse)
-        }
+    $('#add_event').click(function(){
+        window.location.hash = 'addnote/'
     })
 
     $('#search').keyup(function(){
@@ -71,10 +61,7 @@ $(document).ready(function() {
         $(note_table).append(`<tr><td>${tempNotes[0]}</td><td>${tempNotes[1]}</td></tr>`)
 
     });
-    // when add event is clicked have a server call to retun partial event template form.
-    $('#add_event').click(function(){
-        alert('insert event partial here')
-    });
+
 });
 
 $.expr[':'].Contains = function(a,i,m){
