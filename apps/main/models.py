@@ -22,12 +22,12 @@ class Color(models.Model):
 class Property(models.Model):
     name = models.CharField(max_length=25)
     description = models.TextField(max_length=255, null=True)
-    icon_type = models.ForeignKey(Icon, null=True)
-    icon_color = models.ForeignKey(Color, null=True)
+    icon_type = models.ForeignKey(Icon)
+    icon_color = models.ForeignKey(Color)
     address = models.CharField(max_length=100, null=True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
-    user = models.ForeignKey(User, null=True)
+    user = models.ForeignKey(User)
 
 class Event(models.Model):
     name = models.CharField(max_length=25)
