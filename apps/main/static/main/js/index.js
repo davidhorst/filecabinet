@@ -1,3 +1,32 @@
+/***************************************/
+/* CSRF TOKEN FUNCTIONS: DO NOT MODIFY */
+/***************************************/
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+/*******************************/
+/* END OF CSRF TOKEN FUNCTIONS */
+/*******************************/
+
 function loadProperties(){
     $.ajax({
       url: "/properties",
@@ -6,17 +35,25 @@ function loadProperties(){
         $('#main-dashboard').html(serverResponse);
       }
     });
-
-    // fetch('/properties', { credentials: 'same-origin' }).then(resp => resp.text()).then(html =>$('#body').html(html));
 }
 
-function loadEvents(){
+function loadProperty(prop_id) {
     $.ajax({
-      url: "/property/1/events",
-      method: "get",
-      success: function(serverResponse) {
-        $('#main-dashboard').html(serverResponse);
-      }
+        url: `/property/${prop_id}/events`,
+        method: "get",
+        success: function(serverResponse) {
+            $('#main-dashboard').html(serverResponse);
+        }
+    });
+}
+
+function addProperty() {
+    $.ajax({
+        url: "/add_property",
+        method: "get",
+        success: function(serverResponse) {
+            $('#main-dashboard').html(serverResponse);
+        }
     });
 }
 
@@ -45,8 +82,9 @@ function renderTemplate(partialUrl,jsonUrl) {
 
 var routes = [
     ['/properties', loadProperties],
-    ['/property/(\\d+)/events', loadEvents],
     ['/property/(\\d+)/event/(\\d+)/notes', loadNotes],
+    ['/property/(\\d+)/events', loadProperty],
+    ['/add_property', addProperty]
 ];
 
 var originalHash = (window.location.hash || '#').substr(1);

@@ -4,7 +4,7 @@ from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm
 from models import Event, Property, Note
 from .forms import EventCreateForm
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 
 from django.contrib.auth.decorators import login_required
 
@@ -45,7 +45,7 @@ def add_property(request):
 				'form':prop_form
 			}
 			print "invalid form"
-			return render(request,'main/add_property.html',context)
+			return HttpResponseBadRequest(render (request,'main/add_property.html',context))
 	else:
 		context={
 			'form':PropertyCreateForm()
