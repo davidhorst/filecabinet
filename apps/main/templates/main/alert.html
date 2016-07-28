@@ -2,29 +2,18 @@
     <a id='event_link'>Back to Event</a>
 
     <div id='header form-control'>
-        <h3>Name:</h3>
-        <p>{{note.name}}</p>
-        <br>
-        <br>
-        <h4>Description:</h4>
-        <label type='text' name='comment'>{{ note.comment }}</label>
-
-        <!-- <form id='note_update' method="post">
+        <form id='alert_update' method="post">
             <p>disfajdlfjdkfaj</p>
             {% csrf_token %}
             <h3>Name:</h3>
-            <input type='text' name='name' value='{{ note.name }}'/>
+            <input type='text' name='name' value='{{ alert.name }}'/>
             <br>
             <br>
             <p>Description:</p>
-            <textarea type='text' name='comment'>{{ note.comment }}</textarea>
+            <textarea type='text' name='comment'>{{ alert.comment }}</textarea>
             <button type='submit changes'>submit<button/>
-        </form> -->
+        </form>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
 
     {% if documents %}
             <ul>
@@ -39,7 +28,7 @@
         <form id='theForm' method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
-            <input type='hidden' value='{{note.id}}' name='note_id'/>
+            <input type='hidden' value='{{alert.id}}' name='alert_id'/>
             <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
 
             <p>
@@ -76,7 +65,7 @@
 $(document).ready(function() {
 
 
-    $('#note_update').submit(function(e){
+    $('#alert_update').submit(function(e){
     	e.preventDefault();
     	var csrftoken = getCookie('csrftoken');
     	$.ajax({
@@ -85,11 +74,11 @@ $(document).ready(function() {
 	        	    xhr.setRequestHeader("X-CSRFToken", csrftoken);
 	        	}
 	   		},
-	      url: '/property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note.id}}+'/add_file',
+	      url: '/property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert.id}}+'/add_file',
 	      method: "post",
 	      data: $(this).serialize(),
 	      success: function(serverResponse) {
-	        window.location.hash = '/property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note.id}};
+	        window.location.hash = '/property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert.id}};
 	      },
 	      error: function(serverResponse) {
 	      	console.log(serverResponse);
@@ -108,14 +97,14 @@ $(document).ready(function() {
                   xhr.setRequestHeader("X-CSRFToken", csrftoken);
               }
           },
-        url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}}+'/add_file',
+        url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert_id}}+'/add_file',
         method: "post",
         data: new FormData($("#theForm").get(0)),
         cache: false,
         processData: false,
         contentType: false,
         success: function(serverResponse) {
-             window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}};
+             window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert_id}};
         },
         error: function(serverResponse) {
           $('#main-dashboard').html(serverResponse.responseText);
@@ -123,7 +112,7 @@ $(document).ready(function() {
       });
 
 
-      $('#update_note_form').submit(function(e){
+      $('#update_alert_form').submit(function(e){
           alert('got here')
     	  e.preventDefault();
     	  var csrftoken = getCookie('csrftoken');
@@ -134,13 +123,13 @@ $(document).ready(function() {
                     xhr.setRequestHeader("X-CSRFToken", csrftoken);
                 }
             },
-          url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}}+'/update_note',
+          url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert_id}}+'/update_alert',
           method: "post",
           cache: false,
           processData: false,
           contentType: false,
           success: function(serverResponse) {
-               window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}};
+               window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert_id}};
           },
           error: function(serverResponse) {
             $('#main-dashboard').html(serverResponse.responseText);

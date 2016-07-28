@@ -7,7 +7,6 @@
   <div class="col-xl-3">
     <!-- STATIC SIDE MENU: for LG -->
     <div id="static-side-menu">
-    a
     </div>
   </div>
 </div>
@@ -28,8 +27,8 @@
   </div>
 </nav>
 
-      <div>
-      <button type="button" data-toggle="offcanvas" data-target="#slide-side-menu"> 
+<div>
+  <button type="button" data-toggle="offcanvas" data-target="#slide-side-menu"> 
     <span class="icon-bar">sdcsdc</span>
     <span class="icon-bar">sdcsdc</span>
     <span class="icon-bar">sdcsdc</span>
@@ -57,10 +56,8 @@
 
 <style type="text/css">
 
-#sidebar-right {
-  position: fixed; 
-  right:0;
-  width: 200px;
+#static-side-menu {
+  padding: 20px;
 }
 
 #test{
@@ -80,11 +77,27 @@
   #static-side-menu {
     visibility: hidden;
   }
+  #slide-side-menu {
+    visibility: visible;
+    width: 400px;
+    min-height: 300px;
+    position:fixed; 
+    right:0;
+    background-color: #C0B08C;
+  }
 }
 
 @media all and (min-width: 450px) {
   #static-side-menu {
     visibility: hidden;
+  }
+  #slide-side-menu {
+    visibility: visible;
+    width: 400px;
+    min-height: 300px;
+    position:fixed; 
+    right:0;
+    background-color: #C0B08C;
   }
 }
 
@@ -92,22 +105,41 @@
   #static-side-menu {
     visibility: hidden;
   }
+  #slide-side-menu {
+    visibility: visible;
+    width: 400px;
+    min-height: 300px;
+    position:fixed; 
+    right:0;
+    background-color: #C0B08C;
+  }
 }
 
 @media all and (min-width: 800px) {
   #static-side-menu {
     visibility: hidden;
   }
+  #slide-side-menu {
+    visibility: visible;
+    width: 400px;
+    min-height: 300px;
+    position:fixed; 
+    right:0;
+    background-color: #C0B08C;
+  }
 }
 
-@media all and (min-width: 1550px) {
+@media all and (min-width: 1570px) {
   #static-side-menu {
     visibility: visible;
     width: 400px;
-    height: 1000px;
+    min-height: 300px;
     position:fixed; 
     right:0;
-    background-color: yellow;
+    background-color: #C0B08C;
+  }
+  #slide-side-menu {
+    visibility: hidden;
   }
   .col-xl-9 {
     width: 75%;
@@ -115,12 +147,6 @@
   .col-xl-3  {
     width: 25%;
   }
-
-
-   .four-m { width: 33.333333%; }
-    .five-m { width: 41.66666%; }
-    .seven-m { width: 58.33333%; }
-    .eight-m { width: 66.66666%; }
 }
 
 </style>
