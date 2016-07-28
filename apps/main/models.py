@@ -43,11 +43,12 @@ class Note(models.Model):
     updated_at = models.DateTimeField(auto_now = True)
     event = models.ForeignKey(Event)
 
-def directory_path(prop_id,event_id, note_id, instance, filename):
-    return 'property_{0}/event_{1}/note_{2}/filename'.format(prop_id,event_id, note_id, instance, filename)
+def directory_path(prop_id,event_id, note_id, filename):
+    return 'property_{0}/event_{1}/note_{2}/{3}'.format(prop_id,event_id, note_id, filename)
 
 class File(models.Model):
-    docfile = models.FileField(upload_to=directory_path)
+    # upload_to=directory_path
+    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     note = models.ForeignKey(Note)

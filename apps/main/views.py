@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
-from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm
-from models import Event, Property, Note
+from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm, FileUploadForm
+from models import Event, Property, Note, File
 from .forms import EventCreateForm
 
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -98,11 +98,10 @@ def add_event(request, prop_id):
 
 def note(request,event_id,prop_id,note_id):
 	note = Note.objects.get(pk=note_id)
-	context={
-	'event_id':event_id,
-	'prop_id':prop_id,
-	"note":note
-	}
+	documents = note.file_set.all()
+	form = FileUploadForm()
+	context={'form':form, 'documents': documents,'event_id':event_id,
+	'prop_id':prop_id,"note_id":note.id}
 	return render(request, 'main/note.html', context)
 
 def notes(requst,event_id,prop_id):
@@ -123,10 +122,9 @@ def add_note(request,prop_id, event_id):
 			note = note_form.save(commit=False)
 			note.event = Event.objects.get(pk=event_id)
 			note.save()
-
-
 			return HttpResponse(note.id)
 		else:
+
 			context={
 				'form':note_form
 			}
@@ -140,25 +138,22 @@ def add_note(request,prop_id, event_id):
 		return render(request,'main/add_note.html',context)
 
 def add_file(request,prop_id, event_id, note_id):
-    # example from fileupload project
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'])
-            newdoc.save()
-
-            # Redirect to the document list after POST
-            return HttpResponse("added file	")
-    else:
-		form = DocumentForm()
-		context={
-			'form':form
-		}
-		return HttpResponseBadRequest(render (request,'main/add_file.html',context))
-          # A empty, unbound form
-
-    # Load documents for the list page
-    documents = Document.objects.all()
-
-    # Render list page with the documents and the form
-    return render(request, 'main/note.html',{'documents': documents, 'form': form} )
+		form = FileUploadForm(request.POST, request.FILES)
+		note = Note.objects.get(pk=note_id)
+		print request.POST
+		print request.FILES
+		if form.is_valid():
+			newdoc = File(docfile=request.FILES['docfile'] )
+			newdoc.note = note
+			# newdoc = File(docfile=(prop_id,event_id,note_id,request.FILES['docfile']))
+			newdoc.save()
+			print 'worked'
+			return HttpResponse("added file")
+		else:
+			form = FileUploadForm()
+		documents = File.objects.all()
+		context={'form':form, 'documents': documents,'event_id':event_id,
+		'prop_id':prop_id,"note_id":note_id}
+		print 'fail request'
+		return HttpResponseBadRequest(render (request,'main/note.html',context))
