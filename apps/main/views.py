@@ -121,8 +121,10 @@ def note(request,event_id,prop_id,note_id):
 	note = Note.objects.get(pk=note_id)
 	documents = note.file_set.all()
 	form = FileUploadForm()
+	property = Property.objects.get(pk=prop_id)
+	event = Event.objects.get(pk=event_id)
 	context={'form':form, 'documents': documents,'event_id':event_id,
-	'prop_id':prop_id,"note_id":note.id, 'note':note}
+	'prop_id':prop_id,"note_id":note.id, 'note':note, 'event':event, 'property':property}
 	return render(request, 'main/note.html', context)
 
 def notes(requst,event_id,prop_id):
@@ -143,6 +145,7 @@ def add_note(request,prop_id, event_id):
 			note = note_form.save(commit=False)
 			note.event = Event.objects.get(pk=event_id)
 			note.save()
+			print "i saved"
 			return HttpResponse(note.id)
 		else:
 
@@ -198,8 +201,10 @@ def add_file(request,prop_id, event_id, note_id):
 def alert(request,event_id,prop_id,alert_id):
 	alert = Alert.objects.get(pk=alert_id)
 	form = AlertCreateForm()
+	property = Property.objects.get(pk=prop_id)
+	event = Event.objects.get(pk=event_id)
 	context={'form':form, 'event_id':event_id,
-	'prop_id':prop_id,"alert_id":alert.id, 'alert':alert}
+	'prop_id':prop_id,"alert_id":alert.id, 'alert':alert, 'property':property, 'event':event}
 	return render(request, 'main/alert.html', context)
 
 

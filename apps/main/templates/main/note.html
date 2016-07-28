@@ -1,28 +1,18 @@
 <div class='container'>
-    <a id='event_link'>Back to Event</a>
+    <a id='prop_link'>{{property.name}}</a> <span> / </span>
+    <a id='event_link'>{{event.name}}</a>
 
     <div id='header form-control'>
-        <h3>Name:</h3>
-        <p>{{note.name}}</p>
+        <h1> NOTE </h1>
         <br>
+        <br>
+        <h4>Name:</h4>
+        <p>{{note.name}}</p>
         <br>
         <h4>Description:</h4>
         <label type='text' name='comment'>{{ note.comment }}</label>
 
-        <!-- <form id='note_update' method="post">
-            <p>disfajdlfjdkfaj</p>
-            {% csrf_token %}
-            <h3>Name:</h3>
-            <input type='text' name='name' value='{{ note.name }}'/>
-            <br>
-            <br>
-            <p>Description:</p>
-            <textarea type='text' name='comment'>{{ note.comment }}</textarea>
-            <button type='submit changes'>submit<button/>
-        </form> -->
     </div>
-    <br>
-    <br>
     <br>
     <br>
 
@@ -35,19 +25,14 @@
         {% else %}
             <p>No documents.</p>
         {% endif %}
-
         <form id='theForm' method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
             <input type='hidden' value='{{note.id}}' name='note_id'/>
             <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-
             <p>
                 {{ form.docfile.errors }}
                 {{ form.docfile }}
-
-            </p>
-
             <input type="submit" value="Upload">
         </form>
 
@@ -55,6 +40,10 @@
 
 <style>
 
+    ul{
+        columns: 2;
+        list-style: none;
+    }
     #header{
         margin-bottom: 40px;
     }
@@ -71,10 +60,12 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-    $('event_link').click(function(){
-        window.location.hash = '/property/'+{{prop_id}}+'/event/'+{{event_id}}
+    $('#event_link').click(function(){
+        window.location.hash = '/property/{{prop_id}}/event/{{event_id}}'
     });
-
+    $('#prop_link').click(function(){
+        window.location.hash = '/property/{{prop_id}}/events'
+    });
 
     $('#note_update').submit(function(e){
     	e.preventDefault();
@@ -108,18 +99,19 @@ $(document).ready(function() {
                   xhr.setRequestHeader("X-CSRFToken", csrftoken);
               }
           },
-        url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}}+'/add_file',
+        url: 'property/{{prop_id}}/event/{{event_id}}/note/{{note_id}}/add_file',
         method: "post",
         data: new FormData($("#theForm").get(0)),
         cache: false,
         processData: false,
         contentType: false,
         success: function(serverResponse) {
-             window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}};
+             window.location.hash = 'property/{{prop_id}}/event/{{event_id}}/note/{{note_id}}';
         },
         error: function(serverResponse) {
           $('#main-dashboard').html(serverResponse.responseText);
         }
+
       });
 
 
@@ -146,13 +138,8 @@ $(document).ready(function() {
     //         $('#main-dashboard').html(serverResponse.responseText);
     //       }
     //     });
-
-
-
-
-
+    });
 });
-
 $.expr[':'].Contains = function(a,i,m){
     	return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
  	};

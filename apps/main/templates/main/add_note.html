@@ -29,7 +29,7 @@ $(document).ready(function(){
 	   method: "post",
 	   data: $(this).serialize(),
 	   success: function(serverResponse) {
-		 window.location.hash = "/property/{{prop_id}}/event/{{event_id}}/note/"+serverResponse;
+		 window.location.hash = "/property/{{prop_id}}/event/{{event_id}}/note"
 	   },
 	   error: function(serverResponse) {
 		 $('#main-dashboard').html(serverResponse.responseText);
