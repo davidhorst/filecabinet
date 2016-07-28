@@ -137,8 +137,9 @@ def add_note(request,prop_id, event_id):
 		}
 		return render(request,'main/add_note.html',context)
 
+#####
 def add_file(request,prop_id, event_id, note_id):
-    if request.method == 'POST':
+	if request.method == 'POST':
 		form = FileUploadForm(request.POST, request.FILES)
 		note = Note.objects.get(pk=note_id)
 		print request.POST
@@ -157,3 +158,4 @@ def add_file(request,prop_id, event_id, note_id):
 		'prop_id':prop_id,"note_id":note_id}
 		print 'fail request'
 		return HttpResponseBadRequest(render (request,'main/note.html',context))
+######
