@@ -44,10 +44,30 @@
           </form> -->
         </div><!--/.nav-collapse -->
       </div>
-    </nav>
+</nav>
 
-  <div id="main-dashboard" class="container">
+      <div id="main-dashboard" class="container">
+      </div>
+      <div>
+      <button type="button" data-toggle="offcanvas" data-target="#myNavmenu1"> 
+    <span class="icon-bar">sdcsdc</span>
+    <span class="icon-bar">sdcsdc</span>
+    <span class="icon-bar">sdcsdc</span>
+  </button>
+</div>
+
+<nav id="myNavmenu1" class="navmenu navmenu-default navmenu-fixed-right offcanvas" role="navigation">
+<div id="test">
+  <a class="navmenu-brand" href="#">Brand</a>
+  <ul class="nav navmenu-nav">
+    <li class="active"><a href="#">Home</a></li>
+    <li><a href="#">Link</a></li>
+    <li><a href="#">Link</a></li>
+  </ul>
   </div>
+</nav>
+  
+    
 
 <script>
   $(document).ready(function(){
@@ -58,5 +78,25 @@
     //     $('#main-dashboard').html(serverResponse);
     //   }
     // });
+    $('myNavmenu').click(function() {
+      $('.navmenu').offcanvas('show')
+    });
   });
 </script>
+
+<style type="text/css">
+  #sidebar-right {
+    position:fixed; 
+    right:0;
+    width: 200px;
+  }
+  #test{
+    width: 500px;
+  }
+  .navmenu-fixed-right {
+   left: auto !important;
+}
+.navmenu {
+  width: 300px;
+}
+</style>
