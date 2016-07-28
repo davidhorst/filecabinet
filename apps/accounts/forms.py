@@ -13,19 +13,33 @@ class UserCreateForm(UserCreationForm):
 
     email = forms.EmailField(
         required=True,
-        validators=[clean_email])
+        validators=[clean_email],
+        widget=forms.TextInput(attrs={'type': 'email',
+           'placeholder': 'E-mail address'})
+        )
     first_name = forms.CharField(
         max_length=30, 
         validators=[MinLengthValidator(2)],
         error_messages={
-            'min_length': ("First name must be longer than 2 characters")}
+            'min_length': ("First name must be longer than 2 characters")},
+        widget=forms.TextInput(attrs={'placeholder' : 'First Name'})
             )
     last_name = forms.CharField(
         max_length=30,
         validators=[MinLengthValidator(2)],
         error_messages={
-            'min_length': ("Last name must be longer than 2 characters")}
+            'min_length': ("Last name must be longer than 2 characters")},
+        widget=forms.TextInput(attrs={'placeholder' : 'Last Name'})
             )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter a Password'})
+        )
+
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Repeat Password'})
+        )
+
+
 
     def save(self, commit=True):
         user = super(UserCreateForm, self).save(commit=False)

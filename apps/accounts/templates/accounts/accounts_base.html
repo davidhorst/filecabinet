@@ -24,9 +24,11 @@
  color: #000;
 
  position:absolute; 
- top:0; height:100%; width:100%;
+ top:0; 
+ height:100%; 
+ width:100%;
  left:0;
- z-index:1;
+ z-index:0;
 
   background: url('{{ STATIC_URL }}/static/main/img/grayscaleinterior.jpg') no-repeat center center fixed; 
    background-position: center center;
@@ -44,6 +46,7 @@
 }
 	body{
     padding-top: 60px;
+
 	}
   
   .col-centered{
@@ -53,14 +56,14 @@
     z-index: 99;
     height: 80vh;
     padding-top:10%;
-    background-color: rgba(181, 181, 181, 0.7)
+    background-color: rgba(181, 181, 181, 0.5)
 
   }
   .login-box{
     margin: auto;
-    max-width: 420px;
+    max-width: 390px;
     padding: 3em;
-    background-color: rgba(180, 188, 191, .9);
+    background-color: rgba(180, 188, 191, 0.4);
   }
   button, a{
     margin: auto;
@@ -71,7 +74,7 @@
 
   .logo{
     font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
-    font-size: 24px;
+    font-size: 2.25em;
     font-style: normal;
     font-variant: normal;
     font-weight: 500;
@@ -84,15 +87,27 @@
 
   }
   .logo-highlight{
-    color: #F0535C;
+    color: black;
+    -webkit-text-fill-color: #F0535C; /* Will override color (regardless of order) */
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: black;
   }
 
   input{
     width: 100%;
-    padding: 1px 3px;
+    padding: 1px .8em;
+    height: 3em;
   }
 
-
+  
+  #submit, #register{
+    margin-bottom: 1em;
+  }
+  footer{
+    color: lightgray;
+    z-index: 99;
+    margin-top: 80vh;
+  }
 </style> 
 <body>
   <div class="background-img"></div>
@@ -112,7 +127,7 @@
   <hr>
   <div class="container">
     <footer>
-      <p>&copy; 2016 company, Inc.</p>
+      <p>&copy; 2016 company, Inc.  <a href="#">About</a>  <a href="#">Jobs</a> <a href="#">Privacy</a></p>
     </footer>
   </div> <!-- /container -->
 
