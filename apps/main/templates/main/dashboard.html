@@ -1,10 +1,10 @@
 <div class="row middle-content">
-  <div class="col-lg-12 col-xl-9">
+  <div class="left-part">
     <!-- MAIN DASHBOARD AREA -->
     <div id="main-dashboard" class="container">
     </div>
-  </div>
-  <div class="col-lg-3 col-xl-3">
+  </div><!--
+  --><div class="right-part">
     <!-- STATIC SIDE MENU: for LG -->
 
     <div id="static-side-menu">
@@ -17,6 +17,7 @@
 </nav>
 
 <div id="side-expand">
+  <i class="fa fa-caret-left fa-3x" style="color: grey"></i>
 </div>
 
 <script>
@@ -35,6 +36,7 @@
 
 .middle-content {
   width: 100%;
+  margin: 0;
 }
 
 .navmenu-fixed-right { /* Fixing Jasny Issue */
@@ -43,14 +45,16 @@
 
 #side-expand {
   position: fixed;
-  background-color: blue;
+  background-color: silver;
+  opacity: 0.5;
   border-bottom-left-radius: 10px; 
   border-top-left-radius: 10px;
   right: 0;
   top: 100px;
-  height: 50px;
+  height: 45px;
   width: 40px;
-  z-index: 9;
+  z-index: 999;
+  text-align: center;
 }
 
 /* Color Styling */
@@ -64,16 +68,22 @@
 
 
 @media all and (max-width: 450px) {
-  #static-side-menu {
-    visibility: hidden;
-    height: 0px;
-  }
   #slide-side-menu {
     visibility: visible;
-    width: 100%;
+    left: 0;
     min-height: 300px;
-    position:fixed; 
-    right:0;
+    right: 0;
+    position: fixed;
+  }
+  .left-part {
+    width: 100%;
+    margin:0 auto;
+    padding:0;
+  }
+  .right-part {
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
   }
 }
 
@@ -126,14 +136,19 @@
     height: auto;
     right:0;
   }
-  #slide-side-menu {
+  #slide-side-menu,.slide-collapse-anchor, #side-collapse {
     visibility: hidden;
+    height: 0px;
   }
-  .col-xl-9 {
+  .left-part{
+    display: inline-block;
+    vertical-align: top;
     width: 75%;
     height: auto;
   }
-  .col-xl-3  {
+  .right-part  {
+    display: inline-block;
+    vertical-align: top;
     width: 20%;
     height: auto;
   }
