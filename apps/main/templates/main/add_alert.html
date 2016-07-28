@@ -16,6 +16,15 @@
 $(document).ready(function(){
 
 
+	$(function(){
+		$('*[name=datetime]').appendDtpicker({
+			"inline": true,
+			"current": "2012-3-4 12:30"
+		});
+		console.log('datepicker ran');
+	});
+		
+
 	$('#theForm').submit(function(e){
 	 e.preventDefault();
 	 var csrftoken = getCookie('csrftoken');
@@ -34,7 +43,9 @@ $(document).ready(function(){
 	   error: function(serverResponse) {
 		 $('#main-dashboard').html(serverResponse.responseText);
 	   }
-	 });
+	 
+	 } });
 	  });
+
 });
 </script>
