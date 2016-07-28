@@ -18,18 +18,19 @@
             <p>No documents.</p>
         {% endif %}
 
-        <form action="propterty/{{prop_id}}/event/{{event_id}}/note/{{note.id}}/add_file" method="post" enctype="multipart/form-data">
+        <form id='theForm' method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
-
+            <input type='hidden' value='{{note.id}}' name='note_id'/>
             <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
 
             <p>
                 {{ form.docfile.errors }}
                 {{ form.docfile }}
+
             </p>
 
-            <p><input type="submit" value="Upload"/></p>
+            <input type="submit" value="Upload">
         </form>
 
 </div>
@@ -55,6 +56,31 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+
+    $('#theForm').submit(function(e){
+  	  e.preventDefault();
+  	  var csrftoken = getCookie('csrftoken');
+
+  	  $.ajax({
+  		  beforeSend: function(xhr, settings) {
+  			  if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+  				  xhr.setRequestHeader("X-CSRFToken", csrftoken);
+  			  }
+  		  },
+  		url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}}+'/add_file',
+  		method: "post",
+  		data: new FormData($("#theForm").get(0)),
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function(data) {
+            alert('success');
+        },
+        error: function(serverResponse) {
+  		  $('#main-dashboard').html(serverResponse.responseText);
+  		}
+  	  });
+  });
 
 });
 
