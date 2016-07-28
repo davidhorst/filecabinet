@@ -21,7 +21,7 @@
 
   $(document).ready(function(){
   	$('#id_icon_color option').each( function(){
-  		$(this).css("background-color", $(this).attr("color"));
+  		$(this).css("color", $(this).attr("color"));
   		// $(this).html("");
   	});
 
@@ -60,7 +60,7 @@
     });
 
     $('#id_icon_color').change(function(){
-    	$('#preview i').css('color', `${$('#id_icon_color option:selected').text()}`);
+    	$('#preview i').css('color', `${$('#id_icon_color option:selected').attr("color")}`);
     });
 
    });
