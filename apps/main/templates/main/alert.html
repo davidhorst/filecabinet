@@ -1,0 +1,48 @@
+<div class='container'>
+    <a id='event_link'>Back to Event</a>
+
+    <div id='header form-control'>
+        <h3>Alert:</h3>
+        <p>{{alert.comment}}</p>
+        <br>
+        <br>
+        <h4>When:</h4>
+        <label type='text' name='comment'>{{ alert.when }}</label>
+
+    </div>
+
+
+
+</div>
+
+<style>
+
+    ul{
+        columns: 2;
+        list-style: none;
+    }
+    #header{
+        margin-bottom: 40px;
+    }
+
+    .inline{
+        display: inline-block;
+    }
+
+    #search{
+        margin-bottom: 20px;
+    }
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+});
+
+$.expr[':'].Contains = function(a,i,m){
+    	return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
+ 	};
+
+
+
+</script>
