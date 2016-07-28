@@ -50,7 +50,6 @@ class PropertyCreateForm(forms.ModelForm):
         max_length=100,required=False)
 
     icon_type = forms.ModelChoiceField(queryset=Icon.objects.all())
-    print icon_type
     icon_color = forms.ModelChoiceField(queryset=Color.objects.all(), widget=mySelect())
 
 class FileUploadForm(forms.Form):
@@ -96,4 +95,7 @@ class AlertCreateForm(forms.ModelForm):
         max_length=30)
 
     when = forms.DateTimeField(
-        required=True)
+        required=True,
+        widget=forms.DateInput(format=('%Y-%m-%d'),
+                                attrs={'type':'date'})
+        )

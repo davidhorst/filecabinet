@@ -45,7 +45,7 @@
           {% if today.date != alert.when.date %}
           <td class="col-lg-6 time-since">{{ today.date|timesince:alert.when.date }}</td>
           {% else %}
-          <td class="col-lg-6 time-since">NOW</td>
+          <td class="col-lg-6 time-since">TODAY</td>
           {% endif %}
         </tr>
       </tbody>
@@ -143,6 +143,10 @@
   width: 40px;
   z-index: 999;
   
+}
+
+td {
+  overflow: wrap;
 }
 
 </style>
