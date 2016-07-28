@@ -1,0 +1,68 @@
+<h3 class="navmenu-brand" href="#">Upcoming To-Do's</h3>
+<ul class="nav navmenu-nav">
+  {% for alert in alerts %}
+  <li data-is-active="False">
+    <a href="#" class="sidebar-alert">
+      <div class="tab-col-1"><i class="fa fa-{{ alert.event.property.icon_type.name }}" style="color: {{ alert.event.property.icon_color.color }}"></i></div>
+      <div class="tab-col-2">{{ alert.comment }}</div>
+      <div class="tab-col-3">{{ alert.when.date }}</div>
+    </a>
+  </li>
+  {% endfor %}
+
+<h3 class="navmenu-brand" href="#">Recent Notes</h3>
+<ul class="nav navmenu-nav">
+  {% for note in notes %}
+  <li data-is-active="False">
+    <a href="#" class="sidebar-alert">
+      <div class="tab-col-1"><i class="fa fa-{{ note.event.property.icon_type.name }}" style="color: {{ note.event.property.icon_color.color }}"></i></div>
+      <div class="tab-col-2">{{ note.name }}</div>
+      <div class="tab-col-3">{{ note.created_at.date }}</div>
+    </a>
+  </li>
+  {% endfor %}
+
+<style type="text/css">
+  
+.tab-col-1 {
+  height: 1.1em;
+  display: inline-block;
+  width: 5%;
+  overflow: hidden;
+}  
+
+.tab-col-2 {
+  height: 1.1em;
+  display: inline-block;
+  width: 55%;
+  overflow: hidden;
+} 
+
+.tab-col-3 {
+  height: 1.1em;
+  display: inline-block;
+  width: 30%;
+  overflow: hidden;
+} 
+
+.hover-msg {
+
+}
+
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.sidebar-alert').click( function(e){ // STILL MESSING AROUND WITH STUFF (JUN)
+    e.preventDefault();
+    if ( $(this).attr("data-is-active") === "True") {
+      $(this).parent().removeClass();
+      $(this).attr("data-is-active", "False")
+    } else {
+      $(this).parent().addClass("active");
+      $(this).attr("data-is-active", "True")
+    }
+  });
+});
+
+</script>

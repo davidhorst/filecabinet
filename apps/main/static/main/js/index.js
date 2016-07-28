@@ -35,6 +35,15 @@ function loadProperties(){
         $('#main-dashboard').html(serverResponse);
       }
     });
+    $.ajax({
+      url: "/sidebar",
+      method: "get",
+      success: function(serverResponse) {
+        $('#static-side-menu').html(serverResponse);
+        $('#slide-side-menu').html(serverResponse);
+
+      }
+    });
 }
 
 function loadProperty(prop_id) {
