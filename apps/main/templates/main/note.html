@@ -39,11 +39,6 @@
 </div>
 
 <style>
-
-    ul{
-        columns: 2;
-        list-style: none;
-    }
     #header{
         margin-bottom: 40px;
     }
@@ -61,8 +56,11 @@
 $(document).ready(function() {
 
     $('#event_link').click(function(){
-        window.location.hash = '/property/{{prop_id}}/event/{{event_id}}'
+        window.location.hash = '/property/{{prop_id}}/event/{{event_id}}/notes'
     });
+
+
+
     $('#prop_link').click(function(){
         window.location.hash = '/property/{{prop_id}}/events'
     });
@@ -99,14 +97,14 @@ $(document).ready(function() {
                   xhr.setRequestHeader("X-CSRFToken", csrftoken);
               }
           },
-        url: 'property/{{prop_id}}/event/{{event_id}}/note/{{note_id}}/add_file',
+        url: '/property/{{prop_id}}/event/{{event_id}}/note/{{note_id}}/add_file',
         method: "post",
         data: new FormData($("#theForm").get(0)),
         cache: false,
         processData: false,
         contentType: false,
         success: function(serverResponse) {
-             window.location.hash = 'property/{{prop_id}}/event/{{event_id}}/note/{{note_id}}';
+             window.location.hash = '/property/{{prop_id}}/event/{{event_id}}/note/{{note_id}}';
         },
         error: function(serverResponse) {
           $('#main-dashboard').html(serverResponse.responseText);
