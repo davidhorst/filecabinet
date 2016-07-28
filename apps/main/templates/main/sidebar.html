@@ -1,8 +1,12 @@
-<li>
-  <a href="#">
-    <div id="side-collapse"></div>
-  </a>
-</li>
+
+
+
+    <a href="#" class="side-collapse-anchor">
+      <div id="side-collapse">
+        <i class="fa fa-caret-right fa-3x" style="color: grey"></i>
+      </div>
+    </a>
+
 <h3 class="navmenu-brand" href="#">Upcoming To-Do's</h3>
 <ul class="nav navmenu-nav">
   {% for alert in alerts %}
@@ -116,12 +120,29 @@
 
 #side-collapse {
   background-color: blue;
+  background-color: silver;
+  opacity: 0.5;
   border-bottom-right-radius: 10px; 
   border-top-right-radius: 10px;
   left: 0;
-  height: 50px;
+  height: 45px;
   width: 40px;
   z-index: 9;
+  text-align: center;
+}
+
+#side-expand {
+  position: fixed;
+  background-color: silver;
+  opacity: 0.5;
+  border-bottom-left-radius: 10px; 
+  border-top-left-radius: 10px;
+  right: 0;
+  top: 100px;
+  height: 45px;
+  width: 40px;
+  z-index: 999;
+  
 }
 
 </style>
@@ -133,7 +154,7 @@ $(document).ready(function(){
     
   $('.sidebar-item').click( function(e){
     e.preventDefault();
-    $('#slide-side-menu').offcanvas('hide')
+    $('#slide-side-menu').offcanvas('hide');
     window.location.hash = $(this).attr("href");
   });
 
@@ -144,10 +165,13 @@ $(document).ready(function(){
     $(`#${$(this).attr("data-pair")}`).hide();
   });
 
-});
-
-$('#side-collapse').on('click' ,function() {
+  $('.side-collapse-anchor').click(function(e) {
+    e.preventDefault();
     $('#slide-side-menu').offcanvas('hide');
 });
+
+});
+
+
 
 </script>
