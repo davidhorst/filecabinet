@@ -76,27 +76,29 @@ h4 {
 	};
 </script>
 
-<h2 class="row">Properties</h2>
+<div class="main-section properties">
+	<h2 class="row">Properties</h2>
 
-<div class="row">
-	<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-		<input type="text" id="search" class="form-control " placeholder="Search properties by name...">
-	</div>
-</div>
-<div id="properties-interface" class="row">
-	{% for property in properties %}
-	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-		<div class="property-wrapper" data-id="{{property.id}}">
-			<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-{{ property.icon_type.name }} fa-5x" style="color: {{ property.icon_color.color }}"></i></button>
-			<div class="property-name" ><h4>{{ property.name }}</h4></div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+			<input type="text" id="search" class="form-control " placeholder="Search properties by name...">
 		</div>
 	</div>
-	{% endfor %}
+	<div id="properties-interface" class="row">
+		{% for property in properties %}
+		<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+			<div class="property-wrapper" data-id="{{property.id}}">
+				<button class="btn btn-lg btn-default btn-circle"><i class="fa fa-{{ property.icon_type.name }} fa-5x" style="color: {{ property.icon_color.color }}"></i></button>
+				<div class="property-name" ><h4>{{ property.name }}</h4></div>
+			</div>
+		</div>
+		{% endfor %}
 
-	<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-		<div class="property-wrapper">
-			<button class="btn btn-lg btn-info btn-circle btn-add"><i class="fa fa-plus fa-5x" style="color: grey"></i></button>
-			<div class="add-property"><h4>Add Property</h4></div>
+		<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+			<div class="property-wrapper">
+				<button class="btn btn-lg btn-info btn-circle btn-add"><i class="fa fa-plus fa-5x" style="color: grey"></i></button>
+				<div class="add-property"><h4>Add Property</h4></div>
+			</div>
 		</div>
 	</div>
 </div>

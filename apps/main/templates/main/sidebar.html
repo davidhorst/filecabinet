@@ -1,24 +1,89 @@
+<li>
+  <a href="#">
+    <div id="side-collapse"></div>
+  </a>
+</li>
 <h3 class="navmenu-brand" href="#">Upcoming To-Do's</h3>
 <ul class="nav navmenu-nav">
   {% for alert in alerts %}
-  <li data-is-active="False">
-    <a href="#" class="sidebar-alert">
+  <li class="simplified" id="simplified-alert-{{alert.id}}" data-pair="detailed-alert-{{alert.id}}">
+    <a href="/property/{{alert.event.property.id}}/event/{{alert.event.id}}/alert/{{alert.id}}" class="sidebar-alert sidebar-item">
       <div class="tab-col-1"><i class="fa fa-{{ alert.event.property.icon_type.name }}" style="color: {{ alert.event.property.icon_color.color }}"></i></div>
       <div class="tab-col-2">{{ alert.comment }}</div>
       <div class="tab-col-3">{{ alert.when.date }}</div>
     </a>
+  </li>
+  <li class="detailed" id="detailed-alert-{{alert.id}}">
+    <table>
+      <tbody>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Property: </td>
+          <td class="col-lg-6">{{ alert.event.property.name }}</td>
+        </tr>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Event: </td>
+          <td class="col-lg-6">{{ alert.event.name}}</td>
+        </tr>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Created on: </td>
+          <td class="col-lg-6">{{ alert.created_at.date }}</td>
+        </tr>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Comment: </td>
+          <td class="col-lg-6">{{ alert.comment }}</td>
+        </tr>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Alert Date: </td>
+          <td class="col-lg-6">{{ alert.when.date }}</td>
+        </tr>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Days Left: </td>
+          {% if today.date != alert.when.date %}
+          <td class="col-lg-6 time-since">{{ today.date|timesince:alert.when.date }}</td>
+          {% else %}
+          <td class="col-lg-6 time-since">NOW</td>
+          {% endif %}
+        </tr>
+      </tbody>
+    </table>
   </li>
   {% endfor %}
 
 <h3 class="navmenu-brand" href="#">Recent Notes</h3>
 <ul class="nav navmenu-nav">
   {% for note in notes %}
-  <li data-is-active="False">
-    <a href="#" class="sidebar-alert">
+  <li class="simplified" id="simplified-note-{{note.id}}" data-pair="detailed-note-{{note.id}}">
+    <a href="/property/{{note.event.property.id}}/event/{{note.event.id}}/note/{{note.id}}" class="sidebar-note sidebar-item">
       <div class="tab-col-1"><i class="fa fa-{{ note.event.property.icon_type.name }}" style="color: {{ note.event.property.icon_color.color }}"></i></div>
       <div class="tab-col-2">{{ note.name }}</div>
       <div class="tab-col-3">{{ note.created_at.date }}</div>
     </a>
+  </li>
+  <li class="detailed" id="detailed-note-{{note.id}}">
+    <table>
+      <tbody>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Property: </td>
+          <td class="col-lg-6">{{ note.event.property.name }}</td>
+        </tr>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Event: </td>
+          <td class="col-lg-6">{{ note.event.name}}</td>
+        </tr>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Name: </td>
+          <td class="col-lg-6">{{ note.name }}</td>
+        </tr>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Created on: </td>
+          <td class="col-lg-6">{{ note.created_at.date }}</td>
+        </tr>
+        <tr class="row">
+          <td class="col-lg-4 left-col">Comment: </td>
+          <td class="col-lg-6">{{ note.comment }}</td>
+        </tr>
+      </tbody>
+    </table>
   </li>
   {% endfor %}
 
@@ -45,24 +110,44 @@
   overflow: hidden;
 } 
 
-.hover-msg {
+.left-col {
+  text-align: right;
+}
 
+#side-collapse {
+  background-color: blue;
+  border-bottom-right-radius: 10px; 
+  border-top-right-radius: 10px;
+  left: 0;
+  height: 50px;
+  width: 40px;
+  z-index: 9;
 }
 
 </style>
 
 <script type="text/javascript">
 $(document).ready(function(){
-  $('.sidebar-alert').click( function(e){ // STILL MESSING AROUND WITH STUFF (JUN)
+  $(".detailed").hide();
+
+    
+  $('.sidebar-item').click( function(e){
     e.preventDefault();
-    if ( $(this).attr("data-is-active") === "True") {
-      $(this).parent().removeClass();
-      $(this).attr("data-is-active", "False")
-    } else {
-      $(this).parent().addClass("active");
-      $(this).attr("data-is-active", "True")
-    }
+    $('#slide-side-menu').offcanvas('hide')
+    window.location.hash = $(this).attr("href");
   });
+
+  $('.simplified').hover( function(){
+    console.log($(this).attr("data-pair"));
+    $(`#${$(this).attr("data-pair")}`).show();
+  }, function(){
+    $(`#${$(this).attr("data-pair")}`).hide();
+  });
+
+});
+
+$('#side-collapse').on('click' ,function() {
+    $('#slide-side-menu').offcanvas('hide');
 });
 
 </script>

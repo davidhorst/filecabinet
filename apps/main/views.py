@@ -9,6 +9,8 @@ from django.http import HttpResponse, HttpResponseBadRequest
 
 from django.contrib.auth.decorators import login_required
 
+import datetime
+
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
@@ -33,7 +35,8 @@ def sidebar(request):
 	notes = Note.objects.filter(event__property__user=request.user).order_by("created_at")
 	context = {
 			"alerts" : alerts,
-			"notes" : notes
+			"notes" : notes,
+			"today" : datetime.datetime.today
 		}
 	return render(request, "main/sidebar.html", context)
 
