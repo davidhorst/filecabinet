@@ -1,75 +1,56 @@
-<div class="row">
+<div class="row middle-content">
   <div class="col-lg-12 col-xl-9">
     <!-- MAIN DASHBOARD AREA -->
     <div id="main-dashboard" class="container">
     </div>
   </div>
-  <div class="col-xl-3">
+  <div class="col-lg-3 col-xl-3">
     <!-- STATIC SIDE MENU: for LG -->
+
     <div id="static-side-menu">
     </div>
   </div>
 </div>
 
-
-
-
-
 <!-- SLIDE SIDE MENU: for MD SM XS -->
 <nav id="slide-side-menu" class="navmenu navmenu-default navmenu-fixed-right offcanvas" role="navigation">
-  <div id="test">
-    <a class="navmenu-brand" href="#">Brand</a>
-    <ul class="nav navmenu-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Link</a></li>
-      <li><a href="#">Link</a></li>
-    </ul>
-  </div>
 </nav>
 
-<div>
-  <button type="button" data-toggle="offcanvas" data-target="#slide-side-menu"> 
-    <span class="icon-bar">sdcsdc</span>
-    <span class="icon-bar">sdcsdc</span>
-    <span class="icon-bar">sdcsdc</span>
-  </button>
+<div id="side-expand">
 </div>
 
-
-  
-    
-
 <script>
-  $(document).ready(function(){
-    // $.ajax({
-    //   url: "/properties",
-    //   method: "get",
-    //   success: function(serverResponse) {
-    //     $('#main-dashboard').html(serverResponse);
-    //   }
-    // });. 
-    $('myNavmenu').click(function() {
-      $('.navmenu').offcanvas('show')
+  $(document).ready(function(){ 
+    $('#side-expand').click(function() {
+      $('#slide-side-menu').offcanvas('show');
     });
   });
 </script>
 
 <style type="text/css">
 
-#static-side-menu {
+#static-side-menu{
   padding: 20px;
 }
 
-#test{
-  width: 500px;
+.middle-content {
+  width: 100%;
 }
 
-.navmenu-fixed-right {
+.navmenu-fixed-right { /* Fixing Jasny Issue */
   left: auto !important;
 }
 
-.navmenu {
-  width: 300px;
+#side-expand {
+  position: fixed;
+  background-color: blue;
+  border-bottom-left-radius: 10px; 
+  border-top-left-radius: 10px;
+  right: 0;
+  top: 100px;
+  height: 50px;
+  width: 40px;
+  z-index: 9;
 }
 
 /* Color Styling */
@@ -85,20 +66,21 @@
 @media all and (max-width: 450px) {
   #static-side-menu {
     visibility: hidden;
+    height: 0px;
   }
   #slide-side-menu {
     visibility: visible;
-    width: 400px;
+    width: 100%;
     min-height: 300px;
     position:fixed; 
     right:0;
-    background-color: #C0B08C;
   }
 }
 
 @media all and (min-width: 450px) {
   #static-side-menu {
     visibility: hidden;
+    height: 0px;
   }
   #slide-side-menu {
     visibility: visible;
@@ -106,13 +88,13 @@
     min-height: 300px;
     position:fixed; 
     right:0;
-    background-color: #C0B08C;
   }
 }
 
 @media all and (min-width: 650px) {
   #static-side-menu {
     visibility: hidden;
+    height: 0px;
   }
   #slide-side-menu {
     visibility: visible;
@@ -120,13 +102,13 @@
     min-height: 300px;
     position:fixed; 
     right:0;
-    background-color: #C0B08C;
   }
 }
 
 @media all and (min-width: 800px) {
   #static-side-menu {
     visibility: hidden;
+    height: 0px;
   }
   #slide-side-menu {
     visibility: visible;
@@ -134,27 +116,29 @@
     min-height: 300px;
     position:fixed; 
     right:0;
-    background-color: #C0B08C;
   }
 }
 
-@media all and (min-width: 1570px) {
+@media all and (min-width: 1600px) {
   #static-side-menu {
     visibility: visible;
     width: 400px;
-    min-height: 300px;
-    position:fixed; 
+    height: auto;
     right:0;
-    background-color: #C0B08C;
   }
   #slide-side-menu {
     visibility: hidden;
   }
   .col-xl-9 {
     width: 75%;
+    height: auto;
   }
   .col-xl-3  {
-    width: 25%;
+    width: 20%;
+    height: auto;
+  }
+  #side-expand {
+    visibility: hidden;
   }
 }
 
