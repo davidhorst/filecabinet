@@ -16,4 +16,6 @@ urlpatterns = [
     url(r'^property/(?P<prop_id>\d+)/event/(?P<event_id>\d+)/notes$', views.notes, name="notes"),
     url(r'^property/(?P<prop_id>\d+)/event/(?P<event_id>\d+)/add_note$', views.add_note, name="add_note"),
     url(r'^property/(?P<prop_id>\d+)/event/(?P<event_id>\d+)/note/(?P<note_id>\d+)/add_file$', views.add_file, name="add_file"),
+
+    url(r'^sidebar$', views.sidebar, name="sidebar"),
 ]

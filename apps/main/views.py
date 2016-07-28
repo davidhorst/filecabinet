@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm
-from models import Event, Property, Note
+from models import Event, Property, Note, Alert
 from .forms import EventCreateForm
 
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -162,3 +162,12 @@ def add_file(request,prop_id, event_id, note_id):
 
     # Render list page with the documents and the form
     return render(request, 'main/note.html',{'documents': documents, 'form': form} )
+
+def sidebar(request):
+	alerts = Alert.objects.filter(event__property__user=request.user).order_by("when")
+	notes = Note.objects.filter(event__property__user=request.user).order_by("created_at")
+	context = {
+			"alerts" : alerts,
+			"notes" : notes
+		}
+	return render(request, "main/sidebar.html", context)
