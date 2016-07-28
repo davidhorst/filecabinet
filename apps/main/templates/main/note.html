@@ -1,5 +1,5 @@
 <div class='container'>
-    <a id='event_link'>Back to Event</a>
+    <button id='event_link'>Back to Event</button>
 
     <div id='header form-control'>
         <h3>Name:</h3>
@@ -76,7 +76,8 @@
 $(document).ready(function() {
 
     $('event_link').click(function(){
-        window.location.hash = '/property/'+{{prop_id}}+'/event/'+{{event_id}}
+        alert('iwas')
+        window.location.hash = '/property/{{prop_id}}/event/{{event_id}}'
     });
 
 
@@ -112,18 +113,19 @@ $(document).ready(function() {
                   xhr.setRequestHeader("X-CSRFToken", csrftoken);
               }
           },
-        url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}}+'/add_file',
+        url: 'property/{{prop_id}}/event/{{event_id}}/note/{{note_id}}/add_file',
         method: "post",
         data: new FormData($("#theForm").get(0)),
         cache: false,
         processData: false,
         contentType: false,
         success: function(serverResponse) {
-             window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}};
+             window.location.hash = 'property/{{prop_id}}/event/{{event_id}}/note/{{note_id}}';
         },
         error: function(serverResponse) {
           $('#main-dashboard').html(serverResponse.responseText);
         }
+
       });
 
 
@@ -150,13 +152,8 @@ $(document).ready(function() {
     //         $('#main-dashboard').html(serverResponse.responseText);
     //       }
     //     });
-
-
-
-
-
+    });
 });
-
 $.expr[':'].Contains = function(a,i,m){
     	return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
  	};

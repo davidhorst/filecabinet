@@ -137,6 +137,7 @@ def add_note(request,prop_id, event_id):
 			note = note_form.save(commit=False)
 			note.event = Event.objects.get(pk=event_id)
 			note.save()
+			print "i saved"
 			return HttpResponse(note.id)
 		else:
 
