@@ -28,7 +28,6 @@ $(document).ready(function(){
 		method: "post",
 		data: $(this).serialize(),
 		success: function(serverResponse) {
-			// alert("/property/"+{{prop_id}}+"/events/")
 		  window.location.hash = "/property/{{prop_id}}/events";
 		},
 		error: function(serverResponse) {

@@ -1,5 +1,6 @@
 <div class='container'>
     <div class='col-xs-offset-4' id='header'>
+        <a id='prop_link'>Property Name</a>
         <h3>{{event.name}}</h3>
 
         <p>{{event.created_at}}</p>
@@ -11,11 +12,13 @@
         </div>
 
 
-        <button class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event" role="button"> Add </button>
+        <button class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_event" role="button"> Add Note </button>
+
+        <button class="btn btn-default glyphicon-plus inline col-xs-2 col-xs-offset-2" id="add_alert" role="button"> Add Alert </button>
     </div>
 
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-        <input type="text" id="search" class="form-control" placeholder="Search">
+        <input type="text" id='search' class="form-control" placeholder="Search">
     </div>
 
 
@@ -32,6 +35,20 @@
         {% endfor %}
 
     </table>
+
+    <table class="table table-hover" id="alert_table">
+        <thead>
+            <tr>
+                <td><h3>Alerts:</h3></td>
+            </tr>
+        </thead>
+        {% for alert in alerts %}
+        <tr data_id='{{alert.id}}'>
+            <td><p class='alert_name'>{{ alert.comment }}</p></td>
+        </tr>
+        {% endfor %}
+
+    </table>
 </div>
 
 <style>
@@ -44,20 +61,21 @@
         display: inline-block;
     }
 
-    #search{
+    .search{
         margin-bottom: 20px;
     }
 </style>
 
 <script type="text/javascript">
-var tempNotes= ['Note1','Note Content']
 $(document).ready(function() {
 
 
     $('#search').keyup(function(){
       var searchTerm = $('#search').val();
-      $(`.property-name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
-      $(`.property-name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
+      $(`.alert_name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
+      $(`.alert_name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
+      $(`.note_name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
+      $(`.note_name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
   });
 
 
@@ -66,14 +84,27 @@ $('#note_table tr').click(function() {
 
 });
 
+$('#alert_table tr').click(function() {
+    window.location.hash = '/property/{{prop_id}}/event/{{event.id}}/alert/'+$(this).attr("data_id")
 
-    $('#event_table tbody tr').click(function() {
-        $(this).addClass('active').siblings().removeClass('active');
+});
 
-    });
+
     $('#add_event').click(function(){
         window.location.hash = "/property/{{prop_id}}/event/{{event.id}}/addNote";
     });
+
+    $('#add_alert').click(function(){
+        window.location.hash = "/property/{{prop_id}}/event/{{event.id}}/addAlert";
+    });
+
+
+
+    $('#prop_link').click(function(){
+        window.location.hash = '/property/'+{{prop_id}}+'/events'
+    });
+
+
 });
 
 $.expr[':'].Contains = function(a,i,m){

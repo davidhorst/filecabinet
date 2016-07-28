@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.encoding import force_unicode
 from django.utils.html import escape, conditional_escape
-from .models import Event, Property, Icon, Color, Note
+from .models import Event, Property, Icon, Color, Note, Alert
 
 from itertools import chain
 
@@ -83,3 +83,16 @@ class NoteCreateForm(forms.ModelForm):
 
     comment = forms.CharField(
         max_length=30)
+
+
+class AlertCreateForm(forms.ModelForm):
+
+    class Meta:
+        model = Alert
+        fields = ("comment", 'when')
+
+    comment = forms.CharField(
+        max_length=30)
+
+    when = forms.DateTimeField(
+        required=True)

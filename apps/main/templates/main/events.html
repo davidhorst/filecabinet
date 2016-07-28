@@ -1,6 +1,6 @@
 <div class='container'>
     <div class='col-xs-offset-4' id='header'>
-        <h3>{{property.name}}</h3>
+        <h3><a id='main_link'>{{property.name}}</a></h3>
     </div>
 
     <div id='mid_content'>
@@ -57,6 +57,10 @@ $(document).ready(function() {
       $(`.event-name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
   });
 
+
+  $('#main_link').click(function(){
+      window.location.hash = '/property'
+  });
 
     $('#event_table tbody tr').click(function() {
         $(this).addClass('active').siblings().removeClass('active');

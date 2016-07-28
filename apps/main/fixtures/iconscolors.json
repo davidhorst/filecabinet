@@ -1,0 +1,106 @@
+[
+  {
+    "model": "main.icon",
+    "pk": 1,
+    "fields": {
+      "name": "car",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 2,
+    "fields": {
+      "name": "building",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 3,
+    "fields": {
+      "name": "building-o",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 4,
+    "fields": {
+      "name": "hospital",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 5,
+    "fields": {
+      "name": "truck",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 6,
+    "fields": {
+      "name": "fire",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 7,
+    "fields": {
+      "name": "hashtag",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 1,
+    "fields": {
+      "name": "tan",
+      "color": "tan",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 2,
+    "fields": {
+      "name": "grey",
+      "color": "grey",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 3,
+    "fields": {
+      "name": "blue",
+      "color": "blue",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 4,
+    "fields": {
+      "name": "black",
+      "color": "black",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  }
+]
+

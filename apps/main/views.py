@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
-from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm, FileUploadForm
+from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm, FileUploadForm,AlertCreateForm
 from models import Event, Property, Note, File, Alert
 
 from .forms import EventCreateForm
@@ -75,11 +75,13 @@ def add_property(request):
 def event(request,event_id, prop_id):
 	event = Event.objects.get(pk=event_id)
 	notes = event.note_set.all()
+	alerts = event.alert_set.all()
 
 	context={
 	'prop_id':prop_id,
 	'event':event,
-	"notes":notes
+	"notes":notes,
+	'alerts':alerts
 	}
 	return render(request, 'main/event.html',context)
 
@@ -120,16 +122,16 @@ def note(request,event_id,prop_id,note_id):
 	documents = note.file_set.all()
 	form = FileUploadForm()
 	context={'form':form, 'documents': documents,'event_id':event_id,
-	'prop_id':prop_id,"note_id":note.id}
+	'prop_id':prop_id,"note_id":note.id, 'note':note}
 	return render(request, 'main/note.html', context)
 
 def notes(requst,event_id,prop_id):
 		event = Event.objets.get(pk=event_id)
 		notes = event.note_set.all()
-
 		context={
 		'event_id':event_id,
 		'prop_id':prop_id,
+
 		}
 
 		return render(request, 'main/note.html', context)
@@ -156,47 +158,75 @@ def add_note(request,prop_id, event_id):
 		}
 		return render(request,'main/add_note.html',context)
 
+def update_note(request,prop_id, event_id):
+	print ('update')
+	if request.POST:
+		print ('update post')
+
+		name = request.POST['name']
+		name = request.POST['comment']
+		note = Event.objects.get(pk=event_id)
+		note.name=name
+		note.comment=comment
+		note.save()
+		return HttpResponse(note.id)
+
+
+
 def add_file(request,prop_id, event_id, note_id):
-    if request.method == 'POST':
+	if request.method == 'POST':
+		form = FileUploadForm(request.POST, request.FILES)
+		note = Note.objects.get(pk=note_id)
+		print request.POST
+		print request.FILES
+		if form.is_valid():
+			newdoc = File(docfile=request.FILES['docfile'] )
+			newdoc.note = note
+			# newdoc = File(docfile=(prop_id,event_id,note_id,request.FILES['docfile']))
+			newdoc.save()
+			return HttpResponse("added file")
+		else:
+			form = FileUploadForm()
+		documents = File.objects.all()
+		context={'form':form, 'documents': documents,'event_id':event_id,
+		'prop_id':prop_id,"note_id":note_id}
+		print 'fail request'
+		return HttpResponseBadRequest(render (request,'main/note.html',context))
 
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'])
-            newdoc.save()
 
-            # Redirect to the document list after POST
-            return HttpResponse("added file	")
-    else:
-		form = DocumentForm()
+
+def alert(request,event_id,prop_id,alert_id):
+	alert = Alert.objects.get(pk=alert_id)
+	form = AlertCreateForm()
+	context={'form':form, 'event_id':event_id,
+	'prop_id':prop_id,"alert_id":alert.id, 'alert':alert}
+	return render(request, 'main/alert.html', context)
+
+
+
+def add_alert(request,prop_id, event_id):
+	print ('got to add alert view')
+	if request.POST:
+		print ('got into post')
+
+		alert_form = AlertCreateForm(request.POST)
+		if alert_form.is_valid():
+			print ('is valid')
+
+			alert = alert_form.save(commit=False)
+			alert.event = Event.objects.get(pk=event_id)
+			alert.save()
+			return HttpResponse(alert.id)
+		else:
+
+			context={
+				'form':alert_form
+			}
+			return HttpResponseBadRequest(render (request,'main/add_alert.html',context))
+	else:
 		context={
-			'form':form
+			'form':AlertCreateForm(),
+			'prop_id':prop_id,
+			'event_id':event_id
 		}
-		return HttpResponseBadRequest(render (request,'main/add_file.html',context))
-          # A empty, unbound form
-
-    # Load documents for the list page
-    documents = Document.objects.all()
-
-    # Render list page with the documents and the form
-    return render(request, 'main/note.html',{'documents': documents, 'form': form} )
-
-
-# 		form = FileUploadForm(request.POST, request.FILES)
-# 		note = Note.objects.get(pk=note_id)
-# 		print request.POST
-# 		print request.FILES
-# 		if form.is_valid():
-# 			newdoc = File(docfile=request.FILES['docfile'] )
-# 			newdoc.note = note
-# 			# newdoc = File(docfile=(prop_id,event_id,note_id,request.FILES['docfile']))
-# 			newdoc.save()
-# 			print 'worked'
-# 			return HttpResponse("added file")
-# 		else:
-# 			form = FileUploadForm()
-# 		documents = File.objects.all()
-# 		context={'form':form, 'documents': documents,'event_id':event_id,
-# 		'prop_id':prop_id,"note_id":note_id}
-# 		print 'fail request'
-# 		return HttpResponseBadRequest(render (request,'main/note.html',context))
-
+		return render(request,'main/add_alert.html',context)
