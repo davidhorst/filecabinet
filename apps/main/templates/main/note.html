@@ -75,6 +75,10 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
+    $('event_link').click(function(){
+        window.location.hash = '/property/'+{{prop_id}}+'/event/'+{{event_id}}
+    });
+
 
     $('#note_update').submit(function(e){
     	e.preventDefault();
@@ -123,29 +127,29 @@ $(document).ready(function() {
       });
 
 
-      $('#update_note_form').submit(function(e){
-          alert('got here')
-    	  e.preventDefault();
-    	  var csrftoken = getCookie('csrftoken');
-
-        $.ajax({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            },
-          url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}}+'/update_note',
-          method: "post",
-          cache: false,
-          processData: false,
-          contentType: false,
-          success: function(serverResponse) {
-               window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}};
-          },
-          error: function(serverResponse) {
-            $('#main-dashboard').html(serverResponse.responseText);
-          }
-        });
+    //   $('#update_note_form').submit(function(e){
+    //       alert('got here')
+    // 	  e.preventDefault();
+    // 	  var csrftoken = getCookie('csrftoken');
+      //
+    //     $.ajax({
+    //         beforeSend: function(xhr, settings) {
+    //             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+    //                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
+    //             }
+    //         },
+    //       url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}}+'/update_note',
+    //       method: "post",
+    //       cache: false,
+    //       processData: false,
+    //       contentType: false,
+    //       success: function(serverResponse) {
+    //            window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}};
+    //       },
+    //       error: function(serverResponse) {
+    //         $('#main-dashboard').html(serverResponse.responseText);
+    //       }
+    //     });
 
 
 

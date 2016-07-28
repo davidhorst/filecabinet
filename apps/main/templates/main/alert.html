@@ -2,43 +2,16 @@
     <a id='event_link'>Back to Event</a>
 
     <div id='header form-control'>
-        <form id='alert_update' method="post">
-            <p>disfajdlfjdkfaj</p>
-            {% csrf_token %}
-            <h3>Name:</h3>
-            <input type='text' name='name' value='{{ alert.name }}'/>
-            <br>
-            <br>
-            <p>Description:</p>
-            <textarea type='text' name='comment'>{{ alert.comment }}</textarea>
-            <button type='submit changes'>submit<button/>
-        </form>
+        <h3>Alert:</h3>
+        <p>{{alert.comment}}</p>
+        <br>
+        <br>
+        <h4>When:</h4>
+        <label type='text' name='comment'>{{ alert.when }}</label>
+
     </div>
 
-    {% if documents %}
-            <ul>
-                {% for document in documents %}
-                    <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No documents.</p>
-        {% endif %}
 
-        <form id='theForm' method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>{{ form.non_field_errors }}</p>
-            <input type='hidden' value='{{alert.id}}' name='alert_id'/>
-            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-
-            <p>
-                {{ form.docfile.errors }}
-                {{ form.docfile }}
-
-            </p>
-
-            <input type="submit" value="Upload">
-        </form>
 
 </div>
 
@@ -63,82 +36,6 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-
-
-    $('#alert_update').submit(function(e){
-    	e.preventDefault();
-    	var csrftoken = getCookie('csrftoken');
-    	$.ajax({
-	    	beforeSend: function(xhr, settings) {
-	    	    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-	        	    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-	        	}
-	   		},
-	      url: '/property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert.id}}+'/add_file',
-	      method: "post",
-	      data: $(this).serialize(),
-	      success: function(serverResponse) {
-	        window.location.hash = '/property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert.id}};
-	      },
-	      error: function(serverResponse) {
-	      	console.log(serverResponse);
-	        $('#main-dashboard').html(serverResponse.responseText);
-	      }
-	    });
-    });
-
-    $('#theForm').submit(function(e){
-  	  e.preventDefault();
-  	  var csrftoken = getCookie('csrftoken');
-
-      $.ajax({
-          beforeSend: function(xhr, settings) {
-              if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                  xhr.setRequestHeader("X-CSRFToken", csrftoken);
-              }
-          },
-        url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert_id}}+'/add_file',
-        method: "post",
-        data: new FormData($("#theForm").get(0)),
-        cache: false,
-        processData: false,
-        contentType: false,
-        success: function(serverResponse) {
-             window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert_id}};
-        },
-        error: function(serverResponse) {
-          $('#main-dashboard').html(serverResponse.responseText);
-        }
-      });
-
-
-      $('#update_alert_form').submit(function(e){
-          alert('got here')
-    	  e.preventDefault();
-    	  var csrftoken = getCookie('csrftoken');
-
-        $.ajax({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            },
-          url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert_id}}+'/update_alert',
-          method: "post",
-          cache: false,
-          processData: false,
-          contentType: false,
-          success: function(serverResponse) {
-               window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/alert/'+{{alert_id}};
-          },
-          error: function(serverResponse) {
-            $('#main-dashboard').html(serverResponse.responseText);
-          }
-        });
-
-
-
-
 
 });
 

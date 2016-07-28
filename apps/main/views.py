@@ -190,10 +190,10 @@ def add_file(request,prop_id, event_id, note_id):
 
 
 def alert(request,event_id,prop_id,alert_id):
-	alert = Alert.objects.get(pk=note_id)
+	alert = Alert.objects.get(pk=alert_id)
 	form = AlertCreateForm()
 	context={'form':form, 'event_id':event_id,
-	'prop_id':prop_id,"alert_id":note.id, 'alert':alert}
+	'prop_id':prop_id,"alert_id":alert.id, 'alert':alert}
 	return render(request, 'main/alert.html', context)
 
 

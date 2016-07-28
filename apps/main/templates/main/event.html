@@ -18,7 +18,7 @@
     </div>
 
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-        <input type="text" id="search" class="form-control" placeholder="Search">
+        <input type="text" id='search' class="form-control" placeholder="Search">
     </div>
 
 
@@ -61,7 +61,7 @@
         display: inline-block;
     }
 
-    #search{
+    .search{
         margin-bottom: 20px;
     }
 </style>
@@ -72,8 +72,10 @@ $(document).ready(function() {
 
     $('#search').keyup(function(){
       var searchTerm = $('#search').val();
-      $(`.property-name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
-      $(`.property-name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
+      $(`.alert_name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
+      $(`.alert_name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
+      $(`.note_name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
+      $(`.note_name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
   });
 
 
@@ -87,10 +89,7 @@ $('#alert_table tr').click(function() {
 
 });
 
-    $('#event_table tbody tr').click(function() {
-        $(this).addClass('active').siblings().removeClass('active');
 
-    });
     $('#add_event').click(function(){
         window.location.hash = "/property/{{prop_id}}/event/{{event.id}}/addNote";
     });
