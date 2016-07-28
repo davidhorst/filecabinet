@@ -1,71 +1,42 @@
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">File Cabinet</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-          <div class="btn-group navbar-right navbar-btn">
-            <button type="button" class="btn btn-circle-nav dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-2x"></i>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Edit Profile</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="/accounts/logout">Logout</a></li>
-            </ul>
-          </div>
-          <p class="navbar-right">te</p>
-          <p class="navbar-text navbar-right">Welcome back, {{ request.user.first_name }}</p>
-          <!-- <form action="accounts/logout" class="navbar-form navbar-right">
-            <label class="form-label">Welcome back, {{ request.user.first_name }}</label>
-            <button type="submit" class="btn btn-success">Logout</button>
-          </form> -->
-        </div><!--/.nav-collapse -->
-      </div>
+<div class="row">
+  <div class="col-lg-12 col-xl-9">
+    <!-- MAIN DASHBOARD AREA -->
+    <div id="main-dashboard" class="container">
+    </div>
+  </div>
+  <div class="col-xl-3">
+    <!-- STATIC SIDE MENU: for LG -->
+    <div id="static-side-menu">
+    a
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- SLIDE SIDE MENU: for MD SM XS -->
+<nav id="slide-side-menu" class="navmenu navmenu-default navmenu-fixed-right offcanvas" role="navigation">
+  <div id="test">
+    <a class="navmenu-brand" href="#">Brand</a>
+    <ul class="nav navmenu-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Link</a></li>
+      <li><a href="#">Link</a></li>
+    </ul>
+  </div>
 </nav>
 
-      <div id="main-dashboard" class="container">
-      </div>
       <div>
-      <button type="button" data-toggle="offcanvas" data-target="#myNavmenu1"> 
+      <button type="button" data-toggle="offcanvas" data-target="#slide-side-menu"> 
     <span class="icon-bar">sdcsdc</span>
     <span class="icon-bar">sdcsdc</span>
     <span class="icon-bar">sdcsdc</span>
   </button>
 </div>
 
-<nav id="myNavmenu1" class="navmenu navmenu-default navmenu-fixed-right offcanvas" role="navigation">
-<div id="test">
-  <a class="navmenu-brand" href="#">Brand</a>
-  <ul class="nav navmenu-nav">
-    <li class="active"><a href="#">Home</a></li>
-    <li><a href="#">Link</a></li>
-    <li><a href="#">Link</a></li>
-  </ul>
-  </div>
-</nav>
+
   
     
 
@@ -77,7 +48,7 @@
     //   success: function(serverResponse) {
     //     $('#main-dashboard').html(serverResponse);
     //   }
-    // });
+    // });. 
     $('myNavmenu').click(function() {
       $('.navmenu').offcanvas('show')
     });
@@ -85,18 +56,71 @@
 </script>
 
 <style type="text/css">
-  #sidebar-right {
-    position:fixed; 
-    right:0;
-    width: 200px;
-  }
-  #test{
-    width: 500px;
-  }
-  .navmenu-fixed-right {
-   left: auto !important;
+
+#sidebar-right {
+  position: fixed; 
+  right:0;
+  width: 200px;
 }
+
+#test{
+  width: 500px;
+}
+
+.navmenu-fixed-right {
+  left: auto !important;
+}
+
 .navmenu {
   width: 300px;
 }
+
+
+@media all and (max-width: 450px) {
+  #static-side-menu {
+    visibility: hidden;
+  }
+}
+
+@media all and (min-width: 450px) {
+  #static-side-menu {
+    visibility: hidden;
+  }
+}
+
+@media all and (min-width: 650px) {
+  #static-side-menu {
+    visibility: hidden;
+  }
+}
+
+@media all and (min-width: 800px) {
+  #static-side-menu {
+    visibility: hidden;
+  }
+}
+
+@media all and (min-width: 1550px) {
+  #static-side-menu {
+    visibility: visible;
+    width: 400px;
+    height: 1000px;
+    position:fixed; 
+    right:0;
+    background-color: yellow;
+  }
+  .col-xl-9 {
+    width: 75%;
+  }
+  .col-xl-3  {
+    width: 25%;
+  }
+
+
+   .four-m { width: 33.333333%; }
+    .five-m { width: 41.66666%; }
+    .seven-m { width: 58.33333%; }
+    .eight-m { width: 66.66666%; }
+}
+
 </style>
