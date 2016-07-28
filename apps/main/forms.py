@@ -96,4 +96,7 @@ class AlertCreateForm(forms.ModelForm):
         max_length=30)
 
     when = forms.DateTimeField(
-        required=True)
+        required=True,
+        widget=forms.DateInput(format=('%Y-%m-%d'),
+                                attrs={'type':'date'})
+        )
