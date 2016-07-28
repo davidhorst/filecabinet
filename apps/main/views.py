@@ -67,8 +67,6 @@ def event(request,event_id, prop_id):
 def events(request, prop_id):
 	property = Property.objects.get(pk=prop_id)
 	events = property.event_set.all()
-	print events
-
 	context={
 	'property' : property,
 	'events':events
@@ -126,7 +124,7 @@ def add_note(request,prop_id, event_id):
 			note.event = Event.objects.get(pk=event_id)
 			note.save()
 
-			
+
 			return HttpResponse(note.id)
 		else:
 			context={
@@ -150,7 +148,7 @@ def add_file(request,prop_id, event_id, note_id):
             newdoc.save()
 
             # Redirect to the document list after POST
-            return HttpResponseRedirect(reverse('list'))
+            return HttpResponse("added file	")
     else:
 		form = DocumentForm()
 		context={

@@ -7,6 +7,7 @@
         <p>Description:</p>
         <p>{{ note.comment }}
     </div>
+
     {% if documents %}
             <ul>
                 {% for document in documents %}
@@ -17,7 +18,7 @@
             <p>No documents.</p>
         {% endif %}
 
-        <form method="post" enctype="multipart/form-data">
+        <form action="propterty/{{prop_id}}/event/{{event_id}}/note/{{note.id}}/add_file" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
 
@@ -53,24 +54,8 @@
 </style>
 
 <script type="text/javascript">
-var tempNotes= ['Note1','Note Content']
 $(document).ready(function() {
 
-    $('#search').keyup(function(){
-      var searchTerm = $('#search').val();
-      $(`.property-name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
-      $(`.property-name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
-  });
-
-
-    $('#event_table tbody tr').click(function() {
-        $(this).addClass('active').siblings().removeClass('active');
-
-    });
-    // when add event is clicked have a server call to retun partial event template form.
-    $('#add_event').click(function(){
-        alert('insert note partial here')
-    });
 });
 
 $.expr[':'].Contains = function(a,i,m){
