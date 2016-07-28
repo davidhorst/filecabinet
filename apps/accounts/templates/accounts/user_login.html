@@ -2,24 +2,23 @@
 {% load staticfiles %}
 {% block body %}
 
-<div class="container-fluid col-centered">
-  <div class="login-box">
-  	<div class="row">
-  		<div id="img-div" class="col-sm-12">
-  			<img src="{% static 'main/img/logo.png' %}" alt="HOW DID YOU FIND ME">
-  		</div>
-  	</div>
   	<div class="row">
   		<div class="col-sm-12" id="reg-panel">
   			<form method="post" action="/accounts/login/" class="col-sm-12">
   			 {% csrf_token %}
-  				{{ form.as_p }}
-  				<button type="submit" class="btn btn-primary">Login</button>
-  				<a href="/accounts/register" class="btn btn-primary">Create New Account</a>
+          {% for field in form %}
+          <div class="form-group">
+            <div class="col-sm-12">
+              <span class="text-danger small">{{ field.errors }}</span>
+            </div>
+            <div class="col-sm-12">{{ field }}</div>
+          </div>
+          {% endfor %}
+  				<button type="submit" class="btn btn-primary col-xs-12">Login</button>
+  				<a href="/accounts/register" class="btn btn-primary col-xs-12">Create New Account</a>
   			</form>
   		</div>
   	</div>
-  </div>
-</div>
+
 
 {% endblock %}

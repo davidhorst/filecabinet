@@ -15,12 +15,12 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 
-from .forms import UserCreateForm, UserUpdateForm
+from .forms import UserCreateForm, UserUpdateForm, UserLoginForm
 from django.contrib.auth.models import User
 
 class RegisterUser(CreateView):
 
-	template_name = 'accounts/register.html'
+	template_name = 'accounts/user_register.html'
 	form_class = UserCreateForm
 	success_url = '/main'
 
@@ -31,7 +31,6 @@ class RegisterUser(CreateView):
 		if form.is_valid():
 
 			user = form.save()
-			print "user saved"
 			user = authenticate(username=request.POST['email'], password=request.POST['password1'])
 
 			#log in user
@@ -49,10 +48,9 @@ class LoginView(FormView):
 
 	template_name = 'accounts/user_login.html'
 	success_url = '/'
-	form_class = AuthenticationForm
+	form_class = UserLoginForm
 
 	def form_valid(self, form):
-		print "hello"
 		login(self.request, form.get_user())
 		return super(LoginView, self).form_valid(form)
 
