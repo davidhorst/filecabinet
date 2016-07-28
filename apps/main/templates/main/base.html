@@ -25,13 +25,21 @@
     body{
       padding-top: 60px;
     }
+
+    .navbar-brand>img {
+      height: 215%;
+    /* padding: 15px; */
+    /* width: auto; */
+      margin-top: -13px;
+    }
+
   </style>
 
 </head>
 
 <body>
   <!-- TOP NAV (HEADER) -->
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -40,7 +48,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">File Cabinet</a>
+        <a class="navbar-brand" href="#"><img src="{% static 'main/img/paperroll-nb.png' %}" alt="files at hand"></a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
