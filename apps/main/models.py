@@ -37,14 +37,17 @@ class Event(models.Model):
     property = models.ForeignKey(Property)
 
 class Note(models.Model):
-    name = models.CharField(max_length=25)
-    comment = models.CharField(max_length=50)
+    name = models.CharField(max_length=25, null=True)
+    comment = models.CharField(max_length=50, null=True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     event = models.ForeignKey(Event)
 
+def directory_path(prop_id,event_id, note_id, instance, filename):
+    return 'property_{0}/event_{1}/note_{2}/filename'.format(prop_id,event_id, note_id, instance, filename)
+
 class File(models.Model):
-    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+    docfile = models.FileField(upload_to=directory_path)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     note = models.ForeignKey(Note)

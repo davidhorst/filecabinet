@@ -12,63 +12,29 @@
     <input type='submit' value="submit">
 </form>
 
-<form method="post" enctype="multipart/form-data">
-	{% csrf_token %}
-	<p>{{ form.non_field_errors }}</p>
-
-	<p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-
-	<p>
-		{{ form.docfile.errors }}
-		{{ form.docfile }}
-	</p>
-
-	<p><input type="submit" value="Attach File(s)"/></p>
-	<p><input type="submit" value="Create Note"/></p>
-</form>
-<div>
-	<ul>
-		<li><p>test</p></li>
-		<li><p>test</p></li>
-		<li><p>test</p></li>
-		<li><p>test</p></li>
-		<li><p>test</p></li>
-		<li><p>test</p></li>
-	</ul>
-</div>
-{% if documents %}
-	<ul>
-		{% for document in documents %}
-			<li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
-		{% endfor %}
-
-	</ul>
-
-{% endif %}
-
 <script>
 $(document).ready(function(){
 
-  $('#theForm').submit(function(e){
-	  e.preventDefault();
-	  var csrftoken = getCookie('csrftoken');
-	  $.ajax({
-		  beforeSend: function(xhr, settings) {
-			  if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-				  xhr.setRequestHeader("X-CSRFToken", csrftoken);
-			  }
-		  },
-		url: "/property/{{prop_id}}/event/{{event_id}}/add_note",
-		method: "post",
-		data: $(this).serialize(),
-		success: function(serverResponse) {
-		  window.location.hash = "/property/{{prop_id}}/event/{{event_id}}/notes";
-		},
-		error: function(serverResponse) {
-			console.log(serverResponse)
-		  $('#main-dashboard').html(serverResponse.responseText);
-		}
+
+	$('#theForm').submit(function(e){
+	 e.preventDefault();
+	 var csrftoken = getCookie('csrftoken');
+	 $.ajax({
+		 beforeSend: function(xhr, settings) {
+			 if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+				 xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			 }
+		 },
+	   url: "/property/{{prop_id}}/event/{{event_id}}/add_note",
+	   method: "post",
+	   data: $(this).serialize(),
+	   success: function(serverResponse) {
+		 window.location.hash = "/property/{{prop_id}}/event/{{event_id}}/note/"+serverResponse;
+	   },
+	   error: function(serverResponse) {
+		 $('#main-dashboard').html(serverResponse.responseText);
+	   }
+	 });
 	  });
-    });
 });
 </script>
