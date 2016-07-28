@@ -31,12 +31,18 @@ def properties(request):
 	return render (request, "main/properties.html", context)
 
 def sidebar(request):
-	alerts = Alert.objects.filter(event__property__user=request.user).order_by("when")
-	notes = Note.objects.filter(event__property__user=request.user).order_by("created_at")
+	today = datetime.datetime.now()
+	yesterday = today - datetime.timedelta(days=1)
+	print today
+
+	alerts = Alert.objects.filter(event__property__user=request.user, when__gt=yesterday).order_by("when")[:5]
+	notes = Note.objects.filter(event__property__user=request.user).order_by("-created_at")[:5]
+	for alert in alerts:
+		print alert.when
 	context = {
 			"alerts" : alerts,
 			"notes" : notes,
-			"today" : datetime.datetime.today
+			"today" : today
 		}
 	return render(request, "main/sidebar.html", context)
 
