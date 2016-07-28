@@ -18,64 +18,59 @@
   </head>
 
 <style>
-  .background-img{ 
-     padding: 0;
- margin: 0;
- color: #000;
+  /* -- background styling -- */
+  /* background-img and background-overlay create burred/tinted background image */
 
- position:absolute; 
- top:0; 
- height:100%; 
- width:100%;
- left:0;
- z-index:0;
+  .background-img{
+    padding: 0;
+    margin: 0;
+    color: #000;
+    position:absolute; 
+    top:0; 
+    height:100%; 
+    width:100%;
+    left:0;
+    z-index:0;
 
-  background: url('{{ STATIC_URL }}/static/main/img/grayscaleinterior.jpg') no-repeat center center fixed; 
-   background-position: center center;
- background-repeat: no-repeat;
- background-attachment: fixed;
- background-size: cover;
- background-color: #464646;
+    background: url('{{ STATIC_URL }}/static/main/img/grayscaleinterior.jpg') no-repeat center center fixed; 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
 
- -webkit-filter: blur(10px);
- -moz-filter: blur(10px);
- -o-filter: blur(10px);
- -ms-filter: blur(10px);
- filter: blur(10px); 
-
-}
-	body{
-    padding-top: 60px;
-
-	}
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px); 
+  }
   
-  .col-centered{
-      position: fixed;
+  .background-overlay{
+    position: fixed;
     left: 0;
     right: 0;
     z-index: 99;
-    height: 80vh;
-    padding-top:10%;
+    height: 90vh;
     background-color: rgba(181, 181, 181, 0.5)
 
   }
-  .login-box{
+
+  .input-window{
     margin: auto;
     max-width: 390px;
     padding: 3em;
     background-color: rgba(180, 188, 191, 0.4);
   }
-  button, a{
-    margin: auto;
-  }
-  p,form, #img-div{
+
+  p,form, #logo-img{
     text-align: center;
   }
 
   .logo{
     font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
     font-size: 2.25em;
-    font-size: 8vw;
+    
     font-style: normal;
     font-variant: normal;
     font-weight: 500;
@@ -83,39 +78,66 @@
     margin-bottom: 20px;
     
   }
-  .logo-base{
-    color: #2B6072;
+    .logo-base{
+      color: #2B6072;
+      font-weight: bolder;
 
-  }
-  .logo-highlight{
-    color: black;
-    -webkit-text-fill-color: #F0535C; /* Will override color (regardless of order) */
-   -webkit-text-stroke-width: 1px;
-   -webkit-text-stroke-color: black;
-  }
-
+    }
+  
+    .logo-highlight{
+      color: black;
+      -webkit-text-fill-color: #F0535C;  /*Will override color (regardless of order)*/
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+    }
+  
+  /* -- form styling --  */
+  
   input{
     width: 100%;
     padding: 1px .8em;
     height: 3em;
   }
 
-  
   #submit, #register{
     margin-bottom: 1em;
   }
+
+  /* -- footer -- */
   footer{
     color: lightgray;
     z-index: 99;
     margin-top: 80vh;
   }
+
+  /* Media Width Specific Styling */
+
+  @media all and (max-width: 390px) {
+    .background-overlay{
+      padding-top:5%;
+    }
+    .logo{
+      font-size: 8vw;
+    }
+    
+  }
+
+  @media all and (min-width: 391px) {
+    .background-overlay{
+      padding-top:20%;
+    }
+    .logo{
+      font-size: 2.4em;
+    }
+  }
+
 </style> 
 <body>
   <div class="background-img"></div>
-  <div class="container-fluid col-centered">
-    <div class="login-box">
+  <div class="container-fluid background-overlay">
+    <div class="input-window">
       <div class="row">
-        <div id="img-div" class="col-sm-12">
+        <div id="logo-img" class="col-sm-12">
           <img src="{% static 'main/img/paperroll-nb.png' %}" alt="HOW DID YOU FIND ME">
           <p class="logo"><span class="logo-base">REMEMBER</span><span class="logo-highlight">THIS</span></p>
         </div>
