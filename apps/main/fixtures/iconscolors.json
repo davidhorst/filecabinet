@@ -3,7 +3,7 @@
     "model": "main.icon",
     "pk": 1,
     "fields": {
-      "name": "car",
+      "name": "home",
       "created_at": "2012-09-15T22:17:44Z",
       "updated_at": "2012-09-15T22:17:44Z"
     }
@@ -30,7 +30,7 @@
     "model": "main.icon",
     "pk": 4,
     "fields": {
-      "name": "hospital",
+      "name": "asterisk",
       "created_at": "2012-09-15T22:17:44Z",
       "updated_at": "2012-09-15T22:17:44Z"
     }
@@ -63,11 +63,101 @@
     }
   },
   {
+    "model": "main.icon",
+    "pk": 8,
+    "fields": {
+      "name": "leaf",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 9,
+    "fields": {
+      "name": "key",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 10,
+    "fields": {
+      "name": "car",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 11,
+    "fields": {
+      "name": "motorcycle",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 12,
+    "fields": {
+      "name": "road",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 13,
+    "fields": {
+      "name": "star",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 13,
+    "fields": {
+      "name": "tree",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 14,
+    "fields": {
+      "name": "user",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 15,
+    "fields": {
+      "name": "users",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.icon",
+    "pk": 16,
+    "fields": {
+      "name": "question",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
     "model": "main.color",
     "pk": 1,
     "fields": {
-      "name": "tan",
-      "color": "tan",
+      "name": "Tan",
+      "color": "#C0B08C",
       "created_at": "2012-09-15T22:17:44Z",
       "updated_at": "2012-09-15T22:17:44Z"
     }
@@ -76,8 +166,8 @@
     "model": "main.color",
     "pk": 2,
     "fields": {
-      "name": "grey",
-      "color": "grey",
+      "name": "Salmon",
+      "color": "#F2525E",
       "created_at": "2012-09-15T22:17:44Z",
       "updated_at": "2012-09-15T22:17:44Z"
     }
@@ -86,8 +176,8 @@
     "model": "main.color",
     "pk": 3,
     "fields": {
-      "name": "blue",
-      "color": "blue",
+      "name": "Dark Blue",
+      "color": "#305D72",
       "created_at": "2012-09-15T22:17:44Z",
       "updated_at": "2012-09-15T22:17:44Z"
     }
@@ -96,11 +186,82 @@
     "model": "main.color",
     "pk": 4,
     "fields": {
-      "name": "black",
+      "name": "Pastel Blue",
+      "color": "#6CACC5",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 5,
+    "fields": {
+      "name": "Light Blue",
+      "color": "#91CDD8",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 6,
+    "fields": {
+      "name": "Black",
       "color": "black",
       "created_at": "2012-09-15T22:17:44Z",
       "updated_at": "2012-09-15T22:17:44Z"
     }
+  },
+  {
+    "model": "main.color",
+    "pk": 7,
+    "fields": {
+      "name": "Grey",
+      "color": "grey",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 8,
+    "fields": {
+      "name": "Silver",
+      "color": "silver",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 9,
+    "fields": {
+      "name": "Red",
+      "color": "red",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 10,
+    "fields": {
+      "name": "Blue",
+      "color": "blue",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 11,
+    "fields": {
+      "name": "Green",
+      "color": "green",
+      "created_at": "2012-09-15T22:17:44Z",
+      "updated_at": "2012-09-15T22:17:44Z"
+    }
   }
+
 ]
 

@@ -20,12 +20,36 @@
                     <strong>EVENT:</strong> {{event.name}}<br><br><br>
                     <strong>ALERT:</strong><br>{{alert.comment}}<br><br><br>
                     <strong>WHEN:</strong><br>{{alert.when}}<br><br><br>
+                    <strong>WHEN:</strong><br>{{alert.when}}<br><br><br>
                 </p>
+
+                <strong><p>Sticky:</p></strong>
+                <label class="switch">
+                  <input id='sticky_id' type="checkbox">
+                  <div class="slider round"></div>
+                </label><br>
+                <button style="display: none" id='finish_button' class='btn'>Finished</button><br><br><br>
+
+                <strong><p>Repeat:</p></strong>
+                <label class="switch">
+                  <input id='repeat_id' type="checkbox">
+                  <div class="slider round"></div>
+                </label>
+
+
+                <div id='repeat_dropdown'style="display: none">
+                    <select class="selectpicker">
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                        <option>Yearly</option>
+                    </select>
+
+                </div>
             </div>
-        </div>        
+        </div>
     </div>
 </div>
-
+<
 
 <!-- <div class='container'>
     <a id='prop_link'>{{property.name}}</a> <span> / </span>
@@ -54,16 +78,79 @@
     #search{
         margin-bottom: 20px;
     }
-    .inactiveLink {
-       pointer-events: none;
-       cursor: default;
-    }
+
+    .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.inactiveLink {
+   pointer-events: none;
+   cursor: default;
+}
 
 </style>
 
 <script type="text/javascript">
 $(document).ready(function() {
+        $('#repeat_id').change(function(){
+            $('#repeat_dropdown').toggle()
+        });
 
+        $('#sticky_id').change(function(){
+            $('#finish_button').toggle()
+        });
 
         $('#event_link').click(function(){
             window.location.hash = '/property/{{prop_id}}/event/{{event_id}}/notes'
