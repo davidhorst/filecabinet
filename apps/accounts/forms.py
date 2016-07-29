@@ -44,17 +44,21 @@ class UserCreateForm(UserCreationForm):
     def save(self, commit=True):
         user = super(UserCreateForm, self).save(commit=False)
         # print user
-        user.username = user.email
-
+        user.username = user.email.lower()
+        user.email = user.username
         if commit:
             user.save()
         return user
 
+class EmailNameField(forms.CharField):
+    def to_python(self, value):
+        return value.lower()
+
 class UserLoginForm(AuthenticationForm):
 
-    username = forms.CharField(
+    username = EmailNameField(
         max_length=254,
-        widget=forms.TextInput(attrs={'placeholder': 'username'})
+        widget=forms.TextInput(attrs={'placeholder': 'email address'})
      )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder': 'password'})
