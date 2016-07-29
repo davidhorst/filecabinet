@@ -9,89 +9,95 @@
 
 <h3 class="navmenu-brand" href="#">Upcoming To-Do's</h3>
 <ul class="nav navmenu-nav">
-  {% for alert in alerts %}
-  <li class="simplified" id="simplified-alert-{{alert.id}}" data-pair="detailed-alert-{{alert.id}}">
-    <a href="/property/{{alert.event.property.id}}/event/{{alert.event.id}}/alert/{{alert.id}}" class="sidebar-alert sidebar-item">
-      <div class="tab-col-1"><i class="fa fa-{{ alert.event.property.icon_type.name }}" style="color: {{ alert.event.property.icon_color.color }}"></i></div>
-      <div class="tab-col-2">{{ alert.comment }}</div>
-      <div class="tab-col-3">{{ alert.when.date }}</div>
-    </a>
-    <div class="detailed" id="detailed-alert-{{alert.id}}">
-      <table class="table-striped">
-        <tbody>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Property: </td>
-            <td class="col-xs-8">{{ alert.event.property.name }}</td>
-          </tr>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Event: </td>
-            <td class="col-xs-8">{{ alert.event.name}}</td>
-          </tr>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Created on: </td>
-            <td class="col-xs-8">{{ alert.created_at.date }}</td>
-          </tr>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Comment: </td>
-            <td class="col-xs-8">{{ alert.comment }}</td>
-          </tr>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Alert Date: </td>
-            <td class="col-xs-8">{{ alert.when.date }}</td>
-          </tr>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Days Left: </td>
-            {% if today.date != alert.when.date %}
-            <td class="col-xs-8 time-since">{{ today.date|timesince:alert.when.date }}</td>
-            {% else %}
-            <td class="col-xs-8 time-since">TODAY</td>
-            {% endif %}
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </li>
-  
-  {% endfor %}
+  {% if alerts %}
+    {% for alert in alerts %}
+    <li class="simplified" id="simplified-alert-{{alert.id}}" data-pair="detailed-alert-{{alert.id}}">
+      <a href="/property/{{alert.event.property.id}}/event/{{alert.event.id}}/alert/{{alert.id}}" class="sidebar-alert sidebar-item">
+        <div class="tab-col-1"><i class="fa fa-{{ alert.event.property.icon_type.name }}" style="color: {{ alert.event.property.icon_color.color }}"></i></div>
+        <div class="tab-col-2">{{ alert.comment }}</div>
+        <div class="tab-col-3">{{ alert.when.date }}</div>
+      </a>
+      <div class="detailed" id="detailed-alert-{{alert.id}}">
+        <table class="table-striped">
+          <tbody>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Property: </td>
+              <td class="col-xs-8">{{ alert.event.property.name }}</td>
+            </tr>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Event: </td>
+              <td class="col-xs-8">{{ alert.event.name}}</td>
+            </tr>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Created on: </td>
+              <td class="col-xs-8">{{ alert.created_at.date }}</td>
+            </tr>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Comment: </td>
+              <td class="col-xs-8">{{ alert.comment }}</td>
+            </tr>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Alert Date: </td>
+              <td class="col-xs-8">{{ alert.when.date }}</td>
+            </tr>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Days Left: </td>
+              {% if today.date != alert.when.date %}
+              <td class="col-xs-8 time-since">{{ today.date|timesince:alert.when.date }}</td>
+              {% else %}
+              <td class="col-xs-8 time-since">TODAY</td>
+              {% endif %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+    {% endfor %}
+  {% else %}
+    <li><a><i>There are no alerts to display</i></a></li>
+  {% endif %}
 
 <h3 class="navmenu-brand" href="#">Recent Notes</h3>
 <ul class="nav navmenu-nav">
-  {% for note in notes %}
-  <li class="simplified" id="simplified-note-{{note.id}}" data-pair="detailed-note-{{note.id}}">
-    <a href="/property/{{note.event.property.id}}/event/{{note.event.id}}/note/{{note.id}}" class="sidebar-note sidebar-item">
-      <div class="tab-col-1"><i class="fa fa-{{ note.event.property.icon_type.name }}" style="color: {{ note.event.property.icon_color.color }}"></i></div>
-      <div class="tab-col-2">{{ note.name }}</div>
-      <div class="tab-col-3">{{ note.created_at.date }}</div>
-    </a>
-    <div class="detailed" id="detailed-note-{{note.id}}">
-      <table class="table-striped">
-        <tbody>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Property: </td>
-            <td class="col-xs-8">{{ note.event.property.name }}</td>
-          </tr>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Event: </td>
-            <td class="col-xs-8">{{ note.event.name}}</td>
-          </tr>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Name: </td>
-            <td class="col-xs-8">{{ note.name }}</td>
-          </tr>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Created on: </td>
-            <td class="col-xs-8">{{ note.created_at.date }}</td>
-          </tr>
-          <tr class="row">
-            <td class="col-xs-4 left-col">Comment: </td>
-            <td class="col-xs-8">{{ note.comment }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </li>
-  
-  {% endfor %}
+  {% if notes %}
+    {% for note in notes %}
+    <li class="simplified" id="simplified-note-{{note.id}}" data-pair="detailed-note-{{note.id}}">
+      <a href="/property/{{note.event.property.id}}/event/{{note.event.id}}/note/{{note.id}}" class="sidebar-note sidebar-item">
+        <div class="tab-col-1"><i class="fa fa-{{ note.event.property.icon_type.name }}" style="color: {{ note.event.property.icon_color.color }}"></i></div>
+        <div class="tab-col-2">{{ note.name }}</div>
+        <div class="tab-col-3">{{ note.created_at.date }}</div>
+      </a>
+      <div class="detailed" id="detailed-note-{{note.id}}">
+        <table class="table-striped">
+          <tbody>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Property: </td>
+              <td class="col-xs-8">{{ note.event.property.name }}</td>
+            </tr>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Event: </td>
+              <td class="col-xs-8">{{ note.event.name}}</td>
+            </tr>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Name: </td>
+              <td class="col-xs-8">{{ note.name }}</td>
+            </tr>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Created on: </td>
+              <td class="col-xs-8">{{ note.created_at.date }}</td>
+            </tr>
+            <tr class="row">
+              <td class="col-xs-4 left-col">Comment: </td>
+              <td class="col-xs-8">{{ note.comment }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+    {% endfor %}
+  {% else %}
+    <li><a><i>There are no notes to display</i></a></li>
+  {% endif %}    
 
 <style type="text/css">
 .simplified {
