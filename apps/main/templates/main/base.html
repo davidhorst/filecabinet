@@ -27,17 +27,26 @@
 
   <style>
     body{
-      padding-top: 60px;/*
-      background-color: lightgray;*/
-      background-color: rgba(48,93,114,0.15);
+      padding-top: 60px;
+      background-color: #364652
+;
+      /*background-color: rgba(48,93,114,0.15);*/
+    }
+    
+    #body{
+      height: 80vh;
     }
 
     .navbar.navbar-default.navbar-fixed-top {
-      background-color: rgba(192,176,140,0.5);
+      background-color: #f4f4ed;
+      /*background-color: /*rgba(192,176,140,0.5)*/;*/
     }
 
     .footer{
-      background-color: rgba(192,176,140,0.5);
+      background-color: #364652
+
+;
+      /*background-color: rgba(192,176,140,0.5);*/
     }
     .navbar-brand>img {
       height: 215%;
@@ -58,6 +67,27 @@
       font-size: 12px;
       line-height: 1.428571429;
       border-radius: 15px;
+    }
+    
+    .navbar-text{
+      padding-right: 20px;
+    }
+
+    h1, h2, h3, h4{
+      color:#4ba3c3;
+    }
+
+    a{
+      padding: 10px;
+      color: #fe5f55;
+    }
+
+    p{
+      color: #f4f4ed;
+    }
+
+    footer{
+    
     }
 
     @media all and (max-width: 767px) {
@@ -106,7 +136,6 @@
               <li><a href="/accounts/logout">Logout</a></li>
             </ul>
           </div>
-          <p class="navbar-right">..</p>
           <p class="navbar-text navbar-right">Welcome back, {{ request.user.first_name }}</p>
         </div>
       </div><!--/.nav-collapse -->
@@ -115,8 +144,9 @@
   </nav>
   </div> <!-- end color block -->
   <!-- BODY -->
-  {% include 'main/dashboard.html' %}
+  
   <div id="body">
+    {% include 'main/dashboard.html' %}
     <!-- INSERT MAIN CONTENT HERE AKA DASHBOARD -->
   </div>
 
@@ -124,7 +154,13 @@
   <hr>
   <div class="footer">
     <footer>
-      <p>&copy; 2016 company, Inc.</p>
+    <div class="row">
+      <div class="col-xs-6 col-md-3"><p>&copy; 2016 company, Inc.</p></div>
+      <div class="col-xs-6 col-md-3"><p>About Us</p></div>
+      <div class="col-xs-6 col-md-3"><p>Careers</p></div>
+      <div class="col-xs-6 col-md-3"><p>Contact</p></div>
+    </div>
+      
     </footer>
   </div> <!-- /container -->
 
