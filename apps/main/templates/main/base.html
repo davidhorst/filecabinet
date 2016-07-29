@@ -24,9 +24,18 @@
 
   <style>
     body{
-      padding-top: 60px;
+      padding-top: 60px;/*
+      background-color: lightgray;*/
+      background-color: rgba(48,93,114,0.15);
     }
 
+    .navbar.navbar-default.navbar-fixed-top {
+      background-color: rgba(192,176,140,0.5);
+    }
+
+    .footer{
+      background-color: rgba(192,176,140,0.5);
+    }
     .navbar-brand>img {
       height: 215%;
     /* padding: 15px; */
@@ -36,6 +45,18 @@
 
     .container-navbar{
       padding: 5px 20px;
+    }
+
+    .btn-circle-nav {
+      width: 30px;
+      height: 30px;
+      margin: 5px;
+      margin-right: 25px;
+      text-align: center;
+      padding: 6px 0;
+      font-size: 12px;
+      line-height: 1.428571429;
+      border-radius: 15px;
     }
 
     @media all and (max-width: 767px) {
@@ -99,7 +120,7 @@
 
   <!-- FOOTER -->
   <hr>
-  <div class="container">
+  <div class="footer">
     <footer>
       <p>&copy; 2016 company, Inc.</p>
     </footer>

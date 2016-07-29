@@ -54,6 +54,15 @@ function loadProperty(prop_id) {
             $('#main-dashboard').html(serverResponse);
         }
     });
+    $.ajax({
+      url: "/sidebar",
+      method: "get",
+      success: function(serverResponse) {
+        $('#static-side-menu').html(serverResponse);
+        $('#slide-side-menu').html(serverResponse);
+
+      }
+    });
 }
 
 function addNote(args) {
@@ -63,6 +72,15 @@ function addNote(args) {
         success: function(serverResponse) {
             $('#main-dashboard').html(serverResponse);
         }
+    });
+    $.ajax({
+      url: "/sidebar",
+      method: "get",
+      success: function(serverResponse) {
+        $('#static-side-menu').html(serverResponse);
+        $('#slide-side-menu').html(serverResponse);
+
+      }
     });
 }
 
@@ -74,6 +92,15 @@ function addEvent(args) {
             $('#main-dashboard').html(serverResponse);
         }
     });
+    $.ajax({
+      url: "/sidebar",
+      method: "get",
+      success: function(serverResponse) {
+        $('#static-side-menu').html(serverResponse);
+        $('#slide-side-menu').html(serverResponse);
+
+      }
+    });
 }
 
 function addProperty() {
@@ -84,6 +111,15 @@ function addProperty() {
             $('#main-dashboard').html(serverResponse);
         }
     });
+    $.ajax({
+      url: "/sidebar",
+      method: "get",
+      success: function(serverResponse) {
+        $('#static-side-menu').html(serverResponse);
+        $('#slide-side-menu').html(serverResponse);
+
+      }
+    });
 }
 
 
@@ -93,6 +129,15 @@ function addProperty() {
       method: "get",
       success: function(serverResponse) {
         $('#main-dashboard').html(serverResponse);
+      }
+    });
+    $.ajax({
+      url: "/sidebar",
+      method: "get",
+      success: function(serverResponse) {
+        $('#static-side-menu').html(serverResponse);
+        $('#slide-side-menu').html(serverResponse);
+
       }
     });
 }
@@ -109,6 +154,15 @@ $.ajax({
     $('#main-dashboard').html(serverResponse);
   }
 });
+$.ajax({
+      url: "/sidebar",
+      method: "get",
+      success: function(serverResponse) {
+        $('#static-side-menu').html(serverResponse);
+        $('#slide-side-menu').html(serverResponse);
+
+      }
+    });
 }
 
 function renderTemplate(partialUrl,jsonUrl) {
@@ -120,6 +174,7 @@ function renderTemplate(partialUrl,jsonUrl) {
         var html = template(args[1]);
         return html;
     });
+
 }
 
 function addAlert(args) {
@@ -129,6 +184,15 @@ function addAlert(args) {
         success: function(serverResponse) {
             $('#main-dashboard').html(serverResponse);
         }
+    });
+    $.ajax({
+      url: "/sidebar",
+      method: "get",
+      success: function(serverResponse) {
+        $('#static-side-menu').html(serverResponse);
+        $('#slide-side-menu').html(serverResponse);
+
+      }
     });
 }
 
@@ -141,6 +205,15 @@ $.ajax({
     $('#main-dashboard').html(serverResponse);
   }
 });
+$.ajax({
+      url: "/sidebar",
+      method: "get",
+      success: function(serverResponse) {
+        $('#static-side-menu').html(serverResponse);
+        $('#slide-side-menu').html(serverResponse);
+
+      }
+    });
 }
 
 

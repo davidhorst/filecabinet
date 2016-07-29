@@ -42,13 +42,23 @@ class PropertyCreateForm(forms.ModelForm):
         fields = ("name", "description", "address", "icon_type", "icon_color")
 
     name = forms.CharField(
-        max_length=30)
+        max_length=30,
+        widget=forms.TextInput(attrs={
+           'placeholder': 'Property Name'})
+        )
 
-    description = forms.CharField(max_length=255, widget=forms.Textarea, required=False)
+    description = forms.CharField(
+        max_length=255, 
+        widget=forms.Textarea(attrs={
+           'placeholder': 'Input property description here...'}), 
+        required=False)
 
     address = forms.CharField(
-        max_length=100,required=False)
-
+        max_length=100,
+        widget=forms.TextInput(attrs={
+           'placeholder': 'Address'}),
+        required=False
+        )
     icon_type = forms.ModelChoiceField(queryset=Icon.objects.all())
     icon_color = forms.ModelChoiceField(queryset=Color.objects.all(), widget=mySelect())
 
@@ -66,10 +76,15 @@ class EventCreateForm(forms.ModelForm):
 
     name = forms.CharField(
         max_length=30,
+        widget=forms.TextInput(attrs={
+           'placeholder': 'Event Name'}),
         required=True)
 
     comment = forms.CharField(
-        max_length=30)
+        max_length=30,
+        widget=forms.Textarea(attrs={
+           'placeholder': 'Add a comment here...'})
+        )
 
 class NoteCreateForm(forms.ModelForm):
 
@@ -79,10 +94,15 @@ class NoteCreateForm(forms.ModelForm):
 
     name = forms.CharField(
         max_length=30,
+        widget=forms.TextInput(attrs={
+           'placeholder': 'Note Name'}),
         required=True)
 
     comment = forms.CharField(
-        max_length=30)
+        max_length=30,
+        widget=forms.Textarea(attrs={
+           'placeholder': 'Add a comment here...'})
+        )
 
 
 class AlertCreateForm(forms.ModelForm):
