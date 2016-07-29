@@ -19,26 +19,55 @@
 
 <style>
   /* -- background styling -- */
-  body{
-    background-color: #364652;
+  /* background-img and background-overlay create burred/tinted background image */
+
+  .background-img{
+    padding: 0;
+    margin: 0;
+    color: #000;
+    position:absolute; 
+    top:0; 
+    height:100%; 
+    width:100%;
+    left:0;
+    z-index:0;
+
+    background: url('{{ STATIC_URL }}/static/main/img/grayscaleinterior.jpg') no-repeat center center fixed; 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px); 
   }
-  .container-fluid{
-    
-    min-height: 80vh;
+  
+  .background-overlay{
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    height: 90vh;
+    background-color: rgba(244, 244, 237, 0.5);
+    overflow-y: scroll;
 
   }
- 
 
-  /* -- logo styling -- */
-  .logo-box{
+  .input-window{
+    margin: auto;
+    max-width: 390px;
+    padding: 3em;
+    background-color: rgba(244, 244, 237, 0.4);
+  }
+
+  p,form, #logo-img{
     text-align: center;
   }
-  #logo-img img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 30px;
-  }
+
   .logo{
     font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
     font-size: 2.25em;
@@ -51,20 +80,22 @@
     
   }
     .logo-base{
-      color: #f4f4ed
+      color: #175676
 ;
       font-weight: bolder;
 
     }
   
     .logo-highlight{
-      color: #fe5f55;
+      color: black;
+      -webkit-text-fill-color: #fe5f55
+;  /*Will override color (regardless of order)*/
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
     }
   
   /* -- form styling --  */
-  .input-window{
-    padding: 0px 30px;
-  }
+  
   .input-field{
     padding-left: 0px;
     padding-right: 0px;
@@ -73,8 +104,6 @@
     width: 100%;
     padding: 1px .8em;
     height: 3em;
-    border-radius: 10px;
-    margin-bottom:15px;
   }
 
   #submit, #register{
@@ -90,8 +119,8 @@
   }
 
   /* -- footer -- */
-  .footer p, .footer a{
-    color: #fe5f55;
+  .footer{
+
   }
 
   /* Media Width Specific Styling */
@@ -126,39 +155,26 @@
 
 </style> 
 <body>
+  <div class="background-img"></div>
   <div class="container-fluid background-overlay">
-    <div class="row">
-      <div class="logo-box col-sm-12 col-lg-offset-3 col-lg-3">
-        <div id="logo-img">
+    <div class="input-window">
+      <div class="row">
+        <div id="logo-img" class="col-sm-12">
           <img src="{% static 'main/img/paperroll-nb.png' %}" alt="HOW DID YOU FIND ME">
-        </div>
-        <p class="logo"><span class="logo-base">REMEMBER</span><span class="logo-highlight">THIS</span></p>
-      </div>
-      <div class="input-window col-sm-6 col-sm-offset-3 col-lg-3 col-lg-offset-0">
-        <div class="row">
-          {% block body %}
-          {% endblock %}
+          <p class="logo"><span class="logo-base">REMEMBER</span><span class="logo-highlight">THIS</span></p>
         </div>
       </div>
+    
+    {% block body %}
+    {% endblock %}
     </div>
   </div>
-
-  <footer class=" row footer">
   <hr>
-
-    <div class="col-sm-6 col-lg-3">
-      <p>&copy; 2016 company, Inc.</p>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-      <p><a href="#">About</a></p>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-      <p><a href="#">Jobs</a></p>
-    </div>
-    <div class="col-sm-6 col-lg-3">
-      <p><a href="#">Privacy</a></p>
-    </div>
-  </footer>
+  <div class="container">
+    <footer>
+      <p>&copy; 2016 company, Inc.  <a href="#">About</a>  <a href="#">Jobs</a> <a href="#">Privacy</a></p>
+    </footer>
+  </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript

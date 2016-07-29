@@ -30,15 +30,21 @@
             </tr>
         </thead>
         <tbody>
-        {% for event in events %}
-            <tr data_id='{{event.id}}'>
-                <td><div class='event-name'>{{event.name}}</div></td>
-                <td>{{event.comment}}</td>
-                <td class="sm-and-up">{{event.created_at.date}}</td>
-                <td class="lg-and-up">{{event.note_set.count}}</td>
-                <td class="lg-and-up">{{event.alert_set.count}}</td>
+        {% if events %}
+            {% for event in events %}
+                <tr data_id='{{event.id}}'>
+                    <td><div class='event-name'>{{event.name}}</div></td>
+                    <td>{{event.comment}}</td>
+                    <td class="sm-and-up">{{event.created_at.date}}</td>
+                    <td class="lg-and-up">{{event.note_set.count}}</td>
+                    <td class="lg-and-up">{{event.alert_set.count}}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5"><i>There are no events to display</i></td>
             </tr>
-        {% endfor %}
+        {% endif %}
         </tbody>        
     </table>       
 </div>

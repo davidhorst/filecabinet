@@ -41,13 +41,19 @@
             </tr>
         </thead>
         <tbody>
-        {% for note in notes %}
-            <tr data_id='{{note.id}}'>
-                <td><div class='note_name'>{{note.name}}</div></td>
-                <td>{{note.comment}}</td>
-                <td class="sm-and-up">{{note.created_at.date}}</td>
+        {% if notes %}
+            {% for note in notes %}
+                <tr data_id='{{note.id}}'>
+                    <td><div class='note_name'>{{note.name}}</div></td>
+                    <td>{{note.comment}}</td>
+                    <td class="sm-and-up">{{note.created_at.date}}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5"><i>There are no notes to display</i></td>
             </tr>
-        {% endfor %}
+        {% endif %}
         </tbody>        
     </table>
     <div class="row">
@@ -62,13 +68,19 @@
             </tr>
         </thead>
         <tbody>
-        {% for alert in alerts %}
-            <tr data_id='{{alert.id}}'>
-                <td><div class='alert_name'>{{alert.comment}}</div></td>
-                <td>{{alert.when.date}}</td>
-                <td class="sm-and-up">{{alert.when.time}}</td>
+        {% if alerts %}
+            {% for alert in alerts %}
+                <tr data_id='{{alert.id}}'>
+                    <td><div class='alert_name'>{{alert.comment}}</div></td>
+                    <td>{{alert.when.date}}</td>
+                    <td class="sm-and-up">{{alert.when.time}}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5"><i>There are no alerts to display</i></td>
             </tr>
-        {% endfor %}
+        {% endif %}
         </tbody>        
     </table>     
 </div>
@@ -113,6 +125,8 @@
 </div> -->
 
 <style>
+    
+
 
     #event_header, #event_mid_content{
         margin-bottom: 40px;

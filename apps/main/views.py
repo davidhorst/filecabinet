@@ -168,7 +168,9 @@ def add_note(request,prop_id, event_id):
 		else:
 
 			context={
-				'form':note_form
+				'form':note_form,
+				'prop_id':prop_id,
+				'event_id':event_id
 			}
 			return HttpResponseBadRequest(render (request,'main/add_note.html',context))
 	else:
