@@ -140,8 +140,8 @@ def note(request,event_id,prop_id,note_id):
 	'prop_id':prop_id,"note_id":note.id, 'note':note, 'event':event, 'property':property}
 	return render(request, 'main/note.html', context)
 
-def notes(requst,event_id,prop_id):
-		event = Event.objets.get(pk=event_id)
+def notes(request,event_id,prop_id):
+		event = Event.objects.get(pk=event_id)
 		notes = event.note_set.all()
 		context={
 		'event_id':event_id,
