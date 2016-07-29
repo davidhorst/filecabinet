@@ -31,7 +31,7 @@ class RegisterUser(CreateView):
 		if form.is_valid():
 
 			user = form.save()
-			user = authenticate(username=request.POST['email'], password=request.POST['password1'])
+			user = authenticate(username=request.POST['email'].lower(), password=request.POST['password1'])
 
 			#log in user
 			if user is not None:
