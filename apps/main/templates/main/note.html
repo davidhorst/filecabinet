@@ -17,11 +17,11 @@
     <br>
 
     {% if documents %}
-            <ul>
                 {% for document in documents %}
-                    <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+                    <a href='javascript:void(0)' class='file_link' data_item="{{ document.id }}">
+                        {{ document.docfile.name }}
+                    </a>
                 {% endfor %}
-            </ul>
         {% else %}
             <p>No documents.</p>
         {% endif %}
@@ -33,12 +33,18 @@
             <p>
                 {{ form.docfile.errors }}
                 {{ form.docfile }}
-            <input type="submit" value="Upload">
         </form>
+        <iframe  id='file_frame'></iframe>
 
 </div>
 
 <style>
+
+    #file_frame{
+        width: 100%;
+        height: 400px;
+        border: 0;
+    }
     #header{
         margin-bottom: 40px;
     }
@@ -50,10 +56,15 @@
     #search{
         margin-bottom: 20px;
     }
+
+    .file_link {
+        display: block;
+    }
 </style>
 
 <script type="text/javascript">
 $(document).ready(function() {
+
 
     $('#event_link').click(function(){
         window.location.hash = '/property/{{prop_id}}/event/{{event_id}}/notes'
@@ -87,7 +98,24 @@ $(document).ready(function() {
 	    });
     });
 
-    $('#theForm').submit(function(e){
+    $('.file_link').click(function(){
+        console.log( window.location.origin +"/attachment/"+ $(this).attr('data_item'));
+        // alert(window.location.origin + $(this).attr('data_item'))
+        // $('#file_frame').src = window.location.origin +"/attachment/"+ $(this).attr('data_item');
+        // window.location.href = window.location.origin +"/attachment/"+ $(this).attr('data_item');
+        $('#file_frame').attr('src',window.location.origin +"/attachment/"+ $(this).attr('data_item'));
+        // $.ajax({
+        //     url: window.location.origin +"/attachment/"+ $(this).attr('data_item'),
+        //     method: "get",
+        //     success: function(serverResponse) {
+        //         // $('#main-dashboard').html(serverResponse);
+        //     }
+        // });
+
+
+    })
+
+    $('#id_docfile').on('change', function(e){
   	  e.preventDefault();
   	  var csrftoken = getCookie('csrftoken');
 
@@ -112,31 +140,6 @@ $(document).ready(function() {
         }
 
       });
-
-
-    //   $('#update_note_form').submit(function(e){
-    //       alert('got here')
-    // 	  e.preventDefault();
-    // 	  var csrftoken = getCookie('csrftoken');
-      //
-    //     $.ajax({
-    //         beforeSend: function(xhr, settings) {
-    //             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-    //                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
-    //             }
-    //         },
-    //       url: 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}}+'/update_note',
-    //       method: "post",
-    //       cache: false,
-    //       processData: false,
-    //       contentType: false,
-    //       success: function(serverResponse) {
-    //            window.location.hash = 'property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note_id}};
-    //       },
-    //       error: function(serverResponse) {
-    //         $('#main-dashboard').html(serverResponse.responseText);
-    //       }
-    //     });
     });
 });
 $.expr[':'].Contains = function(a,i,m){
