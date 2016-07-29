@@ -74,11 +74,11 @@ $(document).ready(function() {
 	        	    xhr.setRequestHeader("X-CSRFToken", csrftoken);
 	        	}
 	   		},
-	      url: '/property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note.id}}+'/add_file',
+	      url: '/property/{{prop_id}}/event/{{event_id}}/note/{{note.id}}/add_file',
 	      method: "post",
 	      data: $(this).serialize(),
 	      success: function(serverResponse) {
-	        window.location.hash = '/property/'+{{prop_id}}+'/event/'+{{event_id}}+'/note/'+{{note.id}};
+	        window.location.hash = '/property/{{prop_id}}/event/{{event_id}}/note/{{note.id}}';
 	      },
 	      error: function(serverResponse) {
 	      	console.log(serverResponse);
@@ -104,7 +104,8 @@ $(document).ready(function() {
         processData: false,
         contentType: false,
         success: function(serverResponse) {
-             window.location.hash = '/property/{{prop_id}}/event/{{event_id}}/note/{{note_id}}';
+            //  window.location.hash = '/property/{{prop_id}}/event/{{event_id}}/note/{{note_id}}';
+            loadNote([{{prop_id}},{{event_id}},{{note_id}}]);
         },
         error: function(serverResponse) {
           $('#main-dashboard').html(serverResponse.responseText);
