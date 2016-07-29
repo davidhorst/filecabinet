@@ -4,18 +4,13 @@ from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm, FileUplo
 from models import Event, Property, Note, File, Alert
 from wsgiref.util import FileWrapper
 from django.http import HttpResponse, HttpResponseBadRequest
-
 from django.contrib.auth.decorators import login_required
-
 import datetime, mimetypes
 
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
 def index(request):
-
-	#redirect to login if user isn't authenticated
-
 	return render(request, "main/base.html")
 
 @login_required(login_url='/accounts/login/')
@@ -98,10 +93,7 @@ def get_file(request,file_id):
 	file = File.objects.get(pk=file_id)
 	mimetype = mimetypes.guess_type(file.docfile.name)
 	response = HttpResponse(content_type=mimetype[0])
-	# response = HttpResponse(content_type='application/octet-stream')
 	response['Content-Disposition'] = 'inline; filename=' + file.docfile.name.split('/')[-1]
-	# response['Content-Encoding'] = mimetype[1]
-# Connection:Keep-Alive
 	response['Accept-Ranges'] = 'bytes'
 	response['Content-Length'] = file.docfile.size
 	response.write(file.docfile.read())
@@ -135,9 +127,7 @@ def note(request,event_id,prop_id,note_id):
 	documents = note.file_set.all()
 	docNames = []
 	for document in documents:
-		# print document.docfile.name.split('/')[-1]
 		docNames.append((document.id,document.docfile.name.split('/')[-1]))
-		# print document.name.split('/')[-1]
 	print docNames
 	form = FileUploadForm()
 	property = Property.objects.get(pk=prop_id)
@@ -152,9 +142,7 @@ def notes(request,event_id,prop_id):
 		context={
 		'event_id':event_id,
 		'prop_id':prop_id,
-
 		}
-
 		return render(request, 'main/note.html', context)
 
 def add_note(request,prop_id, event_id):
@@ -166,7 +154,6 @@ def add_note(request,prop_id, event_id):
 			note.save()
 			return HttpResponse(note.id)
 		else:
-
 			context={
 				'form':note_form,
 				'prop_id':prop_id,
@@ -184,8 +171,6 @@ def add_note(request,prop_id, event_id):
 def update_note(request,prop_id, event_id):
 	print ('update')
 	if request.POST:
-		print ('update post')
-
 		name = request.POST['name']
 		name = request.POST['comment']
 		note = Event.objects.get(pk=event_id)
@@ -200,12 +185,9 @@ def add_file(request,prop_id, event_id, note_id):
 	if request.method == 'POST':
 		form = FileUploadForm(request.POST, request.FILES)
 		note = Note.objects.get(pk=note_id)
-		print request.POST
-		print request.FILES
 		if form.is_valid():
 			newdoc = File(docfile=request.FILES['docfile'] )
 			newdoc.note = note
-			# newdoc = File(docfile=(prop_id,event_id,note_id,request.FILES['docfile']))
 			newdoc.save()
 			return HttpResponse("added file")
 		else:
@@ -213,10 +195,7 @@ def add_file(request,prop_id, event_id, note_id):
 		documents = File.objects.all()
 		context={'form':form, 'documents': documents,'event_id':event_id,
 		'prop_id':prop_id,"note_id":note_id}
-		print 'fail request'
 		return HttpResponseBadRequest(render (request,'main/note.html',context))
-
-
 
 def alert(request,event_id,prop_id,alert_id):
 	alert = Alert.objects.get(pk=alert_id)
@@ -227,19 +206,15 @@ def alert(request,event_id,prop_id,alert_id):
 	'prop_id':prop_id,"alert_id":alert.id, 'alert':alert, 'property':property, 'event':event}
 	return render(request, 'main/alert.html', context)
 
-
-
 def add_alert(request,prop_id, event_id):
 	if request.POST:
 		alert_form = AlertCreateForm(request.POST)
 		if alert_form.is_valid():
-
 			alert = alert_form.save(commit=False)
 			alert.event = Event.objects.get(pk=event_id)
 			alert.save()
 			return HttpResponse(alert.id)
 		else:
-
 			context={
 				'form':alert_form,
 				'prop_id':prop_id,

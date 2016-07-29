@@ -1,7 +1,6 @@
 /***************************************/
 /* CSRF TOKEN FUNCTIONS: DO NOT MODIFY */
 /***************************************/
-
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -122,7 +121,6 @@ function addProperty() {
     });
 }
 
-
     function loadNotes(args){
     $.ajax({
       url: `/property/${args[0]}/event/${args[1]}`,
@@ -142,10 +140,6 @@ function addProperty() {
     });
 }
 
-
-
-
-
 function loadNote(args){
 $.ajax({
   url: `/property/${args[0]}/event/${args[1]}/note/${args[2]}`,
@@ -164,6 +158,7 @@ $.ajax({
       }
     });
 }
+
 function addAlert(args) {
     $.ajax({
         url:  `/property/${args[0]}/event/${args[1]}/add_alert`,
@@ -203,17 +198,13 @@ $.ajax({
     });
 }
 
-
 var routes = [
     ['/properties', loadProperties],
     ['/property/(\\d+)/event/(\\d+)/addNote', addNote],
     ['/property/(\\d+)/event/(\\d+)/notes', loadNotes],
     ['/property/(\\d+)/event/(\\d+)/note/(\\d+)', loadNote],
-
     ['/property/(\\d+)/event/(\\d+)/addAlert', addAlert],
     ['/property/(\\d+)/event/(\\d+)/alert/(\\d+)', loadAlert],
-
-
     ['/property/(\\d+)/addEvent', addEvent],
     ['/property/(\\d+)/events', loadProperty],
     ['/add_property', addProperty],
