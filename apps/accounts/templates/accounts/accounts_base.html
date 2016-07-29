@@ -62,6 +62,9 @@
     }
   
   /* -- form styling --  */
+  #main-window{
+    padding: 0 30px;
+  }
   .input-window{
     padding: 0px 30px;
   }
@@ -127,7 +130,7 @@
 </style> 
 <body>
   <div class="container-fluid background-overlay">
-    <div class="row">
+    <div id="main-window" class="row">
       <div class="logo-box col-sm-12 col-lg-offset-3 col-lg-3">
         <div id="logo-img">
           <img src="{% static 'main/img/paperroll-nb.png' %}" alt="HOW DID YOU FIND ME">
