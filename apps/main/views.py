@@ -55,7 +55,7 @@ def add_property(request):
 				"properties" : Property.objects.filter(user = request.user)
 			}
 			print "valid form"
-			return render (request, "main/properties.html", context)
+			return HttpResponse(prop.id)
 		else:
 			context={
 				'form':prop_form
@@ -133,11 +133,17 @@ def add_event(request, prop_id):
 def note(request,event_id,prop_id,note_id):
 	note = Note.objects.get(pk=note_id)
 	documents = note.file_set.all()
+	docNames = []
+	for document in documents:
+		# print document.docfile.name.split('/')[-1]
+		docNames.append((document.id,document.docfile.name.split('/')[-1]))
+		# print document.name.split('/')[-1]
+	print docNames
 	form = FileUploadForm()
 	property = Property.objects.get(pk=prop_id)
 	event = Event.objects.get(pk=event_id)
 	context={'form':form, 'documents': documents,'event_id':event_id,
-	'prop_id':prop_id,"note_id":note.id, 'note':note, 'event':event, 'property':property}
+	'prop_id':prop_id,"note_id":note.id, 'note':note, 'event':event, 'property':property, "docNames":docNames}
 	return render(request, 'main/note.html', context)
 
 def notes(request,event_id,prop_id):
