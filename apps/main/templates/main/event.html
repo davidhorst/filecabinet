@@ -1,4 +1,70 @@
 <div class='container'>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <div class="row">
+                <div class="prop-desc-part col-sm-8">
+                    <h2>{{event.name}}</h2>
+                    <p><strong>EVENT COMMENT:</strong><br>{{event.comment}}</p>
+                </div>
+                <div class="add-event-part col-xs-6 col-sm-2">
+                    <button id="add_note" class="btn btn-lg btn-default btn-circle btn-add"><i class="fa fa-plus fa-3x" style="color: grey"></i></button>
+                    <p>Add a note</p>
+                </div>
+                <div class="add-event-part col-xs-6 col-sm-2">
+                    <button id="add_alert" class="btn btn-lg btn-default btn-circle btn-add"><i class="fa fa-plus fa-3x" style="color: grey"></i></button>
+                    <p>Add an alert</p>
+                </div>
+            </div>
+            <div class="row">
+                <input type="text" id="search" class="form-control" placeholder="Dynamically search for notes and alerts...">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <h3 class="table-title">Notes</h3>
+    </div>
+    <table class="table table-hover" id="note_table">
+        <thead>
+            <tr>
+                <th>Note Name</th>
+                <th>Comment</th>
+                <th class="sm-and-up">Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for note in notes %}
+            <tr data_id='{{note.id}}'>
+                <td><div class='note_name'>{{note.name}}</div></td>
+                <td>{{note.comment}}</td>
+                <td class="sm-and-up">{{note.created_at.date}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>        
+    </table>
+    <div class="row">
+        <h3 class="table-title">Alerts</h3>
+    </div>
+    <table class="table table-hover" id="alert_table">
+        <thead>
+            <tr>
+                <th>Alert Comment</th>
+                <th>Alert Date</th>
+                <th class="sm-and-up">Alert Time</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for alert in alerts %}
+            <tr data_id='{{alert.id}}'>
+                <td><div class='alert_name'>{{alert.comment}}</div></td>
+                <td>{{alert.when.date}}</td>
+                <td class="sm-and-up">{{alert.when.time}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>        
+    </table>     
+</div>
+
+<!-- <div class='container'>
     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1" id='event_header'>
         <a id='prop_link'>{{property.name}}</a>
         <h3>{{event.name}}</h3>
@@ -35,7 +101,7 @@
         {% endfor %}
 
     </table>
-</div>
+</div> -->
 
 <style>
 
@@ -50,6 +116,56 @@
 
     .search{
         margin-bottom: 20px;
+    }
+    table {
+        word-break:break-all;
+    }
+    h3.table-title {
+        text-align: center;
+        text-decoration: underline;
+        margin
+    }
+    .btn-circle {
+      width: 5em;
+      height: 5em;
+      margin: 20px auto 5px;
+      text-align: center;
+      padding: 6px 0;
+      font-size: 1em;
+      line-height: 1.42;
+      border-radius: 2.5em;
+      border: 1px solid #305D72;
+    }
+
+    .add-event-part {
+        text-align: center;
+    }
+
+    @media all and (max-width: 450px) {
+        h2 {
+            text-align: center;
+        }
+        .sm-and-up, .lg-and-up{
+            display: none;
+        }
+    }
+
+    @media all and (min-width: 450px) {
+        h2 {
+            text-align: center;
+        }
+        .lg-and-up{
+            display: none;
+        }
+    }
+
+    @media all and (min-width: 770px) {
+        h2 {
+            text-align: left;
+        }
+        .lg-and-up{
+            display: table-cell;
+        }
     }
 </style>
 
@@ -73,7 +189,7 @@ $('#alert_table tr').click(function() {
     window.location.hash = '/property/{{prop_id}}/event/{{event.id}}/alert/'+$(this).attr("data_id")
 });
 
-    $('#add_event').click(function(){
+    $('#add_note').click(function(){
 
         window.location.hash = "/property/{{prop_id}}/event/{{event.id}}/addNote";
     });

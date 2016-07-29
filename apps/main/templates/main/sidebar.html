@@ -16,41 +16,42 @@
       <div class="tab-col-2">{{ alert.comment }}</div>
       <div class="tab-col-3">{{ alert.when.date }}</div>
     </a>
+    <div class="detailed" id="detailed-alert-{{alert.id}}">
+      <table class="table-striped">
+        <tbody>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Property: </td>
+            <td class="col-xs-8">{{ alert.event.property.name }}</td>
+          </tr>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Event: </td>
+            <td class="col-xs-8">{{ alert.event.name}}</td>
+          </tr>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Created on: </td>
+            <td class="col-xs-8">{{ alert.created_at.date }}</td>
+          </tr>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Comment: </td>
+            <td class="col-xs-8">{{ alert.comment }}</td>
+          </tr>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Alert Date: </td>
+            <td class="col-xs-8">{{ alert.when.date }}</td>
+          </tr>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Days Left: </td>
+            {% if today.date != alert.when.date %}
+            <td class="col-xs-8 time-since">{{ today.date|timesince:alert.when.date }}</td>
+            {% else %}
+            <td class="col-xs-8 time-since">TODAY</td>
+            {% endif %}
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </li>
-  <li class="detailed" id="detailed-alert-{{alert.id}}">
-    <table>
-      <tbody>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Property: </td>
-          <td class="col-lg-6">{{ alert.event.property.name }}</td>
-        </tr>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Event: </td>
-          <td class="col-lg-6">{{ alert.event.name}}</td>
-        </tr>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Created on: </td>
-          <td class="col-lg-6">{{ alert.created_at.date }}</td>
-        </tr>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Comment: </td>
-          <td class="col-lg-6">{{ alert.comment }}</td>
-        </tr>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Alert Date: </td>
-          <td class="col-lg-6">{{ alert.when.date }}</td>
-        </tr>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Days Left: </td>
-          {% if today.date != alert.when.date %}
-          <td class="col-lg-6 time-since">{{ today.date|timesince:alert.when.date }}</td>
-          {% else %}
-          <td class="col-lg-6 time-since">TODAY</td>
-          {% endif %}
-        </tr>
-      </tbody>
-    </table>
-  </li>
+  
   {% endfor %}
 
 <h3 class="navmenu-brand" href="#">Recent Notes</h3>
@@ -62,37 +63,59 @@
       <div class="tab-col-2">{{ note.name }}</div>
       <div class="tab-col-3">{{ note.created_at.date }}</div>
     </a>
+    <div class="detailed" id="detailed-note-{{note.id}}">
+      <table class="table-striped">
+        <tbody>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Property: </td>
+            <td class="col-xs-8">{{ note.event.property.name }}</td>
+          </tr>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Event: </td>
+            <td class="col-xs-8">{{ note.event.name}}</td>
+          </tr>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Name: </td>
+            <td class="col-xs-8">{{ note.name }}</td>
+          </tr>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Created on: </td>
+            <td class="col-xs-8">{{ note.created_at.date }}</td>
+          </tr>
+          <tr class="row">
+            <td class="col-xs-4 left-col">Comment: </td>
+            <td class="col-xs-8">{{ note.comment }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </li>
-  <li class="detailed" id="detailed-note-{{note.id}}">
-    <table>
-      <tbody>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Property: </td>
-          <td class="col-lg-6">{{ note.event.property.name }}</td>
-        </tr>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Event: </td>
-          <td class="col-lg-6">{{ note.event.name}}</td>
-        </tr>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Name: </td>
-          <td class="col-lg-6">{{ note.name }}</td>
-        </tr>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Created on: </td>
-          <td class="col-lg-6">{{ note.created_at.date }}</td>
-        </tr>
-        <tr class="row">
-          <td class="col-lg-4 left-col">Comment: </td>
-          <td class="col-lg-6">{{ note.comment }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </li>
+  
   {% endfor %}
 
 <style type="text/css">
-  
+.simplified {
+  position: relative;
+}
+.detailed {
+  position: absolute;
+  background-color: rgba(145,205,216, 0.8);
+  display: inline-block;
+  height: auto;
+  width: 100%;
+  top:0px;
+  left:-100%;
+  z-index: 9;
+  word-break:break-all;
+  vertical-align: top;
+  border-radius: 1em;
+  padding: 0.5em;
+}
+
+.detailed *{
+  margin: 0.1em auto;
+}
+
 .tab-col-1 {
   height: 1.1em;
   display: inline-block;
@@ -116,6 +139,7 @@
 
 .left-col {
   text-align: right;
+  font-weight: 600;
 }
 
 #side-collapse {
@@ -163,10 +187,11 @@ $(document).ready(function(){
   });
 
   $('.simplified').hover( function(){
-    console.log($(this).attr("data-pair"));
-    $(`#${$(this).attr("data-pair")}`).show();
+    $(`#${$(this).attr("data-pair")}`).stop();
+    $(`#${$(this).attr("data-pair")}`).fadeIn(200);
   }, function(){
-    $(`#${$(this).attr("data-pair")}`).hide();
+    $(`#${$(this).attr("data-pair")}`).stop();
+    $(`#${$(this).attr("data-pair")}`).fadeOut(200);
   });
 
   $('.side-collapse-anchor').click(function(e) {

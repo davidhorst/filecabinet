@@ -2,14 +2,12 @@ from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from .forms import EventCreateForm, NoteCreateForm, PropertyCreateForm, FileUploadForm,AlertCreateForm
 from models import Event, Property, Note, File, Alert
-
-from .forms import EventCreateForm
-
+from wsgiref.util import FileWrapper
 from django.http import HttpResponse, HttpResponseBadRequest
 
 from django.contrib.auth.decorators import login_required
 
-import datetime
+import datetime, mimetypes
 
 # Create your views here.
 
@@ -95,6 +93,19 @@ def events(request, prop_id):
 	'events':events
 	}
 	return render(request, 'main/events.html',context)
+
+def get_file(request,file_id):
+	file = File.objects.get(pk=file_id)
+	mimetype = mimetypes.guess_type(file.docfile.name)
+	response = HttpResponse(content_type=mimetype[0])
+	# response = HttpResponse(content_type='application/octet-stream')
+	response['Content-Disposition'] = 'inline; filename=' + file.docfile.name.split('/')[-1]
+	# response['Content-Encoding'] = mimetype[1]
+# Connection:Keep-Alive
+	response['Accept-Ranges'] = 'bytes'
+	response['Content-Length'] = file.docfile.size
+	response.write(file.docfile.read())
+	return response
 
 
 def add_event(request, prop_id):

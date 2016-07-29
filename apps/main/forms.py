@@ -113,7 +113,7 @@ class AlertCreateForm(forms.ModelForm):
 
     comment = forms.CharField(
         max_length=30,
-        widget=forms.TextInput(attrs={
+        widget=forms.Textarea(attrs={
            'placeholder': 'Add a short comment for your alert...'})
         )
 

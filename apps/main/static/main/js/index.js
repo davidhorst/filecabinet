@@ -164,19 +164,6 @@ $.ajax({
       }
     });
 }
-
-function renderTemplate(partialUrl,jsonUrl) {
-    return Promise.all([
-        fetch(partialUrl).then(resp => resp.text()),
-        fetch(jsonUrl).then(resp => resp.json())
-    ]).then(args => {
-        var template = Handlebars.compile(args[0]);
-        var html = template(args[1]);
-        return html;
-    });
-
-}
-
 function addAlert(args) {
     $.ajax({
         url:  `/property/${args[0]}/event/${args[1]}/add_alert`,
