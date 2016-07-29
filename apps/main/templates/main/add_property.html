@@ -17,7 +17,6 @@
 	      method: "post",
 	      data: $(this).serialize(),
 	      success: function(serverResponse) {
-              alert('/property/'+serverResponse+'/events')
 	        window.location.hash = '/property/'+serverResponse+'/events';
 	      },
 	      error: function(serverResponse) {
