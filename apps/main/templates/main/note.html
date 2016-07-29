@@ -1,5 +1,63 @@
 <div class='container'>
-    <a id='prop_link'>{{property.name}}</a> <span> / </span>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <div class="row">
+                <h2>{{note.name}}</h2>
+                <p>
+                    <strong>PROPERTY:</strong> <i class="fa fa-{{property.icon_type.name}}" style="color: {{property.icon_color.color}}"></i> {{property.name}}<br>
+                    <strong>EVENT:</strong> {{event.name}}<br>
+                    <strong>NOTE COMMENT:</strong><br>{{note.comment}}
+                </p>
+            </div>
+            
+            <div class="row"> <!-- files -->
+                <table class="table table-hover" id="note_table">
+                    <thead>
+                        <tr>
+                            <th>Attached Documents</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if documents %}
+                            {% for document in documents %}
+                                <tr>
+                                    <td>
+                                        <a href='javascript:void(0)' class='file_link' data_item="{{ document.id }}">
+                                            {{ document.docfile.name }}
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td><i>No attached documents found</i></td>
+                            </tr>
+                        {% endif %}
+                    </tbody>        
+                </table>
+            </div>
+
+            <div class="row"> <!-- form -->
+                <form id='theForm' method="post" enctype="multipart/form-data" class="form-horizontal">
+                    {% csrf_token %}
+                    <p>{{ form.non_field_errors }}</p>
+                    <input type='hidden' value='{{note.id}}' name='note_id'/>
+                    <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+                    <p>
+                        {{ form.docfile.errors }}
+                        {{ form.docfile }}
+                </form>
+                
+            </div>
+        </div>
+        <iframe  id='file_frame'></iframe>
+    </div>
+</div>
+
+
+
+<!-- <div class='container'> -->
+<!--     <a id='prop_link'>{{property.name}}</a> <span> / </span>
     <a id='event_link'>{{event.name}}</a>
 
     <div id='header form-control'>
@@ -14,8 +72,8 @@
 
     </div>
     <br>
-    <br>
-
+    <br> -->
+<!-- 
     {% if documents %}
                 {% for document in documents %}
                     <a href='javascript:void(0)' class='file_link' data_item="{{ document.id }}">
@@ -24,7 +82,8 @@
                 {% endfor %}
         {% else %}
             <p>No documents.</p>
-        {% endif %}
+        {% endif %} -->
+<!-- 
         <form id='theForm' method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
@@ -34,9 +93,9 @@
                 {{ form.docfile.errors }}
                 {{ form.docfile }}
         </form>
-        <iframe  id='file_frame'></iframe>
+        <iframe  id='file_frame'></iframe> -->
 
-</div>
+<!-- </div> -->
 
 <style>
 
