@@ -6,17 +6,7 @@
 	margin: 1em 0em;
 	text-align: center;
 }
-.btn-circle-nav {
-  width: 30px;
-  height: 30px;
-  margin: 5px;
-  margin-right: 25px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
+
 .btn-circle {
   width: 8em;
   height: 8em;
@@ -26,10 +16,16 @@
   font-size: 1em;
   line-height: 1.42;
   border-radius: 4em;
+  border: 1px solid #305D72;
 }
 .property-name, .add-property{
 	border-top: 1px solid silver;
 }
+
+.property-wrapper{
+  background-color: whitesmoke;
+}
+
 #search{
 	margin-bottom: 1em;
 }
@@ -49,26 +45,11 @@ h4 {
 		});
 
 		$(".property-name").parent().click(function(){
-			
 			window.location.hash = `/property/${$(this).attr("data-id")}/events`;
-			// $.ajax({
-			// 	url: `/property/${$(this).attr("data-id")}/events`,
-			// 	method: "get",
-			// 	success: function(serverResponse) {
-			// 		$('#main-dashboard').html(serverResponse);
-			// 	}
-			// });
 		});
 
 		$(".add-property").parent().click(function(){
 			window.location.hash = '/add_property';
-			// $.ajax({
-			// 	url: "/add_property",
-			// 	method: "get",
-			// 	success: function(serverResponse) {
-			// 		$('#main-dashboard').html(serverResponse);
-			// 	}
-			// });
 		});
 	});
 

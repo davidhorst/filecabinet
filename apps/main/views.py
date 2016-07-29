@@ -107,14 +107,14 @@ def add_event(request, prop_id):
 			return HttpResponse(event.id)
 		else:
 			context={
-				'form':event_form
+				'form':event_form,
+				'prop_id':prop_id
 			}
 			return HttpResponseBadRequest(render (request,'main/add_event.html',context))
 	else:
 		context={
 			'form':EventCreateForm(),
-			'prop_id':prop_id,
-
+			'prop_id':prop_id
 		}
 		return render(request,'main/add_event.html',context)
 
