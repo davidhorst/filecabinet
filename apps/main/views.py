@@ -211,13 +211,9 @@ def alert(request,event_id,prop_id,alert_id):
 
 
 def add_alert(request,prop_id, event_id):
-	print ('got to add alert view')
 	if request.POST:
-		print ('got into post')
-
 		alert_form = AlertCreateForm(request.POST)
 		if alert_form.is_valid():
-			print ('is valid')
 
 			alert = alert_form.save(commit=False)
 			alert.event = Event.objects.get(pk=event_id)
@@ -226,7 +222,9 @@ def add_alert(request,prop_id, event_id):
 		else:
 
 			context={
-				'form':alert_form
+				'form':alert_form,
+				'prop_id':prop_id,
+				'event_id':event_id
 			}
 			return HttpResponseBadRequest(render (request,'main/add_alert.html',context))
 	else:
