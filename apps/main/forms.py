@@ -112,8 +112,11 @@ class AlertCreateForm(forms.ModelForm):
         fields = ("comment", 'when')
 
     comment = forms.CharField(
-        max_length=30)
+        max_length=30,
+        widget=forms.TextInput(attrs={
+           'placeholder': 'Add a short comment for your alert...'})
+        )
 
     when = forms.DateTimeField(
         required=True,
-        widget=forms.DateInput(attrs={'name':'datetime'}))
+        widget=forms.DateInput(attrs={'name':'datetime', 'placeholder':'Select time and date'}))

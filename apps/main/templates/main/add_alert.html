@@ -16,14 +16,11 @@
 $(document).ready(function(){
 
 
-	$(function(){
-		$('*[name=datetime]').appendDtpicker({
-			"inline": true,
-			"current": "2012-3-4 12:30"
-		});
-		console.log('datepicker ran');
-	});
 
+		$('#id_when').appendDtpicker({
+
+
+		});
 
 	$('#theForm').submit(function(e){
 	 e.preventDefault();
@@ -43,8 +40,13 @@ $(document).ready(function(){
 	   error: function(serverResponse) {
 		 $('#main-dashboard').html(serverResponse.responseText);
 	   }
+<<<<<<< HEAD
 
 	 } });
+=======
+
+	 });
+>>>>>>> 0b5eadbfc05ff7b5c470ac6ada1344b218e3e641
 	  });
 
 });
