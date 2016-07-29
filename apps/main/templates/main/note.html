@@ -20,7 +20,7 @@
                     <strong>NOTE COMMENT:</strong><br>{{note.comment}}
                 </p>
             </div>
-            
+
             <div class="row"> <!-- files -->
                 <table class="table table-hover" id="note_table">
                     <thead>
@@ -30,11 +30,11 @@
                     </thead>
                     <tbody>
                         {% if documents %}
-                            {% for document in documents %}
+                            {% for document in docNames %}
                                 <tr>
                                     <td>
-                                        <a href='javascript:void(0)' class='file_link' data_item="{{ document.id }}">
-                                            {{ document.docfile.name }}
+                                        <a href='javascript:void(0)' class='file_link' data_item="{{ document.0 }}">
+                                            {{ document.1 }}
                                         </a>
                                     </td>
                                 </tr>
@@ -44,7 +44,7 @@
                                 <td><i>No attached documents found</i></td>
                             </tr>
                         {% endif %}
-                    </tbody>        
+                    </tbody>
                 </table>
             </div>
 
@@ -83,7 +83,7 @@
     </div>
     <br>
     <br> -->
-<!-- 
+<!--
     {% if documents %}
                 {% for document in documents %}
                     <a href='javascript:void(0)' class='file_link' data_item="{{ document.id }}">
@@ -93,7 +93,7 @@
         {% else %}
             <p>No documents.</p>
         {% endif %} -->
-<!-- 
+<!--
         <form id='theForm' method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <p>{{ form.non_field_errors }}</p>
