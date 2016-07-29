@@ -1,18 +1,23 @@
 <div class='container'>
-    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-        <div class="row">
-            <div class="prop-desc-part col-sm-8">
-                <h2><i class="fa fa-{{property.icon_type.name}}" style="color: {{property.icon_color.color}}"></i> {{property.name}}</h2>
-                <p><strong>PROPERTY DESCRIPTION:</strong><br>{{property.description}}</p>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+            <div class="row">
+                <div class="prop-desc-part col-sm-8">
+                    <h2><i class="fa fa-{{property.icon_type.name}}" style="color: {{property.icon_color.color}}"></i> {{property.name}}</h2>
+                    <p><strong>PROPERTY DESCRIPTION:</strong><br>{{property.description}}</p>
+                </div>
+                <div class="add-event-part col-sm-4">
+                    <button id="add_event" class="btn btn-lg btn-default btn-circle btn-add"><i class="fa fa-plus fa-3x" style="color: grey"></i></button>
+                    <p>Add an event</p>
+                </div>
             </div>
-            <div class="add-event-part col-sm-4">
-                <button id="add_event" class="btn btn-lg btn-default btn-circle btn-add"><i class="fa fa-plus fa-3x" style="color: grey"></i></button>
-                <p>Add an event</p>
+            <div class="row">
+                <input type="text" id="search" class="form-control" placeholder="Dynamically search for events...">
             </div>
         </div>
-        <div class="row">
-            <input type="text" id="search" class="form-control" placeholder="Dynamically search for events...">
-        </div>
+    </div>
+    <div class="row">
+        <h3 class="table-title">Events</h3>
     </div>
     <table class="table table-hover" id="event_table">
         <thead>
@@ -86,7 +91,14 @@
     #search{
         margin-bottom: 20px;
     }
-
+    table {
+        word-break:break-all;
+    }
+    h3.table-title {
+        text-align: center;
+        text-decoration: underline;
+        margin-bottom: 20px;
+    }
     .btn-circle {
       width: 5em;
       height: 5em;
@@ -107,7 +119,7 @@
         h2 {
             text-align: center;
         }
-        .sm-and-up, .lg-and-up{
+        .sm-and-up{
             display: none;
         }
     }
@@ -116,17 +128,11 @@
         h2 {
             text-align: center;
         }
-        .lg-and-up{
-            display: none;
-        }
     }
 
     @media all and (min-width: 770px) {
         h2 {
             text-align: left;
-        }
-        .lg-and-up{
-            display: table-cell;
         }
     }
 
