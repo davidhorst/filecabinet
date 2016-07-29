@@ -1,5 +1,52 @@
 <div class='container'>
-    <div class='col-xs-offset-4' id='header'>
+    <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+        <div class="row">
+            <div class="prop-desc-part col-sm-8">
+                <h2><i class="fa fa-{{property.icon_type.name}}" style="color: {{property.icon_color.color}}"></i> {{property.name}}</h2>
+                <p><strong>PROPERTY DESCRIPTION:</strong><br>{{property.description}}</p>
+            </div>
+            <div class="add-event-part col-sm-4">
+                <button id="add_event" class="btn btn-lg btn-default btn-circle btn-add"><i class="fa fa-plus fa-3x" style="color: grey"></i></button>
+                <p>Add an event</p>
+            </div>
+        </div>
+        <div class="row">
+            <input type="text" id="search" class="form-control" placeholder="Dynamically search for events...">
+        </div>
+    </div>
+    <table class="table table-hover" id="event_table">
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Comment</th>
+                <th class="sm-and-up">Created Date</th>
+                <th class="lg-and-up">Total Notes</th>
+                <th class="lg-and-up">Total Alerts</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr data_id='{{event.id}}'>
+                <td><div class='event-name'>{{event.name}}</div></td>
+                <td>{{event.comment}}</td>
+                <td class="sm-and-up">{{event.created_at.date}}</td>
+                <td class="lg-and-up">{{event.note_set.count}}</td>
+                <td class="lg-and-up">{{event.alert_set.count}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>        
+    </table>       
+</div>
+    
+
+
+        
+    
+    
+
+
+
+<!--     <div class='col-xs-offset-4' id='header'>
         <h3>{{property.name}}</h3>
     </div>
 
@@ -22,8 +69,9 @@
             <td> <div class='event-name'>{{event.name}} </div></td>
         </tr>
         {% endfor %}
-    </table>
-</div>
+    </table> -->
+
+</div> <!--end of container-->
 
 <style>
 
@@ -38,6 +86,51 @@
     #search{
         margin-bottom: 20px;
     }
+
+    .btn-circle {
+      width: 5em;
+      height: 5em;
+      margin: 20px auto 5px;
+      text-align: center;
+      padding: 6px 0;
+      font-size: 1em;
+      line-height: 1.42;
+      border-radius: 2.5em;
+      border: 1px solid #305D72;
+    }
+
+    .add-event-part {
+        text-align: center;
+    }
+
+    @media all and (max-width: 450px) {
+        h2 {
+            text-align: center;
+        }
+        .sm-and-up, .lg-and-up{
+            display: none;
+        }
+    }
+
+    @media all and (min-width: 450px) {
+        h2 {
+            text-align: center;
+        }
+        .lg-and-up{
+            display: none;
+        }
+    }
+
+    @media all and (min-width: 770px) {
+        h2 {
+            text-align: left;
+        }
+        .lg-and-up{
+            display: table-cell;
+        }
+    }
+
+    
 </style>
 
 <script type="text/javascript">
@@ -73,7 +166,5 @@ $(document).ready(function() {
 $.expr[':'].Contains = function(a,i,m){
     	return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
  	};
-
-
 
 </script>
