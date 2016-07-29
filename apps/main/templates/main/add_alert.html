@@ -16,13 +16,13 @@
 $(document).ready(function(){
 
 
-	$(function(){
-		$('*[name=datetime]').appendDtpicker({
-			"inline": true,
-			"current": "2012-3-4 12:30"
+
+		$('#id_when').appendDtpicker({
+    
+
 		});
-		console.log('datepicker ran');
-	});
+
+
 		
 
 	$('#theForm').submit(function(e){
@@ -38,13 +38,13 @@ $(document).ready(function(){
 	   method: "post",
 	   data: $(this).serialize(),
 	   success: function(serverResponse) {
-		 window.location.hash = "/property/{{prop_id}}/event/{{event_id}}/notes"+serverResponse;
+		 window.location.hash = "/property/{{prop_id}}/event/{{event_id}}/alert/"+serverResponse;
 	   },
 	   error: function(serverResponse) {
 		 $('#main-dashboard').html(serverResponse.responseText);
 	   }
 	 
-	 } });
+	 });
 	  });
 
 });

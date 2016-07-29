@@ -1,31 +1,8 @@
 <script>
-// function getCookie(name) {
-//     var cookieValue = null;
-//     if (document.cookie && document.cookie !== '') {
-//         var cookies = document.cookie.split(';');
-//         for (var i = 0; i < cookies.length; i++) {
-//             var cookie = jQuery.trim(cookies[i]);
-//             // Does this cookie string begin with the name we want?
-//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
-//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// }
-// function csrfSafeMethod(method) {
-//     // these HTTP methods do not require CSRF protection
-//     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-// }
-
   $(document).ready(function(){
   	$('#id_icon_color option').each( function(){
   		$(this).css("color", $(this).attr("color"));
-  		// $(this).html("");
   	});
-
-  	
 
     $('#theForm').submit(function(e){
     	e.preventDefault();
@@ -43,7 +20,6 @@
 	        window.location.hash = '/properties';
 	      },
 	      error: function(serverResponse) {
-	      	console.log(serverResponse);
 	        $('#main-dashboard').html(serverResponse.responseText);
 	      }
 	    });
@@ -57,13 +33,18 @@
 	$('#id_icon_type').change(function(){
 		$('#preview i').removeClass();
     	$('#preview i').addClass(`fa fa-${$('#id_icon_type option:selected').text()} fa-5x`);
+    	$('#preview div p').hide();
     });
 
     $('#id_icon_color').change(function(){
     	$('#preview i').css('color', `${$('#id_icon_color option:selected').attr("color")}`);
     });
 
-   });
+    $('#id_icon_type option:first-child').text("Select icon type");
+    $('#id_icon_type option:first-child').css("color","silver");
+	$('#id_icon_color option:first-child').text("Select icon color");
+	$('#id_icon_color option:first-child').css("color","silver");
+   }); // end document.ready
 </script>
 
 <style type="text/css">
@@ -85,6 +66,12 @@
 #preview, #submit-button {
 	text-align: center;
 }
+
+#preview div p {
+	color: silver;
+	font-style: italic;
+	margin-top: 2em;
+}
 </style>
 
 <div class="row"><h2>Add a Property!</h2></div>
@@ -93,7 +80,6 @@
 	{% csrf_token %}
 	{% for field in form %}
 	<fieldset class="form-group">
-		<label>{{field.label}}</label>
 		{{ field }}
 		<small class="text-muted text-danger small">{{ field.errors }}</small>
 	</fieldset>
@@ -102,8 +88,9 @@
 		<div id="preview" class="col-sm-4 col-sm-offset-4 col-xs-12">
 			<div class="btn btn-lg btn-default btn-circle">
 				<i></i>
+				<p>icon preview</p>
 			</div>
-			<p>icon preview</p>
+			
 		</div>
 	</div>
 	<div class="row form-group">

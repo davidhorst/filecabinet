@@ -73,6 +73,7 @@ def add_property(request):
 
 
 def event(request,event_id, prop_id):
+	property = Property.objects.get(pk=prop_id)
 	event = Event.objects.get(pk=event_id)
 	notes = event.note_set.all()
 	alerts = event.alert_set.all()
@@ -81,7 +82,8 @@ def event(request,event_id, prop_id):
 	'prop_id':prop_id,
 	'event':event,
 	"notes":notes,
-	'alerts':alerts
+	'alerts':alerts,
+	'property':property
 	}
 	return render(request, 'main/event.html',context)
 
@@ -102,17 +104,17 @@ def add_event(request, prop_id):
 			event = event_form.save(commit=False)
 			event.property = Property.objects.get(pk=prop_id)
 			event.save()
-			return redirect("/property/{}/event/{}".format(prop_id, event.id))
+			return HttpResponse(event.id)
 		else:
 			context={
-				'form':event_form
+				'form':event_form,
+				'prop_id':prop_id
 			}
 			return HttpResponseBadRequest(render (request,'main/add_event.html',context))
 	else:
 		context={
 			'form':EventCreateForm(),
-			'prop_id':prop_id,
-
+			'prop_id':prop_id
 		}
 		return render(request,'main/add_event.html',context)
 
@@ -145,7 +147,6 @@ def add_note(request,prop_id, event_id):
 			note = note_form.save(commit=False)
 			note.event = Event.objects.get(pk=event_id)
 			note.save()
-			print "i saved"
 			return HttpResponse(note.id)
 		else:
 
