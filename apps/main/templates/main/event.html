@@ -8,8 +8,6 @@
 
     <div id='event_mid_content' class='class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1"'>
 
-
-
         <button class="btn btn-default glyphicon-plus inline col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1" id="add_event" role="button"> Add Note </button>
 
         <button class="btn btn-default glyphicon-plus inline col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1" id="add_alert" role="button"> Add Alert </button>
@@ -30,7 +28,6 @@
 
 <h3>Alerts:</h3>
     <table class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 table table-hover" id="alert_table">
-
         {% for alert in alerts %}
         <tr data_id='{{alert.id}}'>
             <td><p class='alert_name'>{{ alert.comment }}</p></td>
@@ -59,7 +56,6 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-
     $('#search').keyup(function(){
       var searchTerm = $('#search').val();
       $(`.alert_name:not(:Contains("${searchTerm}"))`).parent().parent().fadeOut("slow");
@@ -68,7 +64,6 @@ $(document).ready(function() {
       $(`.note_name:Contains("${searchTerm}")`).parent().parent().fadeIn("slow");
   });
 
-
 $('#note_table tr').click(function() {
     window.location.hash = '/property/{{prop_id}}/event/{{event.id}}/note/'+$(this).attr("data_id")
 
@@ -76,9 +71,7 @@ $('#note_table tr').click(function() {
 
 $('#alert_table tr').click(function() {
     window.location.hash = '/property/{{prop_id}}/event/{{event.id}}/alert/'+$(this).attr("data_id")
-
 });
-
 
     $('#add_event').click(function(){
 
@@ -89,13 +82,9 @@ $('#alert_table tr').click(function() {
         window.location.hash = "/property/{{prop_id}}/event/{{event.id}}/addAlert";
     });
 
-
-
     $('#prop_link').click(function(){
         window.location.hash = '/property/{{prop_id}}/events'
     });
-
-
 });
 
 $.expr[':'].Contains = function(a,i,m){
