@@ -12,7 +12,7 @@ that might need occational maintenance.
 
 ## Motivation
 
-This was built during a one week sprint during a Coding Dojo bootcamp. The goal was to create a fully
+This was built during a one week sprint at Coding Dojo bootcamp. The goal was to create a fully
 functional app highlighting as much of the Django framework as possible.
 
 ### Installing
