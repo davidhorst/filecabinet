@@ -40,7 +40,7 @@ and hope for the best.
 
 * [David Horst](https://github.com/davidhorst)
 * [Spencer Perkins](https://github.com/perkinsb01)
-* [to Jun Kyu Yi](https://github.com/junkyuyih)
+* [Jun Kyu Yi](https://github.com/junkyuyi)
 
 ## License
 
