@@ -3,6 +3,8 @@
 <img src="apps/main/static/main/img/paperroll-nb.png" />
 </p>
 
+##
+
 Your parents kept drawers full of receipts. You take pictures of reciepts and toss the hard copy
 because you're hip and it's the right thing to do.  This app helps you keep track of all of
 those photos, and little scraps of info about your house, your car and any other property that
